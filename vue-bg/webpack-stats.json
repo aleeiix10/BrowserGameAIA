@@ -1,0 +1,31 @@
+{
+  "status": "done",
+  "assets": {
+    "favicon.ico": {
+      "name": "favicon.ico",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/favicon.ico",
+      "publicPath": "http://0.0.0.0:8080/favicon.ico"
+    },
+    "index.html": {
+      "name": "index.html",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/index.html",
+      "publicPath": "http://0.0.0.0:8080/index.html"
+    },
+    "js/main.js": {
+      "name": "js/main.js",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/js/main.js",
+      "publicPath": "http://0.0.0.0:8080/js/main.js"
+    },
+    "main.html": {
+      "name": "main.html",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.html",
+      "publicPath": "http://0.0.0.0:8080/main.html"
+    }
+  },
+  "chunks": {
+    "main": [
+      "js/main.js"
+    ]
+  },
+  "publicPath": "http://0.0.0.0:8080/"
+}
