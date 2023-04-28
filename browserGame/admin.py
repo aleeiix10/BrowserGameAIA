@@ -1,10 +1,9 @@
 from django.contrib import admin
-from django.core.paginator import Paginator, EmptyPage
 from .models import *
 
 class PaginadorLog(admin.ModelAdmin):
-    list_per_page = 5  # cantidad de items por pagina
-
+    list_per_page = 25  # cantidad de items por pagina
+    list_display= ["typeLog", "user", "message", "created_at"]
 # Register your models here.
 admin.site.register(User)
 admin.site.register(Log, PaginadorLog)
