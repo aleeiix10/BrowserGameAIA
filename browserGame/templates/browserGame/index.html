@@ -1,17 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load render_bundle from webpack_loader %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integrar Django 3 y Vue 3</title>
-</head>
-<body>
-    <h1 style="text-align: center;">Como integrar Django 3 y VueJS 3</h1>
-    <div id="app" style="text-align: center;">
-        [[ msg ]]
-        <hello-django/>
-     </div>
-    {% render_bundle 'main' %}
+
+{% block content %}
+<body id="bodyInfo" class="bg-green-300">
+    <header class="header bg-green-700 text-white flex justify-between items-center px-4 w-full">
+        <div class="imagenHeader w-1/5">
+            <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+        </div>
+        <div class="titulo w-3/5 text-center pt-5">
+            <h1 class="text-3xl">Toma Raíces</h1>
+            <p>¡Haz crecer tu verdura y evita ser desplantado!</p>
+            <nav class="navbar flex justify-around items-center py-2">
+            <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" href="./accounts/login">Iniciar Sesión</a>
+            </nav>
+        </div>
+        
+        <div class="imagenHeader w-1/5">
+            <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+        </div>
+    </header>      
+    <main>
+        <section class="hero bg-green-700 text-white text-center py-20 my-4 rounded-md">
+            <h1 class="text-3xl mb-4">¡Bienvenidos al mundo de la jardinería!</h1>
+            <p class="text-xl mb-4">Prepárate para cuidar de tu verdura y hacerla crecer lo más posible.</p>
+            <a href="./register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Regístrate ahora</a>
+        </section>
+        <div class="descripcion flex justify-between">
+            <section class="cta bg-green-700 text-white text-center py-8 px-6 my-4 w-1/2 rounded-lg">
+                <h2 class="text-2xl mb-4">¿Quieres tener la verdura más grande?</h2>
+                <p class="text-lg mb-4">Únete a nuestra comunidad de jardineros y comparte tus consejos para hacer crecer verduras.</p>
+                <button class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Conoce más</button>
+            </section>
+        
+            <section class="cta2 bg-green-700 text-white text-center py-8 px-6 my-4 w-1/2 rounded-lg">
+                <h2 class="text-2xl mb-4">¿Cómo funciona?</h2>
+                <p class="text-lg mb-4">En Toma Raíces, deberás cuidar de tu verdura y hacer todo lo posible para que crezca lo más posible.</p>
+                <p class="text-lg mb-4">El clima cambiará todos los días y afectará el crecimiento de tu verdura. Además, otros peligros como los insectos y los jardineros pueden reducir la vida de tu verdura.</p>
+                <p class="text-lg mb-4">Al final de cada día, podrás ver tu progreso y cómo el clima y los peligros afectaron a tu verdura.</p>
+                <button class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Conoce más</button>
+            </section>
+        </div>
+    </main>        
 </body>
-</html>
+{% endblock %}
