@@ -5,27 +5,31 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-# class UserGame(AbstractUser):
-#     level = models.IntegerField(default=1)
-#     max_life = models.IntegerField(default=10)
-#     max_mana = models.IntegerField(default=10)
-#     experience = models.IntegerField(default=0)
-
-class UserRol(models.Model):
-    rols= [
-        (0,"user"),
-        (1,"admin"),
-    ]
-    user= models.ForeignKey(User, on_delete=models.CASCADE)
-    rol= models.IntegerField(choices=rols, default=0)
-
-class Player(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class User(AbstractUser):
     level = models.IntegerField(default=1)
-    experience = models.IntegerField(default=0)
-    #name= models.ForeignKey(User, on_delete=models.CASCADE)
     current_life = models.IntegerField(default=10)
     current_mana = models.IntegerField(default=10)
+    experience = models.IntegerField(default=0)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='browsergame_users_groups',  # nuevo nombre de acceso inverso
+        blank=True,
+        verbose_name='groups',
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='browsergame_users_permissions',  # nuevo nombre de acceso inverso
+        blank=True,
+        verbose_name='user permissions',
+        help_text='Specific permissions for this user.',
+        related_query_name='browsergame_user',
+    )
+
+class limitResource(models.Model):
+    max_life = models.IntegerField(default=10)
+    max_mana = models.IntegerField(default=10)
 
 class GlobalOption(models.Model):
     start_date = models.DateTimeField()
@@ -45,7 +49,7 @@ class Action(models.Model):
 
 class Event(models.Model):
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
-    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     success = models.BooleanField(default=True)
 
@@ -62,4 +66,4 @@ class Log(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_at'] #POSIBLE CAMBIO, AÑADIRLO EN EL ADMIN.py
