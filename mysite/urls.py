@@ -23,5 +23,5 @@ from django import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('browserGame.urls'))
+    path('', include('browserGame.urls')),
 ]
