@@ -1,6 +1,12 @@
-from django.urls import path
+
+from django.contrib import admin
+from django.urls import include, path
+from django.http import * 
+from django import *
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.pagina_inicio, name='pagina_inicio'),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/profile/", views.profile, name="profile"),
 ]
