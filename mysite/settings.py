@@ -126,8 +126,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public/media/')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'public/static_dev/'),
+    os.path.join(BASE_DIR, "static"),
+    # os.path.join(BASE_DIR, 'public/static_dev/'),
     os.path.join(BASE_DIR, "vue-bg/dist"), # Bundle de VUE
+
 )
 
 # Default primary key field type
@@ -161,4 +163,7 @@ EMAIL_HOST_PASSWORD = 'canasta2000'
 
 
 AUTH_USER_MODEL = 'browserGame.User'
-LOGIN_REDIRECT_URL = ''
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
