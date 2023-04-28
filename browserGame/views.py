@@ -33,3 +33,8 @@ def enviar_email(request):
     email.send()  
 
     return  render(request, 'browserGame/email_sent.html')
+
+@login_required
+def writeLog(request):
+    systemLog(User.objects.get(id=2), 'I', 'El usuario ha iniciado sesión')
+    return render(request, 'browserGame/index.html')

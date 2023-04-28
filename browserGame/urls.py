@@ -10,4 +10,8 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/profile/", views.profile, name="profile"),
     path("email/",views.enviar_email,name='enviar_email'),
+    path('cron/', views.index, name='index'),
+    path('play-action', views.index, name='index'),
+    path('messages/', views.index, name='index'),
+    path('ranking/', views.index, name='index'),
 ]
