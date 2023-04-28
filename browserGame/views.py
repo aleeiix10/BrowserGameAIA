@@ -8,7 +8,7 @@ def pagina_inicio(request):
         return render(request, 'browserGame/index_protected.html')
     else:
         return render(request, 'browserGame/index.html')
-         
+    
 @login_required
 def profile(request):
     return render(request,"browserGame/profile.html")
@@ -31,5 +31,4 @@ def enviar_email(request):
 
     email.fail_silently = False
     email.send()  
-
     return  render(request, 'browserGame/email_sent.html')
