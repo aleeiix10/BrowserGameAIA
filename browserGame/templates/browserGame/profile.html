@@ -1,81 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h1>Dashboard {{user}}</h1>
-    <h2>Informació personal usuari</h2>
-    <table border="solid black 1px">
-        <tr>
-            <th>
-                Nivell
-            </th>
-            <th>
-                Vida
-            </th>
-            <th>
-                Mana
-            </th>
-            <th>
-                Experiència
-            </th>
-            <th>
-                Posició Ranking
-            </th>
-        </tr>
-        <tr>
-            <td>
-                {{user.level}}
-            </td>
-            <td>
-                {{user.current_life}}
-            </td>
-            <td>
-                {{user.current_mana}}
-            </td>
-            <td>
-                {{user.experience}}
-            </td>
-            <td>
-                Posició Ranking
-            </td>
-        </tr>
-    </table>
-    <h2>Últimes 30 accions realitzades</h2>
-    <table border="solid black 1px">
-        <tr>
-            <th>
-                Nom Acció
-            </th>
-            <th>
-                Categoría
-            </th>
-            <th>
-                Moment Acció
-            </th>
-            <th>
-                Cost
-            </th>
-            <th>
-                Èxit
-            </th>
-        </tr>
-            {% for cnt in userLoged %}
-            <tr>
-                <td>{{cnt.action.name}}</td>
-                <td>{{cnt.action.get_category_display}}</td>
-                <td>{{cnt.timestamp}}</td>
-                <td>{{cnt.action.cost}}</td>
-                <td>{{cnt.success}}</td>
-            </tr>
-            {% endfor %}
-    </table>
-   
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
 
-    <a href="/accounts/logout/?next=/accounts/login">Logout</a>
+{% block content %}
+<body class="bg-green-300">
+    <header class="bg-green-700 text-white py-2">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-xl">Dashboard {{user}}</h1>
+            <a href="/accounts/logout/" class="underline">Logout</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto my-4">
+        <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
+        <table class="border border-black">
+            <thead class="bg-green-700 text-white">
+                <tr>
+                    <th class="p-2">
+                        Nivell
+                    </th>
+                    <th class="p-2">
+                        Vida
+                    </th>
+                    <th class="p-2">
+                        Mana
+                    </th>
+                    <th class="p-2">
+                        Experiència
+                    </th>
+                    <th class="p-2">
+                        Posició Ranking
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-black">
+                    <td class="p-2">
+                        {{user.level}}
+                    </td>
+                    <td class="p-2">
+                        {{user.current_life}}
+                    </td>
+                    <td class="p-2">
+                        {{user.current_mana}}
+                    </td>
+                    <td class="p-2">
+                        {{user.experience}}
+                    </td>
+                    <td class="p-2">
+                        Posició Ranking
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 30 accions realitzades</h2>
+        <table class="border border-black">
+            <thead class="bg-green-700 text-white">
+                <tr>
+                    <th class="p-2">
+                        Nom Acció
+                    </th>
+                    <th class="p-2">
+                        Categoría
+                    </th>
+                    <th class="p-2">
+                        Moment Acció
+                    </th>
+                    <th class="p-2">
+                        Cost
+                    </th>
+                    <th class="p-2">
+                        Èxit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cnt in userLoged %}
+                <tr class="border-b border-black">
+                    <td class="p-2">{{cnt.action.name}}</td>
+                    <td class="p-2">{{cnt.action.get_category_display}}</td>
+                    <td class="p-2">{{cnt.timestamp}}</td>
+                    <td class="p-2">{{cnt.action.cost}}</td>
+                    <td class="p-2">{{cnt.success}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
 </body>
-</html>
+{% endblock %}
