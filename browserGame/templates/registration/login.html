@@ -1,38 +1,38 @@
-{# extends "base.html" #}
- 
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
 {% block content %}
- 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
- 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
- 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
- 
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
- 
-{# Assumes you set up the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
- 
+
+<div class="flex items-center justify-center h-screen bg-green-300">
+    <div class="w-full max-w-md">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="username">
+                    Nom d'usuari
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Usuari" name="username">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2" for="password">
+                    Contrasenya
+                </label>
+                <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="*********" name="password">
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Iniciar sessió
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-green-700 hover:text-green-600" href="{% url 'password_reset' %}">
+                    ¿Has oblidat la contrasenya?
+                </a>
+            </div>
+        </form>
+        <p class="text-center text-gray-500 text-xs">
+            &copy;2023 Pren arrels
+        </p>
+    </div>
+</div>
+
 {% endblock %}
