@@ -1,8 +1,13 @@
 from django.shortcuts import render
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import *
+from .utils import *
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+from .decorators import *
 
-
+@cronDecorator
 def pagina_inicio(request):
     if request.user.is_authenticated:
         return render(request, 'browserGame/index_protected.html')
@@ -12,12 +17,6 @@ def pagina_inicio(request):
 @login_required
 def profile(request):
     return render(request,"browserGame/profile.html")
-
-
-from django.core.mail import EmailMessage
-from django.conf import settings
-from django.template.loader import render_to_string
-
 
 def enviar_email(request):
     template = render_to_string('browserGame/email_template.html', {'user': 'Andres'})
@@ -34,16 +33,15 @@ def enviar_email(request):
 
     return  render(request, 'browserGame/email_sent.html')
 
-from .models import *
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .utils import *
-
 def index(request):
     context = {}
     return render(request, 'browserGame/index.html', context)
 
 @login_required
 def writeLog(request):
-    systemLog(User.objects.get(id=2), 'I', 'El usuario ha iniciado sesión')
+    systemLogU(request.user, 'I', 'El usuario ha iniciado sesión')
+    return render(request, 'browserGame/index.html')
+
+def cronMana(request):
+    cronManaU()
     return render(request, 'browserGame/index.html')
