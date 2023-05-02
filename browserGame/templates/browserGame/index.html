@@ -9,10 +9,10 @@
             <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
         </div>
         <div class="titulo w-3/5 text-center pt-5">
-            <h1 class="text-3xl">Toma Raíces</h1>
-            <p>¡Haz crecer tu verdura y evita ser desplantado!</p>
+            <h1 class="text-3xl">Pren arrels</h1>
+            <p>Fes créixer la teva verdura i evita ser desplantat!</p>
             <nav class="navbar flex justify-around items-center py-2">
-            <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" href="./accounts/login">Iniciar Sesión</a>
+            <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" href="./accounts/login">Iniciar sessió</a>
             </nav>
         </div>
         
@@ -22,23 +22,29 @@
     </header>      
     <main>
         <section class="hero bg-green-700 text-white text-center py-20 my-4 rounded-md">
-            <h1 class="text-3xl mb-4">¡Bienvenidos al mundo de la jardinería!</h1>
-            <p class="text-xl mb-4">Prepárate para cuidar de tu verdura y hacerla crecer lo más posible.</p>
-            <a href="./register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Regístrate ahora</a>
+            <h1 class="text-3xl mb-4">Benvinguts al món de les verdures!</h1>
+            <p class="text-xl mb-4">Prepara't per cuidar la teva verdura i fer-la créixer el més possible.</p>
+            <a href="./register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Registra't ara</a>
         </section>
         <div class="descripcion flex justify-between">
             <section class="cta bg-green-700 text-white text-center py-8 px-6 my-4 w-1/2 rounded-lg">
-                <h2 class="text-2xl mb-4">¿Quieres tener la verdura más grande?</h2>
-                <p class="text-lg mb-4">Únete a nuestra comunidad de jardineros y comparte tus consejos para hacer crecer verduras.</p>
-                <button class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Conoce más</button>
+                <h2 class="text-2xl mb-4">Vols tindre la verdura més gran?</h2>
+                <p class="text-lg mb-10">Uneix-te a la nostra comunitat i comparteix els teus consells per fer créixer verdures.</p>
+                <div class="horarioTemporada bg-green-300 py-20 text-green-700 rounded-full">
+                    <h1 class="text-2xl mb-4">Temporada actual</h1>
+                    <p class="text-lg mb-4">Data d'inici: {{ global_option.start_date }}</p>
+                    <p class="text-lg mb-4">Data final: {{ global_option.end_date }}</p>
+                    <p class="text-lg mb-4">Per a la propera temporada falta: {{ time_left }}</p>
+                </div>
             </section>
         
             <section class="cta2 bg-green-700 text-white text-center py-8 px-6 my-4 w-1/2 rounded-lg">
-                <h2 class="text-2xl mb-4">¿Cómo funciona?</h2>
-                <p class="text-lg mb-4">En Toma Raíces, deberás cuidar de tu verdura y hacer todo lo posible para que crezca lo más posible.</p>
-                <p class="text-lg mb-4">El clima cambiará todos los días y afectará el crecimiento de tu verdura. Además, otros peligros como los insectos y los jardineros pueden reducir la vida de tu verdura.</p>
-                <p class="text-lg mb-4">Al final de cada día, podrás ver tu progreso y cómo el clima y los peligros afectaron a tu verdura.</p>
-                <button class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Conoce más</button>
+                <h2 class="text-2xl mb-4">Com funciona?</h2>
+                <p class="text-lg mb-4">En aquest joc, ets una verdura plantada a un jardí i el teu objectiu és créixer el més possible i evitar ser desplantat. Tot i això, el clima i altres perills et poden fer perdre vida.</p>
+                <p class="text-lg mb-4">Cada dia, el clima canviarà i afectarà el teu creixement de maneres diferents. Si el clima és assolellat i càlid, la teva verdura creixerà més ràpid i guanyarà més vida. Si el clima és plujós o fred, la teva verdura creixerà més lentament i perdrà vida.</p>
+                <p class="text-lg mb-4">A més del clima, altres perills aguaiten al jardí. Els insectes i les plagues poden atacar i reduir la vida de la teva verdura. I si les altres verdures decideixen atacar-te i acabes en males condicions, perdràs tot el teu progrés i hauràs de començar de nou.</p>
+                <p class="text-lg mb-4">Per jugar, hauràs de cuidar la teva verdura i fer tot el possible perquè creixi el més possible. Al final de cada dia, podràs veure el teu progrés i com el clima i els perills van afectar la teva verdura.</p>
+                <p class="text-lg mb-4"></p>
             </section>
         </div>
     </main>        

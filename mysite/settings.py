@@ -168,3 +168,5 @@ AUTH_USER_MODEL = 'browserGame.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+TIME_ZONE = 'Europe/Madrid'

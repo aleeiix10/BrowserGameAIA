@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 
 def pagina_inicio(request):
@@ -40,6 +41,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
+from django.utils import timezone
+import datetime
 
 def index(request):
     context = {}
@@ -55,7 +58,15 @@ def pagina_inicio(request):
         userLoged = Event.objects.filter(user=request.user).order_by('-timestamp')[:30]
         return render(request, 'browserGame/profile.html', {'userLoged': userLoged, })
     else:
-        return render(request, 'browserGame/index.html')
+        now = timezone.now()
+        global_option = GlobalOption.objects.first()
+        time_left = global_option.end_date - now
+        time_left_str = str(time_left - datetime.timedelta(microseconds=time_left.microseconds))
+        context = {
+            'global_option': global_option,
+            'time_left': time_left_str,
+        }
+        return render(request, 'browserGame/index.html', context)
 
 def register(request):
     if request.method == 'POST':
