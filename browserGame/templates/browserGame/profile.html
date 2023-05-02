@@ -53,7 +53,7 @@
                 </tr>
             </tbody>
         </table>
-        
+        {% if userLoged|length >= 1 %}
         <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 30 accions realitzades</h2>
         <table class="border border-black">
             <thead class="bg-green-700 text-white">
@@ -87,6 +87,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
     </main>
 </body>
 {% endblock %}

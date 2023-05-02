@@ -2,6 +2,20 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from .models import *
+from django.contrib.auth.decorators import login_required
+
+from .utils import *
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+from .forms import CustomUserCreationForm
+from django.utils import timezone
+import datetime
 
 
 def pagina_inicio(request):
@@ -15,34 +29,6 @@ def profile(request):
     return render(request,"browserGame/profile.html")
 
 
-from django.core.mail import EmailMessage
-from django.conf import settings
-from django.template.loader import render_to_string
-
-
-def enviar_email(request):
-    template = render_to_string('browserGame/email_template.html', {'user': 'Andres'})
-
-    email = EmailMessage(
-        'Bienvenido a BrowserGame',
-        template,
-        settings.EMAIL_HOST_USER,
-        ['evillcatunari.cf@iesesteveterradas.cat']
-    )
-
-    email.fail_silently = False
-    email.send()  
-    return  render(request, 'browserGame/email_sent.html')
-from .models import *
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .utils import *
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
-from .forms import CustomUserCreationForm
-from django.utils import timezone
-import datetime
 
 def index(request):
     context = {}
@@ -74,7 +60,14 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('login')
+            send_mail(
+                'Benvingut a la meva aplicació',
+                'Hola {0}, gràcies per registrar-te en la meva aplicació.'.format(user.username),
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                fail_silently=False,
+            )
+            return redirect('/')
         else:
             print(form.errors)
     else:

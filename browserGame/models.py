@@ -1,8 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
-# Create your models here.
-from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -42,7 +38,7 @@ class Action(models.Model):
         ('D', 'Defensiva'),
         ('N', 'Neutra'),
     ]
-    name= models.CharField(max_length=10)
+    name= models.CharField(max_length=50)
     category= models.CharField(max_length=1, choices=categories)
     cost= models.IntegerField()
     succesPercentage= models.IntegerField()
