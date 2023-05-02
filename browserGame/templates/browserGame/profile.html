@@ -1,3 +1,81 @@
-Benvingut {{user}}.
-<br>
-<a href="/accounts/logout/?next=/accounts/login">Logout</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Dashboard {{user}}</h1>
+    <h2>Informació personal usuari</h2>
+    <table border="solid black 1px">
+        <tr>
+            <th>
+                Nivell
+            </th>
+            <th>
+                Vida
+            </th>
+            <th>
+                Mana
+            </th>
+            <th>
+                Experiència
+            </th>
+            <th>
+                Posició Ranking
+            </th>
+        </tr>
+        <tr>
+            <td>
+                {{user.level}}
+            </td>
+            <td>
+                {{user.current_life}}
+            </td>
+            <td>
+                {{user.current_mana}}
+            </td>
+            <td>
+                {{user.experience}}
+            </td>
+            <td>
+                Posició Ranking
+            </td>
+        </tr>
+    </table>
+    <h2>Últimes 30 accions realitzades</h2>
+    <table border="solid black 1px">
+        <tr>
+            <th>
+                Nom Acció
+            </th>
+            <th>
+                Categoría
+            </th>
+            <th>
+                Moment Acció
+            </th>
+            <th>
+                Cost
+            </th>
+            <th>
+                Èxit
+            </th>
+        </tr>
+            {% for cnt in userLoged %}
+            <tr>
+                <td>{{cnt.action.name}}</td>
+                <td>{{cnt.action.get_category_display}}</td>
+                <td>{{cnt.timestamp}}</td>
+                <td>{{cnt.action.cost}}</td>
+                <td>{{cnt.success}}</td>
+            </tr>
+            {% endfor %}
+    </table>
+   
+
+    <a href="/accounts/logout/?next=/accounts/login">Logout</a>
+</body>
+</html>

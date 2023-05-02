@@ -52,7 +52,8 @@ def writeLog(request):
 
 def pagina_inicio(request):
     if request.user.is_authenticated:
-        return render(request, 'browserGame/index_protected.html')
+        userLoged = Event.objects.filter(user=request.user).order_by('-timestamp')[:30]
+        return render(request, 'browserGame/profile.html', {'userLoged': userLoged, })
     else:
         return render(request, 'browserGame/index.html')
 

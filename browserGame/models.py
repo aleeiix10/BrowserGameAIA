@@ -47,12 +47,19 @@ class Action(models.Model):
     cost= models.IntegerField()
     succesPercentage= models.IntegerField()
     points= models.IntegerField()
+    def __str__(self):
+        return self.name
+
 
 class Event(models.Model):
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     success = models.BooleanField(default=True)
+    class Meta:
+        ordering = ['-timestamp']
+    def __str__(self):
+        return self.action.name
 
 class Log(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)
