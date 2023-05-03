@@ -22,12 +22,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from .decorators import *
 
-@cronDecorator
-def pagina_inicio(request):
-    if request.user.is_authenticated:
-        return render(request, 'browserGame/index_protected.html')
-    else:
-        return render(request, 'browserGame/index.html')
+
     
 @login_required
 def profile(request):
@@ -38,11 +33,10 @@ def index(request):
     context = {}
     return render(request, 'browserGame/index.html', context)
 
-@login_required
-def writeLog(request):
-    systemLog(User.objects.get(id=2), 'I', 'El usuario ha iniciado sesión')
-    return render(request, 'browserGame/index.html')
-
+#@login_required
+#def writeLog(request):
+#    return render(request, 'browserGame/index.html')
+@cronDecorator
 def pagina_inicio(request):
     if request.user.is_authenticated:
         userLoged = Event.objects.filter(user=request.user).order_by('-timestamp')[:30]
@@ -77,5 +71,3 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
-    log_eventU(request.user, 'I', 'El usuario ha iniciado sesión')
-    return render(request, 'browserGame/index.html')

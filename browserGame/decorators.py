@@ -7,8 +7,8 @@ def cronDecorator(function):
         # Ejecutar la función después de que se carga la vista
         cron = GlobalOption.objects.first()
         time_since_last_run = timezone.now() - cron.last_updated_cron
-        if time_since_last_run.seconds >= 3600:
-            mana= time_since_last_run.seconds//3600
+        if time_since_last_run.seconds >= 20:
+            mana= time_since_last_run.seconds//20
             cronManaU(mana)
         return response
     return wrapper
