@@ -1,6 +1,5 @@
 from django.db import models
 # Create your models here.
-from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -26,13 +25,10 @@ class User(AbstractUser):
         related_query_name='browsergame_user',
     )
 
-class LimitResource(models.Model):
-    max_life = models.IntegerField(default=10)
-    max_mana = models.IntegerField(default=10)
-
 class GlobalOption(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    last_updated_cron= models.DateTimeField()
 
 class Action(models.Model):
     categories = [
@@ -40,7 +36,7 @@ class Action(models.Model):
         ('D', 'Defensiva'),
         ('N', 'Neutra'),
     ]
-    name= models.CharField(max_length=10)
+    name= models.CharField(max_length=50)
     category= models.CharField(max_length=1, choices=categories)
     cost= models.IntegerField()
     succesPercentage= models.IntegerField()
@@ -62,7 +58,7 @@ class Log(models.Model):
     ]
     typeLog= models.CharField(max_length=1, choices=typeOfLog)
     message= models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=False)
 
     class Meta:
         ordering = ['-created_at'] #POSIBLE CAMBIO, AÑADIRLO EN EL ADMIN.py

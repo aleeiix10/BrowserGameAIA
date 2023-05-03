@@ -39,9 +39,5 @@ def index(request):
 
 @login_required
 def writeLog(request):
-    systemLogU(request.user, 'I', 'El usuario ha iniciado sesión')
-    return render(request, 'browserGame/index.html')
-
-def cronMana(request):
-    cronManaU()
+    log_eventU(request.user, 'I', 'El usuario ha iniciado sesión')
     return render(request, 'browserGame/index.html')
