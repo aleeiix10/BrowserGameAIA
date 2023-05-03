@@ -34,6 +34,8 @@ def cronManaU(mana):
         for user in users:
             if user.current_mana < user.level * 10 and user.level > 0:
                 user.current_mana += user.level
+                if user.level * 10 < user.current_mana:
+                    user.current_mana = user.level * 10
                 user.save()
 
     cron = GlobalOption.objects.first()
