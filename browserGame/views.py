@@ -7,8 +7,6 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from .models import *
-from django.contrib.auth.decorators import login_required
-
 from .utils import *
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
