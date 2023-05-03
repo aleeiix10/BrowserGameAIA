@@ -7,11 +7,12 @@ class GlobalOptionsView(admin.ModelAdmin):
 class PaginadorLog(admin.ModelAdmin):
     list_per_page = 25  # cantidad de items por pagina
     list_display= ["typeLog", "user", "message", "created_at"]
-
+    readonly_fields = ["typeLog", "user", "message", "created_at"]
 class UserLog(admin.TabularInline):
     model= Log
     extra= 1
     max_num= 5
+    readonly_fields = ["typeLog", "user", "message", "created_at"]
 
 class UserEvent(admin.TabularInline):
     model= Event
