@@ -14,8 +14,15 @@ from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
 from django.utils import timezone
 import datetime
+from django.contrib.auth.decorators import login_required
+from .models import *
+from .utils import *
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+from .decorators import *
 
-
+@cronDecorator
 def pagina_inicio(request):
     if request.user.is_authenticated:
         return render(request, 'browserGame/index_protected.html')
@@ -25,7 +32,6 @@ def pagina_inicio(request):
 @login_required
 def profile(request):
     return render(request,"browserGame/profile.html")
-
 
 
 def index(request):
@@ -71,3 +77,5 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+    log_eventU(request.user, 'I', 'El usuario ha iniciado sesión')
+    return render(request, 'browserGame/index.html')
