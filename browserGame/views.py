@@ -9,20 +9,16 @@ from django.core.mail import send_mail
 from .models import *
 from .utils import *
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
 from django.utils import timezone
 import datetime
-from django.contrib.auth.decorators import login_required
 from .models import *
 from .utils import *
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
 from .decorators import *
-
-
     
 @login_required
 def profile(request):
@@ -33,9 +29,6 @@ def index(request):
     context = {}
     return render(request, 'browserGame/index.html', context)
 
-#@login_required
-#def writeLog(request):
-#    return render(request, 'browserGame/index.html')
 @cronDecorator
 def pagina_inicio(request):
     if request.user.is_authenticated:
@@ -71,3 +64,9 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+# RANKING
+
+def ranking(request):
+    return render(request, 'browserGame/ranking.html')

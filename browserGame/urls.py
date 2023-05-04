@@ -12,6 +12,6 @@ urlpatterns = [
     path('cron/', views.pagina_inicio, name='index'),
     path('play-action', views.pagina_inicio, name='index'),
     path('messages/', views.pagina_inicio, name='index'),
-    path('ranking/', views.pagina_inicio, name='index'),
+    path('ranking/', views.ranking, name='ranking'),
     path('register/', views.register, name='register'),
 ]
