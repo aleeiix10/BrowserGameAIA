@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -21,7 +22,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
 from .decorators import *
-
+import random
 
     
 @login_required
@@ -71,3 +72,50 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+class ActionForm(forms.Form):
+    acció = forms.ModelChoiceField(Action.objects.all())
+    jugador_a_atacar = forms.ModelChoiceField(queryset=None)
+
+@cronDecorator
+def play_action(request):
+    if request.user.is_authenticated:
+        form = ActionForm()
+        if request.method == "POST":
+            form = ActionForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                atack_used = form.cleaned_data.get('acció')
+                atacked_user = form.cleaned_data.get('jugador_a_atacar')
+                #si el coste de mana es mayor al mana que tiene error
+                if atack_used.cost > user.current_mana:
+                    print(form.errors)
+                #si tiene el mana suficiente para atacar
+                else: 
+                    random_atack = random.randint(0, 100)
+                    #si el random es mayor que el porcentaje ha fallado el ataque
+                    if random_atack > atack_used.succesPercentage:
+                        user.current_mana -= atack_used.cost
+                        user.save()
+                        #ha fallado el ataque
+                        print(form.errors)
+                    #si no falla el ataque
+                    else:
+                        user.current_mana -= atack_used.cost
+                        user.experience = user_experience_before_atack
+                        user_experience_before_atack = user.experience + atack_used.cost
+                        if user_experience_before_atack > user.level*10:
+                            user.level += 1
+                            user.save()
+                        life_before_atack = atacked_user.current_life - atack_used.points
+                        if life_before_atack > user.max_life:
+
+
+
+                        
+        level_range = [request.user.level-1, request.user.level, request.user.level+1]
+        form.fields['jugador_a_atacar'].queryset = User.objects.filter(level__in=level_range).exclude(pk=request.user.pk)
+        return render(request, 'browserGame/play_action.html', {'form': form, })
+
+    else:
+        return render(request, 'browserGame/403.html', {}, status=403)

@@ -18,11 +18,19 @@ class UserEvent(admin.TabularInline):
     model= Event
     readonly_fields = ["action", "user", "timestamp", "success"]
 
-class UserView(admin.ModelAdmin):
-    inlines= [UserLog, UserEvent]
-    list_per_page= 25
-    list_display= ["username", "current_mana", "level"]
-    field_set= ["level","current_mana","current_life","experience"]
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
+class UserView(BaseUserAdmin):
+    inlines = [UserLog, UserEvent]
+    list_per_page = 25
+    list_display = ["username", "current_mana", "level"]
+    fieldsets = BaseUserAdmin.fieldsets + (
+        ("PERSONAL INFO USERS", { 
+            "fields": ["level", "current_mana", "current_life", "experience"]
+        }),
+    )
+
+
 
 # Register your models here.
 admin.site.register(User, UserView)
