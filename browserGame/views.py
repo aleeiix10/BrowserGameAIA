@@ -22,7 +22,6 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from .decorators import *
 
-
     
 @login_required
 def profile(request):
@@ -71,3 +70,6 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+    

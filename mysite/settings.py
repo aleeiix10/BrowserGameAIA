@@ -166,7 +166,6 @@ EMAIL_HOST_PASSWORD = 'canasta2000'
 
 AUTH_USER_MODEL = 'browserGame.User'
 
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 

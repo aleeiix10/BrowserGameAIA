@@ -3,6 +3,123 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Index {% endblock %}
 {% block content %}
+<style>
+    .botonAccion {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contenedorAcciones {
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .textoAccion {
+        position: absolute;
+        font-size: 70px;
+        left: -1000px;
+        top: 50%;
+        color: #fff;
+        text-shadow: black 5px 5px 3px;
+        font-weight: bold;
+        z-index: 5;
+    }
+
+    .accion {
+        position: absolute;
+        height: 50%;
+        left: -400px;
+        background-size: cover;
+    }
+
+    #pea1 {
+        top: 30%;
+        left: -400px;
+        width: 350px;
+    }
+    #pea2 {
+        top: 30%;
+        left: -700px;
+        width: 350px;
+    }
+    #pea3 {
+        top: 30%;
+        left: -1000px;
+        width: 350px;
+    }
+    #pea4 {
+        top: 30%;
+        left: -1300px;
+        width: 350px;
+    }
+    #pea5 {
+        top: 30%;
+        left: -1600px;
+        width: 350px;
+    }
+    #pea6 {
+        top: 30%;
+        left: -1900px;
+        width: 350px;
+    }
+
+    #carrot1 {
+        top: -80%;
+        left: 25%;
+        width: 750px;
+    }
+
+    .animacion-texto {
+        animation: desplazar 6.3s ease-in;
+    }
+
+    .animacion-pea {
+        animation: desplazar 3s ease-in;
+    }
+
+    .animacion-carrot {
+        animation: caer 2.8s ease-out;
+    }
+
+    @keyframes desplazar {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(1500%);
+        }
+    }
+
+    @keyframes caer {
+        0% {
+            transform: translateY(0);
+            animation-timing-function: ease-in;
+        }
+        60% {
+            transform: translateY(250%);
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        80% {
+            transform: translateY(240%);
+            animation-timing-function: cubic-bezier(0.26, 0.09, 0.46, 0.84);
+        }
+        90% {
+            transform: translateY(245%);
+            animation-timing-function: cubic-bezier(0.26, 0.09, 0.46, 0.84);
+        }
+        100% {
+            transform: translateY(245%);
+            animation-timing-function: ease-out;
+        }
+    }
+
+
+</style>
 <body class="bg-green-300">
     <header class="bg-green-700 text-white py-2">
         <div class="container mx-auto flex justify-between items-center px-4">
@@ -47,6 +164,7 @@
                 </tr>
             </tbody>
         </table>
+
         {% if userLoged|length >= 1 %}
         <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 30 accions realitzades</h2>
         <table class="border border-black">
@@ -86,6 +204,104 @@
             </tbody>
         </table>
         {% endif %}
+
+        <div class="my-4 flex justify-center">
+            
+            {% csrf_token %}
+            <button id="miBoton" type="submit" name="action" value="Lanzamiento de Guisantes" class="botonAccion bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Lanzamiento de Guisantes
+            </button>
+                
+            <button type="submit" name="action" value="Golpe de Zanahoria" class="botonAccion bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Golpe de Zanahoria
+            </button>
+
+            <button type="submit" name="action" value="Ráfaga de Cebolla" class="botonAccion bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Ráfaga de Cebolla
+            </button>
+
+            <button type="submit" name="action" value="Rayo de Remolacha" class="botonAccion bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Rayo de Remolacha
+            </button>
+
+            <button type="submit" name="action" value="Escudo de Repollo" class="botonAccion bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Escudo de Repollo
+            </button>
+
+            <button type="submit" name="action" value="Campo de Alcachofas" class="botonAccion bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Campo de Alcachofas
+            </button>
+            
+            <button type="submit" name="action" value="Lluvia de Tomillo" class="botonAccion bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
+                Lluvia de Tomillo
+            </button>
+            
+        </div>
+        <div class="contenedorAcciones">
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="textoAccion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+        </div>
     </main>
+<script>
+    const botones = document.querySelectorAll(".botonAccion");
+    const acciones = document.querySelectorAll(".accion");
+    const textoAccion = document.querySelector(".textoAccion");
+    
+    botones.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+            //Eliminar las id
+            for (let i = 0; i < acciones.length; i++) {
+                acciones[i].id = null;
+            }
+
+            textoAccion.textContent = "¡"+boton.textContent+"!";
+            if(boton.value == "Lanzamiento de Guisantes") {
+                const rutaImagen = "/static/img/guisante.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                    acciones[i].id = "pea"+(i+1);
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-pea");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    pea.classList.add("animacion-pea");
+                });
+            }
+            else if(boton.value == "Golpe de Zanahoria") {
+                const rutaImagen = "/static/img/zanahoria.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                    acciones[i].id = "carrot"+(i+1);
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-carrot");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    pea.classList.add("animacion-carrot");
+                });
+            }
+            else {
+                const rutaImagen = "";
+                for (let i = 0; i < acciones.length; i++) {
+                    acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                    acciones[i].id = "pea"+(i+1);
+                }
+            }
+
+            textoAccion.classList.remove("animacion-texto");
+            void textoAccion.offsetWidth;
+            textoAccion.classList.add("animacion-texto");
+            
+        });
+        
+    });
+</script>
+          
 </body>
 {% endblock %}
