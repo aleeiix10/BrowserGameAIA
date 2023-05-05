@@ -109,10 +109,6 @@ def play_action(request):
                             user.save()
                         life_before_atack = atacked_user.current_life - atack_used.points
                         if life_before_atack > user.max_life:
-
-
-
-                        
         level_range = [request.user.level-1, request.user.level, request.user.level+1]
         form.fields['jugador_a_atacar'].queryset = User.objects.filter(level__in=level_range).exclude(pk=request.user.pk)
         return render(request, 'browserGame/play_action.html', {'form': form, })
