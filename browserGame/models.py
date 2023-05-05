@@ -29,6 +29,7 @@ class GlobalOption(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     last_updated_cron= models.DateTimeField()
+    time_cron_execute_seconds = models.IntegerField()
 
 class Action(models.Model):
     categories = [

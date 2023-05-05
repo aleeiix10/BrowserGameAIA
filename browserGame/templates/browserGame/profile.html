@@ -14,7 +14,7 @@
     <main class="container mx-auto my-4">
         <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
         <table class="border border-black">
-            <thead class="bg-green-700 text-white">
+            <thead class="bg-green-700 text-white text-center">
                 <tr>
                     <th class="p-2">
                         Nivell
@@ -23,18 +23,15 @@
                         Vida
                     </th>
                     <th class="p-2">
-                        Mana
+                        Manà
                     </th>
                     <th class="p-2">
                         Experiència
                     </th>
-                    <th class="p-2">
-                        Posició Ranking
-                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b border-black">
+                <tr class="border-b border-black text-center">
                     <td class="p-2">
                         {{user.level}}
                     </td>
@@ -47,22 +44,19 @@
                     <td class="p-2">
                         {{user.experience}}
                     </td>
-                    <td class="p-2">
-                        Posició Ranking
-                    </td>
                 </tr>
             </tbody>
         </table>
         {% if userLoged|length >= 1 %}
         <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 30 accions realitzades</h2>
         <table class="border border-black">
-            <thead class="bg-green-700 text-white">
+            <thead class="bg-green-700 text-white text-center">
                 <tr>
                     <th class="p-2">
                         Nom Acció
                     </th>
                     <th class="p-2">
-                        Categoría
+                        Categoria
                     </th>
                     <th class="p-2">
                         Moment Acció
@@ -77,12 +71,16 @@
             </thead>
             <tbody>
                 {% for cnt in userLoged %}
-                <tr class="border-b border-black">
+                <tr class="border-b border-black text-center">
                     <td class="p-2">{{cnt.action.name}}</td>
                     <td class="p-2">{{cnt.action.get_category_display}}</td>
                     <td class="p-2">{{cnt.timestamp}}</td>
                     <td class="p-2">{{cnt.action.cost}}</td>
-                    <td class="p-2">{{cnt.success}}</td>
+                    {% if cnt.success == True %}
+                        <td class="p-2"><i class="fa fa-solid fa-circle-check" style="color: #316e32;"></i></td>
+                    {% else %}
+                        <td class="p-2"><i class="fa fa-sharp fa-solid fa-circle-xmark" style="color: #a73131;"></i></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
