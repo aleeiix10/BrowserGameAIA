@@ -53,10 +53,10 @@
             <thead class="bg-green-700 text-white text-center">
                 <tr>
                     <th class="p-2">
-                        Atacant
+                        Agressor
                     </th>
                     <th class="p-2">
-                        Atacat
+                        Victima
                     </th>
                     <th class="p-2">
                         Nom Acció
@@ -75,22 +75,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                {% for cnt in userLoged %}
-                <tr class="border-b border-black text-center">
-                    <td class="p-2">{{cnt.user.username}}</td>
-                    <td class="p-2">{{cnt.user_attacked}}</td>
-                    <td class="p-2">{{cnt.action.name}}</td>
-                    <td class="p-2">{{cnt.action.get_category_display}}</td>
-                    <td class="p-2">{{cnt.timestamp}}</td>
-                    <td class="p-2">{{cnt.action.cost}}</td>
-                    {% if cnt.success == True %}
-                        <td class="p-2"><i class="fa fa-solid fa-circle-check" style="color: #316e32;"></i></td>
-                    {% else %}
-                        <td class="p-2"><i class="fa fa-sharp fa-solid fa-circle-xmark" style="color: #a73131;"></i></td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
+            <tbody id="tbodyRelatedActions">
             </tbody>
         </table>
         {% endif %}
@@ -98,15 +83,53 @@
     <script>
         $(document).ready(function(){
             setInterval(getStats, 30000);
+            setInterval(getRelatedActions, 30000);
             function getStats() {
-                $.getJSON("api/get_users", function(usuari){
+                $.getJSON("api/get_users",async function(usuari){
                     $('#profileStatsLevel').text(usuari.UsersObj[0].level);
                     $('#profileStatsLife').text(usuari.UsersObj[0].current_life);
                     $('#profileStatsMana').text(usuari.UsersObj[0].current_mana);
                     $('#profileStatsExperience').text(usuari.UsersObj[0].experience);  
-                })
+                });
+            }
+            function getRelatedActions() {
+                $.getJSON("api/get_related_actions",async function(actions){
+                    $('#tbodyRelatedActions').empty();
+                    actions.ActionsObj.forEach(action =>{
+
+                    $('#tbodyRelatedActions').append('<tr class="border-b border-black text-center">');
+                    if (action.user__username == null){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user__username+`</td>`);
+                    }
+                    if (action.user_attacked__username == null){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user__username+`</td>`);
+                    }
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__name+`</td>`);
+                    if (action.action__category =='A'){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">Agressiva</td>`);
+                    }else if (action.action__category == 'D'){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">Defensiva</td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2">Neutral</td>`);
+                    }
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.timestamp+`</td>`);
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__cost+`</td>`);
+
+                    if (action.success == false){
+                        $('#tbodyRelatedActions').append(` <td class="p-2"><i class="fa fa-sharp fa-solid fa-circle-xmark" style="color: #a73131;"></i></td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2"><i class="fa fa-solid fa-circle-check" style="color: #316e32;"></i></td>`);
+                    }
+                    $('#tbodyRelatedActions').append(`</tr>`);
+                    })
+                });
             }
             getStats();
+            getRelatedActions();
         });
     </script>
 </body>

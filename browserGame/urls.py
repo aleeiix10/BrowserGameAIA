@@ -13,6 +13,6 @@ urlpatterns = [
     path('messages/', views.pagina_inicio, name='index'),
     path('ranking/', views.ranking, name='ranking'),
     path('register/', views.register, name='register'),
-    path('api/get_users',api.getUsers, name="getUsersId"),
-
+    path('api/get_users',api.getUsers, name="getUsers"),
+    path('api/get_related_actions',api.getRelatedActions, name="getRelatedActions"),
 ]
