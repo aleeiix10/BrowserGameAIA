@@ -31,18 +31,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b border-black text-center">
-                    <td class="p-2">
-                        {{user.level}}
+                <tr class="border-b border-black text-center" id="profileStats">
+                    <td class="p-2" id="profileStatsLevel">
+
                     </td>
-                    <td class="p-2">
-                        {{user.current_life}}
+                    <td class="p-2" id="profileStatsLife">
+
                     </td>
-                    <td class="p-2">
-                        {{user.current_mana}}
+                    <td class="p-2" id="profileStatsMana">
+
                     </td>
-                    <td class="p-2">
-                        {{user.experience}}
+                    <td class="p-2" id="profileStatsExperience">
+
                     </td>
                 </tr>
             </tbody>
@@ -87,5 +87,19 @@
         </table>
         {% endif %}
     </main>
+    <script>
+        $(document).ready(function(){
+            setInterval(getStats, 30000);
+            function getStats() {
+                $.getJSON("api/get_users", function(usuari){
+                    $('#profileStatsLevel').text(usuari.UsersObj[0].level);
+                    $('#profileStatsLife').text(usuari.UsersObj[0].current_life);
+                    $('#profileStatsMana').text(usuari.UsersObj[0].current_mana);
+                    $('#profileStatsExperience').text(usuari.UsersObj[0].experience);  
+                })
+            }
+            getStats();
+        });
+    </script>
 </body>
 {% endblock %}
