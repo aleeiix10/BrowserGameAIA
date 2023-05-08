@@ -10,12 +10,10 @@ from django.core.mail import send_mail
 from .models import *
 from .utils import *
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
 from django.utils import timezone
 import datetime
-from django.contrib.auth.decorators import login_required
 from .models import *
 from .utils import *
 from django.core.mail import EmailMessage
@@ -256,3 +254,8 @@ def play_action(request):
 
     else:
         return render(request, 'browserGame/403.html', {}, status=403)
+
+# RANKING
+def ranking(request):
+    users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
+    return render(request, 'browserGame/ranking.html', {'users':users})

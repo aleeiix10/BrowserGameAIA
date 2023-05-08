@@ -11,7 +11,7 @@ urlpatterns = [
     path("accounts/profile/", views.profile, name="profile"),
     path('cron/', views.pagina_inicio, name='index'),
     path('messages/', views.pagina_inicio, name='index'),
-    path('ranking/', views.pagina_inicio, name='index'),
+    path('ranking/', views.ranking, name='ranking'),
     path('register/', views.register, name='register'),
     path('api/get_users',api.getUsers, name="getUsersId"),
 

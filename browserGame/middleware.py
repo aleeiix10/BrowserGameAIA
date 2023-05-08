@@ -1,6 +1,4 @@
-from datetime import datetime
 from django.contrib.auth import get_user
-from .models import Log
 from .utils import log_eventU
 
 class LogMiddleware:
