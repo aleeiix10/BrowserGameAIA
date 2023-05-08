@@ -53,6 +53,12 @@
             <thead class="bg-green-700 text-white text-center">
                 <tr>
                     <th class="p-2">
+                        Atacant
+                    </th>
+                    <th class="p-2">
+                        Atacat
+                    </th>
+                    <th class="p-2">
                         Nom Acció
                     </th>
                     <th class="p-2">
@@ -72,6 +78,8 @@
             <tbody>
                 {% for cnt in userLoged %}
                 <tr class="border-b border-black text-center">
+                    <td class="p-2">{{cnt.user.username}}</td>
+                    <td class="p-2">{{cnt.user_attacked}}</td>
                     <td class="p-2">{{cnt.action.name}}</td>
                     <td class="p-2">{{cnt.action.get_category_display}}</td>
                     <td class="p-2">{{cnt.timestamp}}</td>

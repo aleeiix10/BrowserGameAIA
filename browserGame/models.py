@@ -45,16 +45,14 @@ class Action(models.Model):
     def __str__(self):
         return self.name
 
-
 class Event(models.Model):
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     success = models.BooleanField(default=True)
+    user_attacked = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events_attacked', blank=True, null=True)
     class Meta:
         ordering = ['-timestamp']
-    def __str__(self):
-        return self.action.name
 
 class Log(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)

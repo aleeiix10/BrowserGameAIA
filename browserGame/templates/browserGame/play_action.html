@@ -3,24 +3,26 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Play Action {% endblock %}
 {% block content %}
-<div class="flex flex-col items-center mt-8">
+<div class="flex flex-col items-center mt-8" id="formulario">
   <h2 class="text-2xl font-bold mb-4">Selecciona una acció</h2>
-  <form method="post" class="bg-green-300 p-4 rounded-lg w-96">
+  <form method="post" class="bg-green-300 p-4 rounded-lg w-96" autocomplete="off">
     {% csrf_token %}
     <div class="mb-4">
-      <label for="{{ form.accio.id_for_label }}" class="block text-white font-bold mb-2">Acció</label>
-      {{form.acció|length}}
-      <select>
-      {% for cnt in form.acció%}
-        <option>{{cnt}}</option>
-      {% endfor%}
-    </select>
+      <label for="{{ form.accio.id_for_label }}" class="block text-white font-bold mb-2">Acció:</label>
+      {{form.action}}
     </div>
     <div class="mb-4">
       <label for="{{ form.jugador_a_atacar.id_for_label }}" class="block text-white font-bold mb-2">Jugador a atacar</label>
       {{ form.jugador_a_atacar }}
     </div>
-    <input type="submit" name="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full">
+    <input type="submit" name="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" id="btnSubmit">
   </form>
 </div>
+{{lvl|safe}}
+{{msg|safe}}
+<script>
+  $(document).ready(function(){
+    $("#id_action").first().val("selected")
+  })
+</script>
 {% endblock %}
