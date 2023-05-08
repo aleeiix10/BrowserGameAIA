@@ -34,7 +34,10 @@
         position: absolute;
         height: 50%;
         left: -400px;
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        object-fit: contain;
     }
 
     #pea1 {
@@ -74,6 +77,157 @@
         width: 750px;
     }
 
+    #onion1 {
+        top: 30%;
+        left: -400px;
+        width: 10%;
+    }
+
+    #onion2 {
+        top: 40%;
+        left: -500px;
+        width: 10%;
+    }
+
+    #onion3 {
+        top: 30%;
+        left: -800px;
+        width: 10%;
+    }
+
+    #onion4 {
+        top: 40%;
+        left: -900px;
+        width: 10%;
+    }
+
+    #onion5 {
+        top: 30%;
+        left: -1200px;
+        width: 10%;
+    }
+
+    #onion6 {
+        top: 40%;
+        left: -1300px;
+        width: 10%;
+    }
+
+    #onion7 {
+        top: 30%;
+        left: -1600px;
+        width: 10%;
+    }
+
+    #onion8 {
+        top: 40%;
+        left: -1700px;
+        width: 10%;
+    }
+
+    #onion9 {
+        display: none;
+    }
+
+    #beet1 {
+        top: -100%;
+        left: 45%;
+        width: 9%;
+    }
+    #beet2 {
+        top: -90%;
+        left: 42%;
+        width: 7%;
+    }
+    #beet3 {
+        top: -80%;
+        left: 40%;
+        width: 6%;
+    }
+    #beet4 {
+        top: -80%;
+        left: 48%;
+        width: 6%;
+    }
+    #beet5 {
+        top: -70%;
+        left: 46%;
+        width: 4%;
+    }
+    #beet6 {
+        top: -60%;
+        left: 44%;
+        width: 3%;
+    }
+
+    #verdura1 {
+        top: 45%;
+        left: 25%;
+        width: 750px;
+        opacity: 0;
+    }
+    #verdura9 {
+        top: 45%;
+        left: 25%;
+        width: 750px;
+        opacity: 0;
+    }
+
+    #estate2 {
+        top: 65%;
+        left: 35.5%;
+        width: 350px;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    #cura3 {
+        top: 45%;
+        left: 35%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura4 {
+        top: 55%;
+        left: 36%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura5 {
+        top: 35%;
+        left: 35%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura6 {
+        top: 45%;
+        left: 50%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura7 {
+        top: 55%;
+        left: 49%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura8 {
+        top: 35%;
+        left: 50%;
+        width: 50px;
+        opacity: 0;
+    }
+
+
+    #sun2 {
+        top: 30%;
+        left: 35.5%;
+        width: 30%;
+        z-index: 1;
+        opacity: 0;
+    }
+
+
     .animacion-texto {
         animation: desplazar 6.3s ease-in;
     }
@@ -86,12 +240,64 @@
         animation: caer 2.8s ease-out;
     }
 
+    .animacion-onion {
+        animation: rafaga 3s ease-in;
+    }
+
+    .animacion-beet {
+        animation: caer 3s ease-in, parpadeo 1.5s ease-in infinite;
+    }
+
+    .animacion-verdura {
+        animation: flotando 1.2s ease-in infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-estate {
+        animation: parpadeo 3.6s ease-in infinite;
+        animation-iteration-count: 1;
+    }
+
+    .animacion-cura {
+        animation: curacion 1.2s ease-in infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-sun {
+        animation: sun-rise 1.2s linear infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-verdura-rafaga {
+        animation: dañado-rafaga 3s ease-in;
+    }
+
+    .animacion-verdura-rayo {
+        animation: dañado-rafaga 3s ease-in;
+    }
+
     @keyframes desplazar {
         0% {
             transform: translateX(0);
         }
         100% {
             transform: translateX(1500%);
+        }
+    }
+
+    @keyframes flotando {
+        
+        0% {
+            transform: translateY(-1%);
+            opacity: 0.7;
+        }
+        50% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-1%);
+            opacity: 0.7;
         }
     }
 
@@ -115,6 +321,147 @@
         100% {
             transform: translateY(245%);
             animation-timing-function: ease-out;
+        }
+    }
+
+    @keyframes curacion {
+        0% {
+            transform: translateY(25%);
+            opacity: 0;
+        }
+        50% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-25%);
+            opacity: 0;
+        }
+    }
+
+    @keyframes parpadeo {
+        0% {
+            opacity: 1;
+        }
+        10% {
+            opacity: 0.5;
+        }
+        20% {
+            opacity: 1;
+        }
+        30% {
+            opacity: 0.5;
+        }
+        40% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 1;
+        }
+        60% {
+            opacity: 0.5;
+        }
+        80% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes rafaga {
+        0% {
+            transform: translateX(0);
+            width: 0;
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(1500%);
+            width: 12%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes sun-rise {
+        0% {
+            transform: scale(0.9);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0.9);
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes dañado-rafaga {
+        0% {
+            transform: rotate(0);
+        }
+        10% {
+            transform: rotate(0);
+        }
+        20% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        30% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        40% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        50% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        60% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        70% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        80% {
+            transform: rotate(5deg);
+            opacity: 1;
+        }
+        81% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        82% {
+            transform: rotate(5deg);
+            opacity: 1;
+        }
+        83% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        84% {
+            transform: rotate(5deg);
+            opacity: 1;
+        }
+        85% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        90% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        100% {
+            transform: rotate(0);
+            opacity: 0.5;
         }
     }
 
@@ -224,16 +571,16 @@
                 Rayo de Remolacha
             </button>
 
-            <button type="submit" name="action" value="Escudo de Repollo" class="botonAccion bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Escudo de Repollo
+            <button type="submit" name="action" value="Raíces curativas" class="botonAccion bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Raíces curativas
             </button>
 
-            <button type="submit" name="action" value="Campo de Alcachofas" class="botonAccion bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Campo de Alcachofas
+            <button type="submit" name="action" value="Sol protector" class="botonAccion bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Sol protector
             </button>
             
-            <button type="submit" name="action" value="Lluvia de Tomillo" class="botonAccion bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
-                Lluvia de Tomillo
+            <button type="submit" name="action" value="Fertilizante" class="botonAccion bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
+                Fertilizante
             </button>
             
         </div>
@@ -242,6 +589,9 @@
             <span class="accion"></span>
             <span class="accion"></span>
             <span class="textoAccion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
             <span class="accion"></span>
             <span class="accion"></span>
             <span class="accion"></span>
@@ -268,6 +618,14 @@
                 }
                 acciones.forEach(pea => {
                     pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-onion");
+                    pea.classList.remove("animacion-beet");
+                    pea.classList.remove("animacion-estate");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-sun");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
                     pea.classList.remove("animacion-pea");
                     void pea.offsetWidth; // Reiniciar la animación
                     pea.classList.add("animacion-pea");
@@ -281,9 +639,179 @@
                 }
                 acciones.forEach(pea => {
                     pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-onion");
+                    pea.classList.remove("animacion-beet");
+                    pea.classList.remove("animacion-estate");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-sun");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
                     pea.classList.remove("animacion-carrot");
                     void pea.offsetWidth; // Reiniciar la animación
                     pea.classList.add("animacion-carrot");
+                });
+            }
+            else if(boton.value == "Ráfaga de Cebolla") {
+                console.log(boton.value);
+                const rutaImagen = "/static/img/cebolla.png";
+                const rutaImagenVerdura = "/static/img/verdura1.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    if(i==8) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenVerdura})`;
+                        acciones[i].id = "verdura"+(i+1);
+                        acciones[i].classList.add("animacion-verdura-rafaga");
+                    }
+                    else {
+                        acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                        acciones[i].id = "onion"+(i+1);
+                    }
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-beet");
+                    pea.classList.remove("animacion-estate");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-sun");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
+                    pea.classList.remove("animacion-onion");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    if(pea.id == "verdura9") {
+                        pea.classList.add("animacion-verdura-rafaga");
+                    }
+                    else {
+                        pea.classList.add("animacion-onion");
+                    }
+                    
+                });
+            }
+            else if(boton.value == "Rayo de Remolacha") {
+                console.log(boton.value);
+                const rutaImagen = "/static/img/remolacha.png";
+                const rutaImagenVerdura = "/static/img/verdura1.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    if(i==8) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenVerdura})`;
+                        acciones[i].id = "verdura"+(i+1);
+                        acciones[i].classList.add("animacion-verdura-rayo");
+                    }
+                    else {
+                        acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                        acciones[i].id = "beet"+(i+1);
+                    }
+                    
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-onion");
+                    pea.classList.remove("animacion-estate");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-sun");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
+                    pea.classList.remove("animacion-beet");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    if(pea.id == "verdura9") {
+                        pea.classList.add("animacion-verdura-rayo");
+                    }
+                    else {
+                        pea.classList.add("animacion-beet");
+                    }
+                });
+            }
+            else if(boton.value == "Raíces curativas") {
+                console.log(boton.value);
+                const rutaImagen = "/static/img/raices.png";
+                const rutaImagenVerdura = "/static/img/verdura1.png";
+                const rutaImagenCura = "/static/img/verdura2.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    if(i==0) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenVerdura})`;
+                        acciones[i].id = "verdura"+(i+1);
+                        acciones[i].classList.add("animacion-verdura");
+                    }
+                    else if(i==1) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                        acciones[i].id = "estate"+(i+1);
+                        acciones[i].classList.add("animacion-estate");
+                    }
+                    else {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenCura})`;
+                        acciones[i].id = "cura"+(i+1);
+                        acciones[i].classList.add("animacion-cura");
+                    }
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-onion");
+                    pea.classList.remove("animacion-beet");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-sun");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
+                    pea.classList.remove("animacion-estate");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    if(pea.id == "verdura1") {
+                        pea.classList.add("animacion-verdura");
+                    }
+                    else if(pea.id == "estate2") {
+                        pea.classList.add("animacion-estate");
+                    }
+                    else{
+                        pea.classList.add("animacion-cura");
+                    }
+                });
+            }
+            else if(boton.value == "Sol protector") {
+                console.log(boton.value);
+                const rutaImagen = "/static/img/sol.png";
+                const rutaImagenVerdura = "/static/img/verdura1sol.png";
+                const rutaImagenCura = "/static/img/verdura2.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    if(i==0) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenVerdura})`;
+                        acciones[i].id = "verdura"+(i+1);
+                        acciones[i].classList.add("animacion-verdura");
+                    }
+                    else if(i==1) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                        acciones[i].id = "sun"+(i+1);
+                        acciones[i].classList.add("animacion-sun");
+                    }
+                    else {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenCura})`;
+                        acciones[i].id = "cura"+(i+1);
+                        acciones[i].classList.add("animacion-cura");
+                    }
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-onion");
+                    pea.classList.remove("animacion-beet");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-estate");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
+                    pea.classList.remove("animacion-sun");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    if(pea.id == "verdura1") {
+                        pea.classList.add("animacion-verdura");
+                    }
+                    else if(pea.id == "sun2") {
+                        pea.classList.add("animacion-sun");
+                    }
+                    else{
+                        pea.classList.add("animacion-cura");
+                    }
                 });
             }
             else {
@@ -301,6 +829,7 @@
         });
         
     });
+
 </script>
           
 </body>
