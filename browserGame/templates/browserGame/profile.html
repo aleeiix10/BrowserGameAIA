@@ -32,84 +32,93 @@
         </div>
       </div>
     <main class="container mx-auto my-4">
-        <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
-        <table class="border border-black">
-            <thead class="bg-green-700 text-white text-center">
-                <tr>
-                    <th class="p-2">
-                        Nivell
-                    </th>
-                    <th class="p-2">
-                        Vida
-                    </th>
-                    <th class="p-2">
-                        Manà
-                    </th>
-                    <th class="p-2">
-                        Experiència
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="border-b border-black text-center" id="profileStats">
-                    <td class="p-2" id="profileStatsLevel">
+        <div>
+            <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
+            <table class="border border-black">
+                <thead class="bg-green-700 text-white text-center">
+                    <tr>
+                        <th class="p-2">
+                            Nivell
+                        </th>
+                        <th class="p-2">
+                            Vida
+                        </th>
+                        <th class="p-2">
+                            Manà
+                        </th>
+                        <th class="p-2">
+                            Experiència
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-black text-center" id="profileStats">
+                        <td class="p-2" id="profileStatsLevel">
 
-                    </td>
-                    <td class="p-2" id="profileStatsLife">
+                        </td>
+                        <td class="p-2" id="profileStatsLife">
 
-                    </td>
-                    <td class="p-2" id="profileStatsMana">
+                        </td>
+                        <td class="p-2" id="profileStatsMana">
 
-                    </td>
-                    <td class="p-2" id="profileStatsExperience">
+                        </td>
+                        <td class="p-2" id="profileStatsExperience">
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        {% if userLoged|length >= 1 %}
-        <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 25 accions realitzades</h2>
-        <table class="border border-black">
-            <thead class="bg-green-700 text-white text-center">
-                <tr>
-                    <th class="p-2">
-                        Agressor
-                    </th>
-                    <th class="p-2">
-                        Victima
-                    </th>
-                    <th class="p-2">
-                        Nom Acció
-                    </th>
-                    <th class="p-2">
-                        Categoria
-                    </th>
-                    <th class="p-2">
-                        Moment Acció
-                    </th>
-                    <th class="p-2">
-                        Cost
-                    </th>
-                    <th class="p-2">
-                        Èxit
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="tbodyRelatedActions">
-            </tbody>
-        </table>
-        {% endif %}
-    </main>
-    <form method="post">
-    {% for action in actions %}
-            {% csrf_token %}
-            {% if action.category == "A" %}
-                <button type="submit" name="button_choice" value="{{ action.id }}" class="{{action.category}}" id="openModal">{{ action.name }}</button>
-            {% else %}
-                <button type="submit" name="button_choice" value="{{ action.id }}">{{ action.name }}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div >
+            <button class="mi-boton">Haz clic aquí</button>
+            <form method="post" id="formProfile">
+                {% for action in actions %}
+                        {% csrf_token %}
+                        {% if action.category == "A" %}
+                            <button style="background-image: url('img/mi_imagen.jpg');" type="submit" name="button_choice" value="{{ action.id }}" class="{{action.category}}" id="openModal">{{ action.name }}</button>
+                        {% else %}
+                            <button style="background-image: url('img/mi_imagen.jpg');" type="submit" name="button_choice" value="{{ action.id }}" class="{{accions.category}}">{{ action.name }}</button>
+                        {% endif %}
+                {% endfor %}
+            </form>
+        </div>
+
+        <div>
+            {% if userLoged|length >= 1 %}
+            <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 25 accions realitzades</h2>
+            <table class="border border-black">
+                <thead class="bg-green-700 text-white text-center">
+                    <tr>
+                        <th class="p-2">
+                            Agressor
+                        </th>
+                        <th class="p-2">
+                            Victima
+                        </th>
+                        <th class="p-2">
+                            Nom Acció
+                        </th>
+                        <th class="p-2">
+                            Categoria
+                        </th>
+                        <th class="p-2">
+                            Moment Acció
+                        </th>
+                        <th class="p-2">
+                            Cost
+                        </th>
+                        <th class="p-2">
+                            Èxit
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyRelatedActions">
+                </tbody>
+            </table>
             {% endif %}
-    {% endfor %}
-</form>
+        </div>
+    </main>
     <script>
         $(document).ready(function(){
             $('.A').click(function(e) {
@@ -173,4 +182,17 @@
         });
     </script>
 </body>
+<style>
+.mi-boton {
+        background-image: url('/static/img/zanahoria.png');
+        background-size: cover;
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+</style>
 {% endblock %}

@@ -5,7 +5,7 @@ from itertools import chain
 from .decorators import cronDecorator
 
 def get_user(request):
-    jsonData = list(User.objects.all().order_by('-level', '-experience','-current_life','-current_mana').values(
+    jsonData = list(User.objects.exclude(level=0).order_by('-level', '-experience','-current_life','-current_mana').values(
         'username', 'level', 'experience','current_life', 'current_mana'
         ))
     return JsonResponse({
