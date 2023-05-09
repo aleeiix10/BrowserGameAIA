@@ -16,7 +16,7 @@ const app = createApp({
   data(){
     return {
       arrayUsers: [],
-      elementsByPage: 2,
+      elementsByPage: 100,
       dataPage: [],
       currentPage: 1
     }
