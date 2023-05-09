@@ -314,3 +314,5 @@ def play(user, action_used, user_attacked=""):
 def ranking(request):
     users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
     return render(request, 'browserGame/ranking.html', {'users':users})
+def actions(request):
+    return render(request, 'browserGame/actions.html')

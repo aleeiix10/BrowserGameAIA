@@ -5,7 +5,7 @@ from itertools import chain
 from .decorators import cronDecorator
 
 def get_user(request):
-    jsonData = list(User.objects.all().order_by('-level', '-experience','-current_life','-current_mana').values(
+    jsonData = list(User.objects.exclude(level=0).order_by('-level', '-experience','-current_life','-current_mana').values(
         'username', 'level', 'experience','current_life', 'current_mana'
         ))
     return JsonResponse({
@@ -27,6 +27,15 @@ def getUsers(request):
 def getRelatedActions(request):
     events = Event.objects.filter(Q(user = request.user) | (Q(user_attacked = request.user,success = True))).order_by('-timestamp').values('user__username','user_attacked__username','action__name','action__category','timestamp','action__cost','action__points','success')[:25]
     jsonData = list(events)
+    return JsonResponse({
+        "status": "OK",
+        "ActionsObj": jsonData,
+    }, safe=False)
+
+
+def getActions(request):
+    actions = Action.objects.all()
+    jsonData = list(actions.values())
     return JsonResponse({
         "status": "OK",
         "ActionsObj": jsonData,

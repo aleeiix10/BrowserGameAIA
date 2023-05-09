@@ -17,4 +17,6 @@ urlpatterns = [
     path('api/get_users',api.getUsers, name="getUsers"),
     path('get_user', api.get_user, name='get_user'),
     path('api/get_related_actions',api.getRelatedActions, name="getRelatedActions"),
+    path('api/get_actions',api.getActions, name="get_actions"),
+    path('actions/',views.actions, name="actions"),
 ]

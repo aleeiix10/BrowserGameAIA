@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% block title %} Actions {% endblock %}
+{% block content %}
+<body class="bg-green-300">
+    {% include 'header.html' with title="Actions" %}
+    <main class="container mx-auto my-4">
+        <h2 class="text-lg font-semibold mb-2">Accions</h2>
+        <table class="border border-black">
+            <thead class="bg-green-700 text-white text-center">
+                <tr>
+                    <th class="p-2">
+                        Acció
+                    </th>
+                    <th class="p-2">
+                        Categoria
+                    </th>
+                    <th class="p-2">
+                        Cost
+                    </th>
+                    <th class="p-2">
+                        Percentatge 
+                    </th>
+                    <th class="p-2">
+                        Punts d'Experiencia/Vida 
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbodyAtacs">
+            </tbody>
+        </table>
+    </main>
+    <script>
+        $(document).ready(function() { 
+            function getActions() {
+                $.getJSON("/api/get_actions",function(actions){
+                    actions.ActionsObj.forEach(action =>{
+                        $('#tbodyAtacs').append('<tr class="border-b border-black text-center">');
+                        $('#tbodyAtacs').append(`<td class="p-2">`+action.name+`</td>`);
+                        if (action.category =='A'){
+                           $('#tbodyAtacs').append(`<td class="p-2">Agressiva</td>`);
+                        }else if (action.category  == 'D'){
+                           $('#tbodyAtacs').append(`<td class="p-2">Defensiva</td>`);
+                        }else{
+                           $('#tbodyAtacs').append(`<td class="p-2">Neutral</td>`);
+                        }
+                        
+                        $('#tbodyAtacs').append(`<td class="p-2 text-center">`+action.cost+`</td>`);
+                        $('#tbodyAtacs').append(`<td class="p-2 text-center">`+action.succesPercentage+`</td>`);
+                        $('#tbodyAtacs').append(`<td class="p-2 text-center">`+action.points+`</td>`);
+                        $('#tbodyAtacs').append('</tr>');
+                    })
+                });
+            }
+            getActions();
+        });
+    </script>
+</body>
+{% endblock %}
