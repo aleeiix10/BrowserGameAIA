@@ -1,7 +1,8 @@
 {% load static %}
 <header class="bg-green-700 text-white py-2">
     <div class="container mx-auto flex justify-between items-center px-4">
-        <h1 class="text-xl">Dashboard {{user}}</h1>
+        <h1 class="text-xl">{{title}} {{user}}</h1>
         <a href="/accounts/logout/" class="underline">Logout</a>
+        {% include 'navbar.html'%}
     </div>
 </header>
