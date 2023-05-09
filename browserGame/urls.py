@@ -5,6 +5,7 @@ from django.http import *
 from django import *
 from . import views,api
 
+
 urlpatterns = [
     path('', views.pagina_inicio, name='pagina_inicio'),
     path('play-action',views.play_action, name="play-action"),

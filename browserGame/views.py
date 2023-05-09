@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 from .decorators import *
 import random
 
+    
 @login_required
 def profile(request):
     return render(request,"browserGame/profile.html")
@@ -314,3 +315,5 @@ def play(user, action_used, user_attacked=""):
 def ranking(request):
     users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
     return render(request, 'browserGame/ranking.html', {'users':users})
+
+    
