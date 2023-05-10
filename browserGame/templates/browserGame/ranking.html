@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in dataPage" class="border-b border-black">
+                <tr v-for="(user, index) in dataPage" class="border-b border-black">
                     <td class="p-2 text-center">
                         [[user.username]]
                     </td>
@@ -50,7 +50,7 @@
                         [[user.current_mana]]
                     </td>
                     <td class="p-2 text-center">
-                        1
+                        [[index + 1]]
                     </td>
                 </tr>
             </tbody>

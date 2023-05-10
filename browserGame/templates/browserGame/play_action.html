@@ -5,26 +5,30 @@
 {% block content %}
 {% include 'header.html' with title="Play-Action" %}
 {% include 'navbar.html' %}
-{{lvl|safe}}
+<!-- {{lvl|safe}} -->
 {{msg|safe}}
 <div class="flex flex-col items-center mt-8" id="formulario">
-  <h2 class="text-2xl font-bold mb-4">Selecciona una acció</h2>
-  <form method="post" class="bg-green-300 p-4 rounded-lg w-96" autocomplete="off">
-    {% csrf_token %}
-    <div class="mb-4">
-      <label for="{{ form.accio.id_for_label }}" class="block text-white font-bold mb-2">Acció:</label>
-      {{form.action}}
-    </div>
-    <div class="mb-4">
-      <label for="{{ form.jugador_a_atacar.id_for_label }}" class="block text-white font-bold mb-2">Jugador a atacar</label>
-      {{ form.jugador_a_atacar }}
-    </div>
-    <input type="submit" name="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" id="btnSubmit">
-  </form>
+    <h2 class="text-2xl font-bold mb-4">Selecciona una acció</h2>
+    <form method="post" class="bg-green-300 p-4 rounded-lg w-96" autocomplete="off">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="{{ form.accio.id_for_label }}" class="block text-white font-bold mb-2">Acció:</label>
+            {{form.action}}
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.jugador_a_atacar.id_for_label }}" class="block text-white font-bold mb-2">Jugador a atacar</label>
+            {{ form.jugador_a_atacar }}
+        </div>
+        <input type="submit" name="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" id="btnSubmit">
+    </form>
 </div>
 <script>
-  $(document).ready(function(){
-    $("#id_action").first().val("selected")
-  })
+    $(document).ready(function(){
+        $("#id_action").first().val("selected")
+        $(".btn-alert").click(function (){
+            $(".btn-alert").parent().remove()
+            
+        })
+    })
 </script>
 {% endblock %}
