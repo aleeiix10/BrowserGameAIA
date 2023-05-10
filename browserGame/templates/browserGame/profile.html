@@ -1215,33 +1215,38 @@
     {% include 'header.html' with title="Dashboard" %}
     {% include 'navbar.html' %}
     {{msg|safe}}
+
+    <!-- MODAL FORMULARIO -->
     <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
-        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-          <div class="modal-content py-4 text-left px-6">
-            <div class="flex justify-between items-center pb-3">
-              <p class="text-2xl font-bold">Tria a un jugador</p>
-              <button id="closeModal" class="modal-close cursor-pointer z-50">
-                <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                  <path d="M18 1.8L16.2 0L9 7.2L1.8 0L0 1.8L7.2 9L0 16.2L1.8 18L9 10.8L16.2 18L18 16.2L10.8 9L18 1.8Z"/>
-                </svg>
-              </button>
-            </div>
-            
-            <form method="post">
-                {% csrf_token %}
-              <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
-              {{form.jugador_a_atacar}}
-              <div class="flex justify-end pt-2">
-                <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
-              </div>
-            </form>
-      
-          </div>
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50">
         </div>
-      </div>
+        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">Tria a un jugador</p>
+                    <button id="closeModal" class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M18 1.8L16.2 0L9 7.2L1.8 0L0 1.8L7.2 9L0 16.2L1.8 18L9 10.8L16.2 18L18 16.2L10.8 9L18 1.8Z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
+                    {{form.jugador_a_atacar}}
+                    <div class="flex justify-end pt-2">
+                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
+                    </div>
+                </form>
+        
+            </div>
+        </div>
+    </div>
+
     <main class="container mx-auto my-4">
-        <div>
+        <!-- STATS -->
+        <div class="divStats">
             <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
             <table class="border border-black">
                 <thead class="bg-green-700 text-white text-center">
@@ -1277,7 +1282,8 @@
                     </tr>
                 </tbody>
             </table>
-        </div class="divStats">
+        </div>
+       
         <!-- BOTONES -->
         <div class="divBtnActions">
             <form method="post" id="formProfile">
@@ -1294,6 +1300,7 @@
             </form>
         </div>
 
+        <!-- ACCIONES -->
         <div class="divLastActions">
             {% if userLoged|length >= 1 %}
             <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 25 accions realitzades</h2>
@@ -1328,6 +1335,8 @@
             </table>
             {% endif %}
         </div>
+
+        <!-- BOTONES EXTRA -->
         <div>    
             <button type="submit" name="action" value="8" class="botonAccion bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
                 Subir de Nivel
@@ -1337,6 +1346,8 @@
                 Morir
             </button>
         </div>
+
+        <!-- CONTENEDOR DE ACCIONES -->
         <div class="contenedorAcciones">
             <span class="accion"></span>
             <span class="accion"></span>
@@ -1350,16 +1361,16 @@
             <span class="accion"></span>
         </div>
     </main>
+
     <script>
         $(document).ready(function(){
-            
-
             $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow dark:bg-green-700"></div>');
             $("#agresiva").prepend("<p>ATACS</p>")
             $("form .D").wrapAll('<div id="defensiva" class="rounded-sm shadow dark:bg-green-600"></div>');
             $("#defensiva").prepend("<p>DEFENSIVES</p>")
             $("form .N").wrapAll('<div id="neutra" class="rounded-sm shadow dark:bg-green-500"></div>');
             $("#neutra").prepend("<p>NEUTRALS</p>")
+            
             const acciones = document.querySelectorAll(".accion");
 
             function getStats() {
@@ -1784,80 +1795,53 @@
                 });
             }
             
-            $(".btn-action").click(function(e){
+            $("#btn-submit").click(function(e){
                 e.preventDefault()
-
                 var actionId = $(this).val();
-
-                $(".contenedorAcciones").css("z-index", "9999");
-                if ($(this).val() == "7"){
-                    fertilitzant(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3000);
-                }
-
-                // if ($(this).hasClass("A")){
-
-                // }
-                
-                if ($(this).val() == "6"){
-                    sol(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3500);
-                }
-
-                if ($(this).val() == "5"){
-                    arrels(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3700);
-                }
-
-                if ($(this).val() == "4"){
-                    remolatxa(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3700);
-                }
-
-                if ($(this).val() == "3"){
-                    ceba(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3700);
-                }
-
-                if ($(this).val() == "2"){
-                    pastanaga(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3600);
-                }
-
-                if ($(this).val() == "1"){
-                    pesols(acciones)
-                    setTimeout(function() {
-                        $(".contenedorAcciones").removeAttr("style");
-                    }, 3200);
-                }
-
-                var form= $("#formProfile")
-
+                var user_attacked= $("#id_jugador_a_atacar").val()
+                console.log(user_attacked)
                 $.ajax({
                     type: "POST",
                     url: "/save_action",
                     data: {
-                        'button_choice': actionId
+                        'button_choice': actionId,
+                        "id_jugador_a_atacar": user_attacked
                     }
                 }).done(function(response) {
+                    getStats()
                     getRelatedActions()
+                    $(".contenedorAcciones").css("z-index", "9999");
+                    if (actionId == 1){
+                        pesols(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3200);
+                    }
+
+                    else if (actionId == "4"){
+                        remolatxa(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3700);
+                    }
+
+                    else if (actionId == "3"){
+                        ceba(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3700);
+                    }
+
+                    else if (actionId == "2"){
+                        pastanaga(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3600);
+                    }
                     if(response.lvl == true){
-                        console.log(1)
                         setTimeout(function(){
                             levelUp(acciones)
-                        },3000
+                        },3700
                         )
                         
                     }
@@ -1866,18 +1850,77 @@
                     console.log(error)
                     // Manejar el error de la solicitud AJAX
                 });
-                getStats();
-                getRelatedActions();
             })
 
-            $('.A').click(function(e) {
-                e.preventDefault();
-                var valorBoton = $(event.target).val();
-                $("#btn-submit").attr("value", valorBoton);
-                $('#myModal').removeClass('hidden');
-                $('#myModal').css('hidden');
-                $("#myModal").css("z-index", "9999");
-            });
+            $(".btn-action").click(function(e){
+                e.preventDefault()
+
+                var actionId = $(this).val();
+
+                if ($(this).hasClass("A")){
+
+                    e.preventDefault()
+                    var valorBoton = $(event.target).val();
+                    $("#btn-submit").attr("value", valorBoton);
+                    $('#myModal').removeClass('hidden');
+                    $('#myModal').css('hidden');
+                    $("#myModal").css("z-index", "9999");
+
+                }
+                else{
+                    $(".contenedorAcciones").css("z-index", "9999");
+
+                    if ($(this).val() == "7"){
+                        fertilitzant(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3000);
+                    }
+                    
+                    if ($(this).val() == "6"){
+                        sol(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3500);
+                    }
+
+                    if ($(this).val() == "5"){
+                        arrels(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3700);
+                    }
+
+                    var form= $("#formProfile")
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/save_action",
+                        data: {
+                            'button_choice': actionId,
+                            "id_jugador_a_atacar": ""
+                        }
+                    }).done(function(response) {
+                        getStats()
+                        getRelatedActions()
+                        if(response.lvl == true){
+                            console.log(1)
+                            setTimeout(function(){
+                                levelUp(acciones)
+                            },3000
+                            )
+                            
+                        }
+                        // Manejar la respuesta de la solicitud AJAX
+                    }).fail(function(error) {
+                        console.log(error)
+                        // Manejar el error de la solicitud AJAX
+                    });
+                    getStats();
+                    getRelatedActions();
+                    
+                }                
+            })
 
             $('.modal-close').click(function(e) {
                 $('#myModal').addClass('hidden');
@@ -1892,6 +1935,7 @@
         const acciones = document.querySelectorAll(".accion");
         const botones = document.querySelectorAll(".botonAccion");
         
+        // BOTONES EXTRA MUERTE Y LEVEL UP
         botones.forEach((boton, index) => {
             boton.addEventListener("click", () => {
                 //Eliminar las id

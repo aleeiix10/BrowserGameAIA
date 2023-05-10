@@ -317,7 +317,11 @@ def profileAjaxActions(request):
         user= request.user
         action_id= request.POST.get("button_choice")
         action_used = Action.objects.get(id=action_id)
-        user_attacked= ""
+        user_attacked_id= request.POST.get("id_jugador_a_atacar")
+        if user_attacked_id == "":
+            user_attacked = ""
+        else:
+            user_attacked= User.objects.get(id=user_attacked_id)
         #Si el coste de mana es mayor al mana actual del usuario, dará un error
         if action_used.cost > user.current_mana:
             msg= """
