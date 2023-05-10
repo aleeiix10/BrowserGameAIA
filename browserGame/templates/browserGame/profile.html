@@ -1364,15 +1364,6 @@
 
     <script>
         $(document).ready(function(){
-            $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow dark:bg-green-700"></div>');
-            $("#agresiva").prepend("<p>ATACS</p>")
-            $("form .D").wrapAll('<div id="defensiva" class="rounded-sm shadow dark:bg-green-600"></div>');
-            $("#defensiva").prepend("<p>DEFENSIVES</p>")
-            $("form .N").wrapAll('<div id="neutra" class="rounded-sm shadow dark:bg-green-500"></div>');
-            $("#neutra").prepend("<p>NEUTRALS</p>")
-            
-            const acciones = document.querySelectorAll(".accion");
-
             function getStats() {
                 $.getJSON("api/get_users",async function(usuari){
                     $('#profileStatsLevel').text(usuari.UsersObj[0].level);
@@ -1795,11 +1786,21 @@
                 });
             }
             
+            // METE A LOS BOTONES DE LAS ACCIONES EN UN DIV
+            $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow dark:bg-green-700"></div>');
+            $("#agresiva").prepend("<p>ATACS</p>")
+            $("form .D").wrapAll('<div id="defensiva" class="rounded-sm shadow dark:bg-green-600"></div>');
+            $("#defensiva").prepend("<p>DEFENSIVES</p>")
+            $("form .N").wrapAll('<div id="neutra" class="rounded-sm shadow dark:bg-green-500"></div>');
+            $("#neutra").prepend("<p>NEUTRALS</p>")
+            
+            const acciones = document.querySelectorAll(".accion");
+
+            // AJAX DEL SUBMIT CUANDO APARECE EL MODAL
             $("#btn-submit").click(function(e){
                 e.preventDefault()
                 var actionId = $(this).val();
                 var user_attacked= $("#id_jugador_a_atacar").val()
-                console.log(user_attacked)
                 $.ajax({
                     type: "POST",
                     url: "/save_action",
@@ -1852,6 +1853,7 @@
                 });
             })
 
+            // AJAX DEL SUBMIT DE LOS BOTONES DE LAS ACCIONES
             $(".btn-action").click(function(e){
                 e.preventDefault()
 
@@ -1922,10 +1924,12 @@
                 }                
             })
 
+            // CERRAR EL MODAL
             $('.modal-close').click(function(e) {
                 $('#myModal').addClass('hidden');
             });
 
+            //AJAX PARA RECARGAR LOS STATS Y ACCIONES REALIZADAS
             setInterval(getStats, 30000);
             setInterval(getRelatedActions, 30000);
             getStats();
