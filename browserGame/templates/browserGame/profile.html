@@ -1213,6 +1213,7 @@
 </style>
 <body class="bg-green-300">
     {% include 'header.html' with title="Dashboard" %}
+    {% include 'navbar.html' %}
     {{msg|safe}}
     <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
         <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
@@ -1351,13 +1352,61 @@
     </main>
     <script>
         $(document).ready(function(){
-            $("form .A").wrapAll('<div id="agresiva" class="rounded-lg shadow dark:bg-gray-700"></div>');
+            
+
+            $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow dark:bg-green-700"></div>');
             $("#agresiva").prepend("<p>ATACS</p>")
-            $("form .D").wrapAll('<div id="defensiva" class="rounded-lg shadow dark:bg-gray-700"></div>');
+            $("form .D").wrapAll('<div id="defensiva" class="rounded-sm shadow dark:bg-green-600"></div>');
             $("#defensiva").prepend("<p>DEFENSIVES</p>")
-            $("form .N").wrapAll('<div id="neutra" class="rounded-lg shadow dark:bg-gray-700"></div>');
+            $("form .N").wrapAll('<div id="neutra" class="rounded-sm shadow dark:bg-green-500"></div>');
             $("#neutra").prepend("<p>NEUTRALS</p>")
             const acciones = document.querySelectorAll(".accion");
+
+            function getStats() {
+                $.getJSON("api/get_users",async function(usuari){
+                    $('#profileStatsLevel').text(usuari.UsersObj[0].level);
+                    $('#profileStatsLife').text(usuari.UsersObj[0].current_life);
+                    $('#profileStatsMana').text(usuari.UsersObj[0].current_mana);
+                    $('#profileStatsExperience').text(usuari.UsersObj[0].experience);  
+                });
+            }
+            
+            function getRelatedActions() {
+                $.getJSON("api/get_related_actions",async function(actions){
+                    $('#tbodyRelatedActions').empty();
+                    actions.ActionsObj.forEach(action =>{
+
+                    $('#tbodyRelatedActions').append('<tr class="border-b border-black text-center">');
+                    if (action.user__username == null){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user__username+`</td>`);
+                    }
+                    if (action.user_attacked__username == null){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user_attacked__username+`</td>`);
+                    }
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__name+`</td>`);
+                    if (action.action__category =='A'){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">Agressiva</td>`);
+                    }else if (action.action__category == 'D'){
+                        $('#tbodyRelatedActions').append(`<td class="p-2">Defensiva</td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2">Neutral</td>`);
+                    }
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.timestamp+`</td>`);
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__cost+`</td>`);
+
+                    if (action.success == false){
+                        $('#tbodyRelatedActions').append(` <td class="p-2"><i class="fa fa-sharp fa-solid fa-circle-xmark" style="color: #a73131;"></i></td>`);
+                    }else{
+                        $('#tbodyRelatedActions').append(`<td class="p-2"><i class="fa fa-solid fa-circle-check" style="color: #316e32;"></i></td>`);
+                    }
+                    $('#tbodyRelatedActions').append(`</tr>`);
+                    })
+                });
+            }
 
             function fertilitzant(acciones){
                 const rutaImagen = "";
@@ -1688,8 +1737,53 @@
                 });
             }
 
+            function levelUp(acciones){
+                $(".contenedorAcciones").css("z-index", "9999");
+                setTimeout(function() {
+                    $(".contenedorAcciones").removeAttr("style");
+                }, 3000);
+                const rutaImagen = "/static/img/exp.png";
+                const rutaImagenVerdura = "/static/img/verdura1.png";
+                for (let i = 0; i < acciones.length; i++) {
+                    if(i==8) {
+                        acciones[i].style.backgroundImage = `url(${rutaImagenVerdura})`;
+                        acciones[i].id = "verdura"+(i+1);
+                        acciones[i].classList.add("animacion-verdura-nivel");
+                    }
+                    else {
+                        acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+                        acciones[i].id = "exp"+(i+1);
+                    }
+                }
+                acciones.forEach(pea => {
+                    pea.classList.remove("animacion-pea");
+                    pea.classList.remove("animacion-carrot");
+                    pea.classList.remove("animacion-onion");
+                    pea.classList.remove("animacion-estate");
+                    pea.classList.remove("animacion-verdura");
+                    pea.classList.remove("animacion-cura");
+                    pea.classList.remove("animacion-sun");
+                    pea.classList.remove("animacion-verdura-rafaga");
+                    pea.classList.remove("animacion-verdura-rayo");
+                    pea.classList.remove("animacion-verdura-guisantes");
+                    pea.classList.remove("animacion-verdura-mancha");
+                    pea.classList.remove("animacion-verdura-zanahoria");
+                    pea.classList.remove("animacion-verdura-exp");
+                    pea.classList.remove("animacion-verdura-nivel");
+                    pea.classList.remove("animacion-exp");
+                    pea.classList.remove("animacion-verdura-muerte");
+                    pea.classList.remove("animacion-calavera");
+                    pea.classList.remove("animacion-beet");
+                    void pea.offsetWidth; // Reiniciar la animación
+                    if(pea.id == "verdura9") {
+                        pea.classList.add("animacion-verdura-nivel");
+                    }
+                    else {
+                        pea.classList.add("animacion-exp");
+                    }
+                });
+            }
             
-
             $(".btn-action").click(function(e){
                 e.preventDefault()
 
@@ -1702,6 +1796,10 @@
                         $(".contenedorAcciones").removeAttr("style");
                     }, 3000);
                 }
+
+                // if ($(this).hasClass("A")){
+
+                // }
                 
                 if ($(this).val() == "6"){
                     sol(acciones)
@@ -1754,7 +1852,15 @@
                         'button_choice': actionId
                     }
                 }).done(function(response) {
-                    console.log(response)
+                    getRelatedActions()
+                    if(response.lvl == true){
+                        console.log(1)
+                        setTimeout(function(){
+                            levelUp(acciones)
+                        },3000
+                        )
+                        
+                    }
                     // Manejar la respuesta de la solicitud AJAX
                 }).fail(function(error) {
                     console.log(error)
@@ -1779,50 +1885,6 @@
 
             setInterval(getStats, 30000);
             setInterval(getRelatedActions, 30000);
-            function getStats() {
-                $.getJSON("api/get_users",async function(usuari){
-                    $('#profileStatsLevel').text(usuari.UsersObj[0].level);
-                    $('#profileStatsLife').text(usuari.UsersObj[0].current_life);
-                    $('#profileStatsMana').text(usuari.UsersObj[0].current_mana);
-                    $('#profileStatsExperience').text(usuari.UsersObj[0].experience);  
-                });
-            }
-            function getRelatedActions() {
-                $.getJSON("api/get_related_actions",async function(actions){
-                    $('#tbodyRelatedActions').empty();
-                    actions.ActionsObj.forEach(action =>{
-
-                    $('#tbodyRelatedActions').append('<tr class="border-b border-black text-center">');
-                    if (action.user__username == null){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user__username+`</td>`);
-                    }
-                    if (action.user_attacked__username == null){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user_attacked__username+`</td>`);
-                    }
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__name+`</td>`);
-                    if (action.action__category =='A'){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">Agressiva</td>`);
-                    }else if (action.action__category == 'D'){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">Defensiva</td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2">Neutral</td>`);
-                    }
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.timestamp+`</td>`);
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__cost+`</td>`);
-
-                    if (action.success == false){
-                        $('#tbodyRelatedActions').append(` <td class="p-2"><i class="fa fa-sharp fa-solid fa-circle-xmark" style="color: #a73131;"></i></td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2"><i class="fa fa-solid fa-circle-check" style="color: #316e32;"></i></td>`);
-                    }
-                    $('#tbodyRelatedActions').append(`</tr>`);
-                    })
-                });
-            }
             getStats();
             getRelatedActions();
         });
@@ -1837,7 +1899,10 @@
                     acciones[i].id = null;
                 }
                 if(boton.value == "8") {
-                    console.log(boton.value);
+                    $(".contenedorAcciones").css("z-index", "9999");
+                    setTimeout(function() {
+                        $(".contenedorAcciones").removeAttr("style");
+                    }, 3000);
                     const rutaImagen = "/static/img/exp.png";
                     const rutaImagenVerdura = "/static/img/verdura1.png";
                     for (let i = 0; i < acciones.length; i++) {
@@ -1880,7 +1945,10 @@
                     });
                 }
                 else if(boton.value == "9") {
-                    console.log(boton.value);
+                    $(".contenedorAcciones").css("z-index", "9999");
+                    setTimeout(function() {
+                        $(".contenedorAcciones").removeAttr("style");
+                    }, 5000);
                     const rutaImagen = "/static/img/calavera.png";
                     const rutaImagenVerdura = "/static/img/verdura1.png";
                     for (let i = 0; i < acciones.length; i++) {

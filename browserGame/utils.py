@@ -20,7 +20,7 @@ def log_eventU(event_user, event_type, event_msg):
     if log_entries is None:
         log_entries = []
     log_entries.append(log_entry)
-    if len(log_entries) >= 5:
+    if len(log_entries) >= 100:
         # Escribir los registros en la base de datos
         systemLogU(log_entries)
         log_entries = []
