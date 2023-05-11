@@ -500,7 +500,24 @@ def profileAjaxActions(request):
 
 # RANKING
 def ranking(request):
+    if request.user.is_authenticated:
+        header= """
+                <header class="dark:bg-green-900 text-white py-2">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-xl">Ranking</h1>
+            <a href="/accounts/logout/" class="underline">Logout</a>
+        </div>
+    </header>
+                """
+    else:
+        header="""
+        <header class="dark:bg-green-900 text-white py-2">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-xl">Ranking</h1>
+        </div>
+    </header>
+        """
     users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
-    return render(request, 'browserGame/ranking.html', {'users':users})
+    return render(request, 'browserGame/ranking.html', {'users':users, "header":header})
 
     

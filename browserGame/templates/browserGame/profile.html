@@ -1397,7 +1397,11 @@
                     }else{
                         $('#tbodyRelatedActions').append(`<td class="p-2">Neutral</td>`);
                     }
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.timestamp+`</td>`);
+
+                    var timestamp = new Date(action.timestamp);
+                var formattedTimestamp = timestamp.toLocaleString(); // Formato localizado de fecha y hora
+
+                    $('#tbodyRelatedActions').append(`<td class="p-2">`+formattedTimestamp+`</td>`);
                     $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__cost+`</td>`);
 
                     if (action.success == false){
