@@ -5,6 +5,7 @@ from django.http import *
 from django import *
 from . import views,api
 
+
 urlpatterns = [
     path('', views.pagina_inicio, name='pagina_inicio'),
     path('play-action',views.play_action, name="play-action"),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('api/get_related_actions',api.getRelatedActions, name="getRelatedActions"),
     path('api/get_actions',api.getActions, name="get_actions"),
     path('actions/',views.actions, name="actions"),
+    path('save_action',views.profileAjaxActions, name="save_action")
 ]

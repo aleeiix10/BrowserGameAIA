@@ -1,4 +1,4 @@
-main * {
+main{
     margin: 10px;
     padding: 0;
     box-sizing: border-box;
@@ -8,3 +8,11 @@ input[type="text"], input[type="email"], input[type="password"] {
     background-color: #ffffff;
     color: #000000;
   }
+
+#formProfile > button{
+    width: 500px;
+}
+
+
+/* Animaciones botones */
+

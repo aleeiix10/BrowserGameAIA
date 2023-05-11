@@ -16,7 +16,7 @@ const app = createApp({
   data(){
     return {
       arrayUsers: [],
-      elementsByPage: 100,
+      elementsByPage: 4, //LOS ELEMENTOS POR PAGINA DEL RANKING
       dataPage: [],
       currentPage: 1
     }
@@ -38,6 +38,9 @@ const app = createApp({
   methods:{
     totalPages(){
       return Math.ceil(this.arrayUsers.length/this.elementsByPage)
+    },
+    getPosition(index) {
+      return ((this.currentPage - 1) * this.elementsByPage) + index + 1;
     },
     getDataPage(numPage){
       this.currentPage= numPage

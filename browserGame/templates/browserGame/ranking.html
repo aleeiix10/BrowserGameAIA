@@ -4,7 +4,8 @@
 {% block title %} Ranking {% endblock %}
 {% block content %}
 <body class="bg-green-300">
-    {% include 'header.html' with title="Ranking" %}
+    {{header|safe}}
+    {% include 'navbar.html' %}
     <div id="app">
     <main class="container mx-auto my-4">
         <h2 class="text-lg font-semibold mb-2">Ranking Pren Arrels</h2>
@@ -32,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in dataPage" class="border-b border-black">
+                <tr v-for="(user, index) in dataPage" class="border-b border-black">
                     <td class="p-2 text-center">
                         [[user.username]]
                     </td>
@@ -49,7 +50,7 @@
                         [[user.current_mana]]
                     </td>
                     <td class="p-2 text-center">
-                        1
+                        [[getPosition(index)]]
                     </td>
                 </tr>
             </tbody>
@@ -63,14 +64,14 @@
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
             <p class="text-sm text-gray-700">
-              Mostrando
+              Mostrant
               <span class="font-medium">[[currentPage]]</span>
               a
               <span class="font-medium">[[totalPages()]]
               </span>
               de
               <span class="font-medium">[[arrayUsers.length]]</span>
-              resultados
+              resultats
             </p>
           </div>
             <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
