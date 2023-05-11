@@ -16,16 +16,6 @@
       "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/js/main.js",
       "publicPath": "http://127.0.0.1:8080/js/main.js"
     },
-    "main.f9f038afbba7fde1.hot-update.js": {
-      "name": "main.f9f038afbba7fde1.hot-update.js",
-      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.f9f038afbba7fde1.hot-update.js",
-      "publicPath": "http://127.0.0.1:8080/main.f9f038afbba7fde1.hot-update.js"
-    },
-    "main.f9f038afbba7fde1.hot-update.json": {
-      "name": "main.f9f038afbba7fde1.hot-update.json",
-      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.f9f038afbba7fde1.hot-update.json",
-      "publicPath": "http://127.0.0.1:8080/main.f9f038afbba7fde1.hot-update.json"
-    },
     "main.html": {
       "name": "main.html",
       "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.html",
@@ -34,8 +24,7 @@
   },
   "chunks": {
     "main": [
-      "js/main.js",
-      "main.f9f038afbba7fde1.hot-update.js"
+      "js/main.js"
     ]
   },
   "publicPath": "http://127.0.0.1:8080/"

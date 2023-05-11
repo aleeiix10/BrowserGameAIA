@@ -1248,7 +1248,7 @@
         <!-- STATS -->
         <div class="divStats">
             <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
-            <table class="border border-black">
+            <table class="border border-black" width="60%">
                 <thead class="bg-green-700 text-white text-center">
                     <tr>
                         <th class="p-2">
@@ -1278,6 +1278,28 @@
                         </td>
                         <td class="p-2" id="profileStatsExperience">
 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="border-b border-l border-r border-black" width="60%">
+                <tbody>
+                    <tr class="border-b border-black">
+                        <td class="p-2  border-r border-black" style="width:10%">Vida</td>
+                        <td class="p-2">
+                            <div id="profileStatsLifeBar"></div>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-black">
+                        <td class="p-2 border-r border-black" style="width:10%">Manà</td>
+                        <td class="p-2">
+                            <div id="profileStatsManaBar"></div>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-black">
+                        <td class="p-2 border-r border-black" style="width:10%">Experiencia</td>
+                        <td class="p-2">
+                            <div id="profileStatsExperienceBar"></div>
                         </td>
                     </tr>
                 </tbody>
@@ -1336,17 +1358,6 @@
             {% endif %}
         </div>
 
-        <!-- BOTONES EXTRA -->
-        <div>    
-            <button type="submit" name="action" value="8" class="botonAccion bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
-                Subir de Nivel
-            </button>
-    
-            <button type="submit" name="action" value="9" class="botonAccion bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
-                Morir
-            </button>
-        </div>
-
         <!-- CONTENEDOR DE ACCIONES -->
         <div class="contenedorAcciones">
             <span class="accion"></span>
@@ -1364,55 +1375,8 @@
 
     <script>
         $(document).ready(function(){
-            function getStats() {
-                $.getJSON("api/get_users",async function(usuari){
-                    $('#profileStatsLevel').text(usuari.UsersObj[0].level);
-                    $('#profileStatsLife').text(usuari.UsersObj[0].current_life);
-                    $('#profileStatsMana').text(usuari.UsersObj[0].current_mana);
-                    $('#profileStatsExperience').text(usuari.UsersObj[0].experience);  
-                });
-            }
-            
-            function getRelatedActions() {
-                $.getJSON("api/get_related_actions",async function(actions){
-                    $('#tbodyRelatedActions').empty();
-                    actions.ActionsObj.forEach(action =>{
-
-                    $('#tbodyRelatedActions').append('<tr class="border-b border-black text-center">');
-                    if (action.user__username == null){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user__username+`</td>`);
-                    }
-                    if (action.user_attacked__username == null){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">     </td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2">`+action.user_attacked__username+`</td>`);
-                    }
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__name+`</td>`);
-                    if (action.action__category =='A'){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">Agressiva</td>`);
-                    }else if (action.action__category == 'D'){
-                        $('#tbodyRelatedActions').append(`<td class="p-2">Defensiva</td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2">Neutral</td>`);
-                    }
-
-                    var timestamp = new Date(action.timestamp);
-                var formattedTimestamp = timestamp.toLocaleString(); // Formato localizado de fecha y hora
-
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+formattedTimestamp+`</td>`);
-                    $('#tbodyRelatedActions').append(`<td class="p-2">`+action.action__cost+`</td>`);
-
-                    if (action.success == false){
-                        $('#tbodyRelatedActions').append(` <td class="p-2"><i class="fa fa-sharp fa-solid fa-circle-xmark" style="color: #a73131;"></i></td>`);
-                    }else{
-                        $('#tbodyRelatedActions').append(`<td class="p-2"><i class="fa fa-solid fa-circle-check" style="color: #316e32;"></i></td>`);
-                    }
-                    $('#tbodyRelatedActions').append(`</tr>`);
-                    })
-                });
-            }
+            getStats();
+            getRelatedActions();
 
             function fertilitzant(acciones){
                 const rutaImagen = "";

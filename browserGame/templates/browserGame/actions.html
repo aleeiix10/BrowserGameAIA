@@ -5,7 +5,67 @@
 {% block content %}
 <body class="bg-green-300">
     {% include 'header.html' with title="Actions" %}
+    {% include 'navbar.html' %}
     <main class="container mx-auto my-4">
+        <div class="divStats">
+            <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
+            <table class="border border-black" width="30%">
+                <thead class="bg-green-700 text-white text-center">
+                    <tr>
+                        <th class="p-2">
+                            Nivell
+                        </th>
+                        <th class="p-2">
+                            Vida
+                        </th>
+                        <th class="p-2">
+                            Manà
+                        </th>
+                        <th class="p-2">
+                            Experiència
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-black text-center" id="profileStats">
+                        <td class="p-2" id="profileStatsLevel">
+
+                        </td>
+                        <td class="p-2" id="profileStatsLife">
+
+                        </td>
+                        <td class="p-2" id="profileStatsMana">
+
+                        </td>
+                        <td class="p-2" id="profileStatsExperience">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="border-b border-l border-r border-black" width="30%">
+                <tbody>
+                    <tr class="border-b border-black">
+                        <td class="p-2  border-r border-black" style="width:10%">Vida</td>
+                        <td class="p-2">
+                            <div id="profileStatsLifeBar"></div>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-black">
+                        <td class="p-2 border-r border-black" style="width:10%">Manà</td>
+                        <td class="p-2">
+                            <div id="profileStatsManaBar"></div>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-black">
+                        <td class="p-2 border-r border-black" style="width:10%">Experiencia</td>
+                        <td class="p-2">
+                            <div id="profileStatsExperienceBar"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <h2 class="text-lg font-semibold mb-2">Accions</h2>
         <table class="border border-black">
             <thead class="bg-green-700 text-white text-center">

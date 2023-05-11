@@ -509,6 +509,8 @@ def ranking(request):
         </div>
     </header>
                 """
+        users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
+        return render(request, 'browserGame/logedRanking.html', {'users':users, "header":header})
     else:
         header="""
         <header class="dark:bg-green-900 text-white py-2">
@@ -517,10 +519,12 @@ def ranking(request):
         </div>
     </header>
         """
-    users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
-    return render(request, 'browserGame/ranking.html', {'users':users})
+        users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
+        return render(request, 'browserGame/generalRanking.html', {'users':users, "header":header})
+    
 
 def actions(request):
     return render(request, 'browserGame/actions.html')
+
 
     
