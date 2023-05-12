@@ -3,10 +3,167 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Index {% endblock %}
 {% block content %}
+<style>
+
+    .animacion-infinita {
+        animation: aparecer 3s ease-in infinite;
+    }
+
+    .header {
+        overflow: hidden;
+    }
+
+    .imagenHeader {
+        position: relative;
+    }
+
+    .huerto-izquierda {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        transform: scaleX(-1);
+    }
+
+    .huerto-derecha {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+
+    @keyframes aparecer {
+        0% {
+            transform: translateY(70%);
+        }
+        10% {
+            transform: translateY(50%);
+        }
+        15% {
+            transform: translateY(20%);
+        }
+        16% {
+            transform: translateY(20%);
+        }
+        17% {
+            transform: translateY(20%);
+        }
+        18% {
+            transform: translateY(20%);
+        }
+        19% {
+            transform: translateY(20%);
+        }
+        20% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        21% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        22% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        23% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        24% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        25% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        26% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        27% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        28% {
+            transform: translateY(20%) scaleX(1);
+        }
+        29% {
+            transform: translateY(20%) scaleX(1);
+        }
+        30% {
+            transform: translateY(20%) scaleX(1);
+        }
+        40% {
+            transform: translateY(20%) scaleX(1);
+        }
+        50% {
+            transform: translateY(20%) scaleX(1);
+        }
+        80% {
+            transform: translateY(70%) scaleX(1);
+        }
+        90% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes lanzar-izquierda {
+        0% {
+            transform: translateX(0);
+        }
+        10% {
+            transform: translateX(0);
+        }
+        20% {
+            transform: translateX(0);
+        }
+        30% {
+            transform: translateX(0);
+        }
+        40% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(-3%);
+        }
+        55% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes lanzar-derecha {
+        0% {
+            transform: translateX(0);
+        }
+        10% {
+            transform: translateX(0);
+        }
+        20% {
+            transform: translateX(0);
+        }
+        30% {
+            transform: translateX(0);
+        }
+        40% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(3%);
+        }
+        55% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+</style>
 <body id="bodyInfo" class="bg-green-300">
     <header class="header bg-green-700 text-white flex justify-between items-center px-4 w-full">
         <div class="imagenHeader w-1/5">
-            <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+            <div class="animacion-infinita">
+                <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+            </div>
+            <img src="{% static 'img/huerto.gif' %}" alt="Mi imagen" class="huerto-izquierda w-full">
         </div>
         <div class="titulo w-3/5 text-center pt-5">
             <h1 class="text-3xl">Pren arrels</h1>
@@ -17,7 +174,10 @@
         </div>
         
         <div class="imagenHeader w-1/5">
-            <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+            <div class="animacion-infinita">
+                <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+            </div>
+            <img src="{% static 'img/huerto.gif' %}" alt="Mi imagen" class="huerto-derecha w-full">
         </div>
     </header>      
     <main>
