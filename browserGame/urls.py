@@ -18,5 +18,5 @@ urlpatterns = [
     path('api/get_users',api.getUsers, name="getUsers"),
     path('get_user', api.get_user, name='get_user'),
     path('api/get_related_actions',api.getRelatedActions, name="getRelatedActions"),
-    path('save_action',views.profileAjaxActions, name="save_action")
+    path('save_action',views.profileAjaxActions, name="save_action"),
 ]

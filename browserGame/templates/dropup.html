@@ -1,0 +1,16 @@
+{% load static %}
+{% load render_bundle from webpack_loader %}
+<div class="flex justify-end items-end fixed bottom-4 right-4" id="consoleActions">
+  <div class="drop-up-container">
+    <button id="openButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      Abrir ventana
+    </button>
+    <div id="modal" class="drop-up-content modalContent">
+      <div class="resize-handle"></div>
+      <div class="drop-up-arrow"></div>
+
+      
+
+    </div>
+  </div>
+</div>

@@ -31,3 +31,7 @@ def getRelatedActions(request):
         "status": "OK",
         "ActionsObj": jsonData,
     }, safe=False)
+
+
+# def getEventsForConsoleEvent(request):
+#     consoleEvent= Event.objects.filter(user=request.user)
