@@ -169,7 +169,7 @@
             <h1 class="text-3xl">Pren arrels</h1>
             <p>Fes créixer la teva verdura i evita ser desplantat!</p>
             <nav class="navbar flex justify-around items-center py-2">
-                <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" href="./accounts/login">Iniciar sessió</a>
+                <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" id="link-login" href="./accounts/login">Iniciar sessió</a>
             </nav>
         </div>
         
@@ -184,7 +184,7 @@
         <section class="hero bg-green-700 text-white text-center py-8 lg:py-20 my-4 rounded-md">
             <h1 class="text-3xl lg:text-5xl mb-4">Benvinguts al món de les verdures!</h1>
             <p class="text-xl lg:text-2xl mb-4">Prepara't per cuidar la teva verdura i fer-la créixer el més possible.</p>
-            <a href="./register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Registra't ara</a>
+            <a href="./register" id="link-register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Registra't ara</a>
         </section>
         <div class="descripcion flex flex-col sm:flex-row justify-between mx-0">
             <section class="cta bg-green-700 text-white text-center py-8 px-6 my-0 sm:w-1/2 md:w-3/5 lg:w-1/2 rounded-md">
@@ -208,4 +208,7 @@
         </div>
     </main>        
 </body>
+<script>
+    atajosTeclas();
+</script>
 {% endblock %}

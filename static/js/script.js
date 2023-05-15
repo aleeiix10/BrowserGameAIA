@@ -182,6 +182,9 @@ function getUserRanking(username) {
 }
 
 function fertilitzant(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-saiyan"><source src="/static/audios/saiyan.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     for (let i = 0; i < acciones.length; i++) {
@@ -218,10 +221,21 @@ function fertilitzant(acciones){
         if(pea.id == "verdura9") {
             pea.classList.add("animacion-verdura-exp");
         }
+
+        var audio = document.getElementById("audio-saiyan");
+        audio.play();
+        setTimeout(function() {
+            audio.pause();
+            audio.currentTime = 0;
+        }, 5000);
     });
+    
 }
 
 function sol(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-cura"><source src="/static/audios/cura.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/sol.png";
     const rutaImagenVerdura = "/static/img/verdura1sol.png";
     const rutaImagenCura = "/static/img/verdura2.png";
@@ -271,10 +285,17 @@ function sol(acciones){
         else{
             pea.classList.add("animacion-cura");
         }
+
+        var audio = document.getElementById("audio-cura");
+        audio.currentTime = 0.3;
+        audio.play();
     });
 }
 
 function arrels(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-cura"><source src="/static/audios/cura.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/raices.png";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     const rutaImagenCura = "/static/img/verdura2.png";
@@ -324,10 +345,17 @@ function arrels(acciones){
         else{
             pea.classList.add("animacion-cura");
         }
+
+        var audio = document.getElementById("audio-cura");
+        audio.currentTime = 0.3;
+        audio.play();
     });
 }
 
 function remolatxa(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-trueno"><source src="/static/audios/trueno.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/remolacha.png";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     for (let i = 0; i < acciones.length; i++) {
@@ -367,10 +395,19 @@ function remolatxa(acciones){
         else {
             pea.classList.add("animacion-beet");
         }
+
+        var audio = document.getElementById("audio-trueno");
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 1000);
     });
 }
 
 function ceba(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-rafaga"><source src="/static/audios/rafaga.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/cebolla.png";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     for (let i = 0; i < acciones.length; i++) {
@@ -410,11 +447,27 @@ function ceba(acciones){
         else {
             pea.classList.add("animacion-onion");
         }
-        
+
+        var audio = document.getElementById("audio-rafaga");
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 2000);
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 2400);
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 2700);
     });
 }
 
 function pastanaga(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-golpe"><source src="/static/audios/golpe.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/zanahoria.png";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     for (let i = 0; i < acciones.length; i++) {
@@ -454,10 +507,24 @@ function pastanaga(acciones){
         else {
             pea.classList.add("animacion-carrot");
         }
+
+        var audio = document.getElementById("audio-golpe");
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 1000);
+        setTimeout(function() {
+            audio.pause();
+        }, 3000);
+        
     });
+    
 }
 
 function pesols(acciones){
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-mancha"><source src="/static/audios/mancha.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/guisante.png";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     const rutaImagenMancha = "/static/img/mancha.png";
@@ -507,14 +574,32 @@ function pesols(acciones){
         else {
             pea.classList.add("animacion-pea");
         }
+        var audio = document.getElementById("audio-mancha");
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 800);
+        
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 1600);
+        setTimeout(function() {
+            audio.currentTime = 0;
+            audio.play();
+        }, 2500);
     });
 }
-
+    
 function levelUp(acciones){
     $(".contenedorAcciones").css("z-index", "9999");
     setTimeout(function() {
         $(".contenedorAcciones").removeAttr("style");
     }, 3000);
+
+    $("body .claseAudio").remove();
+    $("body").append('<audio class="claseAudio" id="audio-nivel"><source src="/static/audios/nivel.mp3" type="audio/mpeg"></audio>');
+
     const rutaImagen = "/static/img/exp.png";
     const rutaImagenVerdura = "/static/img/verdura1.png";
     for (let i = 0; i < acciones.length; i++) {
@@ -554,6 +639,62 @@ function levelUp(acciones){
         else {
             pea.classList.add("animacion-exp");
         }
+
+        var audio = document.getElementById("audio-nivel");
+        audio.play();
     });
 }
 
+
+function atajosTeclas() {
+    window.addEventListener('keydown', (event) => {
+        if(document.getElementById("bodyInfo")) {
+            if (event.keyCode === 73 && event.target.tagName.toLowerCase() !== 'textarea') {
+                document.getElementById('link-login').click();
+            }
+            if (event.keyCode === 82 && event.target.tagName.toLowerCase() !== 'textarea') {
+                document.getElementById('link-register').click();
+            }
+        }
+        if (event.keyCode === 73 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('link-inici').click();
+        }
+        if (event.keyCode === 80 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('link-play').click();
+        }
+        if (event.keyCode === 82 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('link-ranking').click();
+        }
+        if (event.keyCode === 65 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('link-actions').click();
+        }
+        if (event.keyCode === 97 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-1').click();
+        }
+        if (event.keyCode === 98 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-2').click();
+        }
+        if (event.keyCode === 99 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-3').click();
+        }
+        if (event.keyCode === 100 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-4').click();
+        }
+        if (event.keyCode === 101 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-5').click();
+        }
+        if (event.keyCode === 102 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-6').click();
+        }
+        if (event.keyCode === 103 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('action-7').click();
+        }
+        if(document.getElementById("myModal")) {
+            if (event.keyCode === 13 && event.target.tagName.toLowerCase() !== 'textarea') {
+                event.preventDefault();
+                document.getElementById('button-jugador').click();
+            }
+            
+        }
+    });
+}

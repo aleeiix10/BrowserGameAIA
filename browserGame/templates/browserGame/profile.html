@@ -24,10 +24,10 @@
                 
                 <form method="post">
                     {% csrf_token %}
-                    <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
+                    <label for="select" id="select-jugador" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
                     {{form.jugador_a_atacar}}
                     <div class="flex justify-end pt-2">
-                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
+                        <button type="submit" id="button-jugador" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
                     </div>
                 </form>
         
@@ -37,109 +37,114 @@
 
     <main class="container mx-auto my-4 mainProfile">
         <!-- STATS -->
-        <div class="divStats">
-            <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
-            <table class="border border-black" width="60%">
-                <thead class="bg-green-700 text-white text-center">
-                    <tr>
-                        <th class="p-2">
-                            Nivell
-                        </th>
-                        <th class="p-2">
-                            Vida
-                        </th>
-                        <th class="p-2">
-                            Manà
-                        </th>
-                        <th class="p-2">
-                            Experiència
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-black text-center" id="profileStats">
-                        <td class="p-2" id="profileStatsLevel"></td>
-                        <td class="p-2" id="profileStatsLife"></td>
-                        <td class="p-2" id="profileStatsMana"></td>
-                        <td class="p-2" id="profileStatsExperience"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="border-b border-l border-r border-black" width="60%">
-                <tbody>
-                    <tr class="border-b border-black">
-                        <td class="p-2  border-r border-black" style="width:10%">Vida</td>
-                        <td class="p-2">
-                            <div id="profileStatsLifeBar"></div>
-                        </td>
-                    </tr>
-                    <tr class="border-b border-black">
-                        <td class="p-2 border-r border-black" style="width:10%">Manà</td>
-                        <td class="p-2">
-                            <div id="profileStatsManaBar"></div>
-                        </td>
-                    </tr>
-                    <tr class="border-b border-black">
-                        <td class="p-2 border-r border-black" style="width:10%">Experiencia</td>
-                        <td class="p-2">
-                            <div id="profileStatsExperienceBar"></div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-       
-        <!-- BOTONES -->
-        <div class="divBtnActions">
-            <form method="post" id="formProfile">
-                {% for action in actions %}
-                    {% csrf_token %}
-                    {% if action.category == "A" %}
-                        <button style="background-image: url('/static/img/{{action.id}}.png');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover-trigger="#miPopover"></button>
-                    {% elif action.category == "D" %}
-                        <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" data-popover-trigger="#miPopover"></button>
-                    {% else %}
-                        <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" data-popover-trigger="#miPopover"></button>
-                    {% endif %}
-                {% endfor %}
-            </form>
+        <div class="flex flex-col sm:flex-row w-full">
+            <div class="divStats sm:table w-full sm:w-1/2 mx-5 sm:mx-0">
+                <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
+                <table class="border border-black" width="62.5%">
+                    <thead class="bg-green-700 text-white text-center">
+                        <tr>
+                            <th class="p-2">
+                                Nivell
+                            </th>
+                            <th class="p-2">
+                                Vida
+                            </th>
+                            <th class="p-2">
+                                Manà
+                            </th>
+                            <th class="p-2">
+                                Experiència
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-black text-center" id="profileStats">
+                            <td class="p-2" id="profileStatsLevel"></td>
+                            <td class="p-2" id="profileStatsLife"></td>
+                            <td class="p-2" id="profileStatsMana"></td>
+                            <td class="p-2" id="profileStatsExperience"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="border-b border-l border-r border-black" width="62.5%">
+                    <tbody>
+                        <tr class="border-b border-black">
+                            <td class="p-2  border-r border-black" style="width:10%">Vida</td>
+                            <td class="p-2">
+                                <div id="profileStatsLifeBar"></div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-black">
+                            <td class="p-2 border-r border-black" style="width:10%">Manà</td>
+                            <td class="p-2">
+                                <div id="profileStatsManaBar"></div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-black">
+                            <td class="p-2 border-r border-black" style="width:10%">Experiencia</td>
+                            <td class="p-2">
+                                <div id="profileStatsExperienceBar"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- BOTONES -->
+            <div class="divBtnActions sm:flex sm:flex-wrap sm:flex-col w-full sm:w-1/2 mx-5">
+                <form method="post" id="formProfile" class="sm:w-full">
+                    {% for action in actions %}
+                        {% csrf_token %}
+                        {% if action.category == "A" %}
+                            <button style="background-image: url('/static/img/{{action.id}}.png');" id="action-{{ action.id }}" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover-trigger="#miPopover"></button>
+                        {% elif action.category == "D" %}
+                            <button style="background-image: url('/static/img/{{action.id}}.jpg');" id="action-{{ action.id }}" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" data-popover-trigger="#miPopover"></button>
+                        {% else %}
+                            <button style="background-image: url('/static/img/{{action.id}}.jpg');" id="action-{{ action.id }}" type="submit" name="button_choice" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" data-popover-trigger="#miPopover"></button>
+                        {% endif %}
+                    {% endfor %}
+                </form>
+            </div>
         </div>
 
         <!-- ACCIONES -->
-        <div class="divLastActions">
+        <div class="divLastActions mt-4 mx-5 sm:mx-0">
             {% if userLoged|length >= 1 %}
-            <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 25 accions realitzades</h2>
-            <table class="border border-black">
-                <thead class="bg-green-700 text-white text-center">
-                    <tr>
-                        <th class="p-2">
-                            Agressor
-                        </th>
-                        <th class="p-2">
-                            Victima
-                        </th>
-                        <th class="p-2">
-                            Nom Acció
-                        </th>
-                        <th class="p-2">
-                            Categoria
-                        </th>
-                        <th class="p-2">
-                            Moment Acció
-                        </th>
-                        <th class="p-2">
-                            Cost
-                        </th>
-                        <th class="p-2">
-                            Èxit
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyRelatedActions">
-                </tbody>
-            </table>
+                <h2 class="text-lg font-semibold mb-2">Últimes 25 accions realitzades</h2>
+                <div class="overflow-x-auto">
+                    <table class="border border-black">
+                        <thead class="bg-green-700 text-white text-center">
+                            <tr>
+                                <th class="p-2">
+                                    Agressor
+                                </th>
+                                <th class="p-2">
+                                    Victima
+                                </th>
+                                <th class="p-2">
+                                    Nom Acció
+                                </th>
+                                <th class="p-2">
+                                    Categoria
+                                </th>
+                                <th class="p-2">
+                                    Moment Acció
+                                </th>
+                                <th class="p-2">
+                                    Cost
+                                </th>
+                                <th class="p-2">
+                                    Èxit
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyRelatedActions">
+                        </tbody>
+                    </table>
+                </div>
             {% endif %}
         </div>
+        
 
         <!-- CONTENEDOR DE ACCIONES -->
         <div class="contenedorAcciones">
@@ -290,6 +295,7 @@
             getRelatedActions();
             setInterval(getRelatedActions, 30000);
             setInterval(getStats, 30000);
+            atajosTeclas();
         });
         const acciones = document.querySelectorAll(".accion");
         const botones = document.querySelectorAll(".botonAccion");

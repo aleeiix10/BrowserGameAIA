@@ -7,7 +7,7 @@
 <div class="flex flex-col items-center justify-center min-h-screen bg-green-300">
     <div class="w-full max-w-md">
         <h1 class="text-4xl text-green-900 font-bold p-10 text-center">Iniciar Sessió</h1>
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" action="{% url 'login' %}">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="login-form" method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="username">
@@ -25,7 +25,7 @@
                 <button class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4 sm:mb-0" type="submit">
                     Iniciar sessió
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-green-700 hover:text-green-600" href="{% url 'password_reset' %}">
+                <a class="inline-block align-baseline font-bold text-sm text-green-700 hover:text-green-600" id="link-password" href="{% url 'password_reset' %}">
                     ¿Has oblidat la contrasenya?
                 </a>
             </div>
@@ -35,5 +35,17 @@
         </p>
     </div>
 </div>
+
+<script>
+    window.addEventListener('keydown', (event) => {
+        if (event.keyCode === 13 && event.target.tagName.toLowerCase() !== 'textarea') {
+            document.getElementById('login-form').submit();
+        }
+        if (event.keyCode === 72 && event.target.tagName.toLowerCase() !== 'textarea') {
+            event.preventDefault();
+            document.getElementById('link-password').click();
+        }
+    });
+</script>
 
 {% endblock %}
