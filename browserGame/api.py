@@ -31,3 +31,25 @@ def getRelatedActions(request):
         "status": "OK",
         "ActionsObj": jsonData,
     }, safe=False)
+
+
+def getActions(request):
+    actions = Action.objects.all()
+    jsonData = list(actions.values())
+    return JsonResponse({
+        "status": "OK",
+        "ActionsObj": jsonData,
+    }, safe=False)
+
+
+def getUsersByName(request, username):
+    user = User.objects.filter(username=username)
+    userSelected = User.objects.filter(username=username).first()
+    getRelatedEvents = Event.objects.filter(user=userSelected)
+    jsonData = list(user.values())
+    jsonData2 = list(getRelatedEvents.values())
+    return JsonResponse({
+        "status": "OK",
+        "userObj": jsonData,
+        "actionObj" : jsonData2
+    }, safe=False)
