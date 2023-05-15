@@ -4,7 +4,7 @@
 {% block title %} Actions {% endblock %}
 {% block content %}
 <body class="bg-green-300">
-    {% include 'header.html' with title="Actions" %}
+    {% include 'header.html' with title="Actions" user=""%}
     {% include 'navbar.html' %}
     <main class="container mx-auto my-4">
         <div class="divStats">
@@ -28,18 +28,10 @@
                 </thead>
                 <tbody>
                     <tr class="border-b border-black text-center" id="profileStats">
-                        <td class="p-2" id="profileStatsLevel">
-
-                        </td>
-                        <td class="p-2" id="profileStatsLife">
-
-                        </td>
-                        <td class="p-2" id="profileStatsMana">
-
-                        </td>
-                        <td class="p-2" id="profileStatsExperience">
-
-                        </td>
+                        <td class="p-2" id="profileStatsLevel"></td>
+                        <td class="p-2" id="profileStatsLife"></td>
+                        <td class="p-2" id="profileStatsMana"></td>
+                        <td class="p-2" id="profileStatsExperience"></td>
                     </tr>
                 </tbody>
             </table>
@@ -66,7 +58,7 @@
                 </tbody>
             </table>
         </div>
-        <h2 class="text-lg font-semibold mb-2">Accions</h2>
+        <h2 class="mt-10 text-lg font-semibold mb-2">Accions</h2>
         <table class="border border-black">
             <thead class="bg-green-700 text-white text-center">
                 <tr>
@@ -92,29 +84,10 @@
         </table>
     </main>
     <script>
-        $(document).ready(function() { 
-            function getActions() {
-                $.getJSON("/api/get_actions",function(actions){
-                    actions.ActionsObj.forEach(action =>{
-                        $('#tbodyAtacs').append('<tr class="border-b border-black text-center">');
-                        $('#tbodyAtacs').append(`<td class="p-2">`+action.name+`</td>`);
-                        if (action.category =='A'){
-                           $('#tbodyAtacs').append(`<td class="p-2">Agressiva</td>`);
-                        }else if (action.category  == 'D'){
-                           $('#tbodyAtacs').append(`<td class="p-2">Defensiva</td>`);
-                        }else{
-                           $('#tbodyAtacs').append(`<td class="p-2">Neutral</td>`);
-                        }
-                        
-                        $('#tbodyAtacs').append(`<td class="p-2 text-center">`+action.cost+`</td>`);
-                        $('#tbodyAtacs').append(`<td class="p-2 text-center">`+action.succesPercentage+`</td>`);
-                        $('#tbodyAtacs').append(`<td class="p-2 text-center">`+action.points+`</td>`);
-                        $('#tbodyAtacs').append('</tr>');
-                    })
-                });
-            }
-            getActions();
-        });
+        getStats();
+        getActions();
+        setInterval(getRelatedActions, 30000);
+        setInterval(getStats, 30000);
     </script>
 </body>
 {% endblock %}

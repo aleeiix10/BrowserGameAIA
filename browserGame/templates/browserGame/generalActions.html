@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% block title %} Actions {% endblock %}
+{% block content %}
+<body class="bg-green-300">
+    {% include 'navbar.html' %}
+    <main class="container mx-auto my-4">
+        <h2 class="mt-2 text-lg font-semibold mb-2">Accions</h2>
+        <table class="border border-black">
+            <thead class="bg-green-700 text-white text-center">
+                <tr>
+                    <th class="p-2">
+                        Acció
+                    </th>
+                    <th class="p-2">
+                        Categoria
+                    </th>
+                    <th class="p-2">
+                        Cost
+                    </th>
+                    <th class="p-2">
+                        Percentatge 
+                    </th>
+                    <th class="p-2">
+                        Punts d'Experiencia/Vida 
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbodyAtacs">
+            </tbody>
+        </table>
+    </main>
+    <script>
+        getActions();
+    </script>
+</body>
+{% endblock %}

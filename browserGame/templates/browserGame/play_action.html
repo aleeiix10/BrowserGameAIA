@@ -3,49 +3,47 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Play Action {% endblock %}
 {% block content %}
-{% include 'header.html' with title="Play-Action" %}
+{% include 'header.html' with title="Play-Action" user=""%}
 {% include 'navbar.html' %}
-<!-- {{lvl|safe}} -->
+<style>
+    .containerPers{
+        display: grid;
+        grid-template-columns: 30% 70%; /* Dos columnas con mitad de longitud cada una y otra que ocupa el resto */
+        grid-gap: 10px; /* Espaco entre los divs */
+    }
+</style>
 {{msg|safe}}
 <body class="bg-green-300">
-<main class="container mx-auto my-4">
+<main class="container containerPers mx-auto my-4">
 <div class="divStats">
   <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
-  <table class="border border-black" width="30%">
-      <thead class="bg-green-700 text-white text-center">
-          <tr>
-              <th class="p-2">
-                  Nivell
-              </th>
-              <th class="p-2">
-                  Vida
-              </th>
-              <th class="p-2">
-                  Manà
-              </th>
-              <th class="p-2">
-                  Experiència
-              </th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr class="border-b border-black text-center" id="profileStats">
-              <td class="p-2" id="profileStatsLevel">
-
-              </td>
-              <td class="p-2" id="profileStatsLife">
-
-              </td>
-              <td class="p-2" id="profileStatsMana">
-
-              </td>
-              <td class="p-2" id="profileStatsExperience">
-
-              </td>
-          </tr>
-      </tbody>
-  </table>
-  <table class="border-b border-l border-r border-black" width="30%">
+  <table class="border border-black" width="100%">
+    <thead class="bg-green-700 text-white text-center">
+        <tr>
+            <th class="p-2">
+                Nivell
+            </th>
+            <th class="p-2">
+                Vida
+            </th>
+            <th class="p-2">
+                Manà
+            </th>
+            <th class="p-2">
+                Experiència
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="border-b border-black text-center" id="profileStats">
+            <td class="p-2" id="profileStatsLevel"></td>
+            <td class="p-2" id="profileStatsLife"></td>
+            <td class="p-2" id="profileStatsMana"></td>
+            <td class="p-2" id="profileStatsExperience"></td>
+        </tr>
+    </tbody>
+</table>
+  <table class="border-b border-l border-r border-black" width="100%">
       <tbody>
           <tr class="border-b border-black">
               <td class="p-2  border-r border-black" style="width:10%">Vida</td>
@@ -68,7 +66,7 @@
       </tbody>
   </table>
 </div>
-<div class="flex items-center justify-center h-screen bg-green-300">
+<div class="flex items-center justify-flex-start h-screen bg-green-300">
     <div class="w-full max-w-md">
     <h1 class="text-4xl text-green-900 font-bold p-10 text-center">Selecciona una acció</h1>
     <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" autocomplete="off">
@@ -105,6 +103,11 @@
         $('#id_action').addClass("shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline");
         $('#id_jugador_a_atacar').addClass("shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline");
         getStats();
-    })
+        getActions();
+        getRelatedActions();    
+        setInterval(getRelatedActions, 30000);
+        setInterval(getStats, 30000);
+    });
+
 </script>
 {% endblock %}

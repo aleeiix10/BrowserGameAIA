@@ -16,7 +16,7 @@ import random
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
-    
+  
 @login_required
 def profile(request):
     return render(request,"browserGame/profile.html")
@@ -498,33 +498,26 @@ def profileAjaxActions(request):
     else:
         return JsonResponse({"error": "La solicitud debe ser POST"})
 
-# RANKING
-def ranking(request):
-    if request.user.is_authenticated:
-        header= """
-                <header class="dark:bg-green-900 text-white py-2">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-xl">Ranking</h1>
-            <a href="/accounts/logout/" class="underline">Logout</a>
-        </div>
-    </header>
-                """
-        users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
-        return render(request, 'browserGame/logedRanking.html', {'users':users, "header":header})
+def ranking(request, username=None):
+    if username:
+        user = User.objects.filter(username=username)
+        if user:
+            return render(request, 'browserGame/profileRanking.html', {'username': username})
+        else:
+            return render(request, 'browserGame/404.html', status=404)
     else:
-        header="""
-        <header class="dark:bg-green-900 text-white py-2">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-xl">Ranking</h1>
-        </div>
-    </header>
-        """
-        users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
-        return render(request, 'browserGame/generalRanking.html', {'users':users, "header":header})
-    
+        if request.user.is_authenticated:
+            users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
+            return render(request, 'browserGame/logedRanking.html', {'users':users})
+        else:
+            users= User.objects.all().order_by('-level', '-experience','-current_life','-current_mana')
+            return render(request, 'browserGame/generalRanking.html', {'users':users})
 
 def actions(request):
-    return render(request, 'browserGame/actions.html')
+    if request.user.is_authenticated:
+        return render(request, 'browserGame/logedActions.html')
+    else:
+        return render(request,'browserGame/generalActions.html')
 
 
     

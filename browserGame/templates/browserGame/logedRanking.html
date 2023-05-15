@@ -3,9 +3,9 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Ranking {% endblock %}
 {% block content %}
+{% include 'header.html' with title="Ranking, " user="" %}
+{% include 'navbar.html' %}
 <body class="bg-green-300">
-    {{header|safe}}
-    {% include 'navbar.html' %}
     <div id="app">
     <main class="container mx-auto my-4">
         <div class="divStats">
@@ -29,18 +29,10 @@
                 </thead>
                 <tbody>
                     <tr class="border-b border-black text-center" id="profileStats">
-                        <td class="p-2" id="profileStatsLevel">
-
-                        </td>
-                        <td class="p-2" id="profileStatsLife">
-
-                        </td>
-                        <td class="p-2" id="profileStatsMana">
-
-                        </td>
-                        <td class="p-2" id="profileStatsExperience">
-
-                        </td>
+                        <td class="p-2" id="profileStatsLevel"></td>
+                        <td class="p-2" id="profileStatsLife"></td>
+                        <td class="p-2" id="profileStatsMana"></td>
+                        <td class="p-2" id="profileStatsExperience"></td>
                     </tr>
                 </tbody>
             </table>
@@ -67,7 +59,7 @@
                 </tbody>
             </table>
         </div>
-        <h2 class="text-lg font-semibold mb-2">Ranking Pren Arrels</h2>
+        <h2 class="mt-10 text-lg font-semibold mb-2">Ranking Pren Arrels</h2>
         <table class="border border-black">
             <thead class="bg-green-700 text-white">
                 <tr>
@@ -94,7 +86,7 @@
             <tbody>
                 <tr v-for="(user, index) in dataPage" class="border-b border-black">
                     <td class="p-2 text-center">
-                        [[user.username]]
+                        <a> [[ user.username ]]  </a>
                     </td>
                     <td class="p-2 text-center">
                         [[user.level]]
@@ -151,11 +143,13 @@
         </div>
       </div>
     </div>
-    <script>
-        $(document).ready(function(){
-            getStats();
-        })
-    </script>
     {% render_bundle 'main' %}
+    <script>
+        getStats();
+        getActions();
+        getRelatedActions();
+        setInterval(getRelatedActions, 30000);
+        setInterval(getStats, 30000);
+    </script>
 </body>
 {% endblock %}

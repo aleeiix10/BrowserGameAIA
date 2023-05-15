@@ -3,6 +3,9 @@ from .models import *
 from django.core.cache import cache
 import datetime
 from django.utils import timezone
+from django.utils.timesince import timesince
+from django.utils.timezone import now
+
 
 #Guarda en el modelo Log informacion del typo, el usuario y el mensaje
 def systemLogU(log_entries):
@@ -41,3 +44,6 @@ def cronManaU(mana):
     cron = GlobalOption.objects.first()
     cron.last_updated_cron = timezone.now()
     cron.save()
+
+def timeago(date):
+    return "Hace " + timesince(date, now())
