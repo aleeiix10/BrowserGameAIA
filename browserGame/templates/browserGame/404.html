@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% block title %} 404 Not Found {% endblock %}
+{% block content %}
+<body class="bg-green-300">
+    <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            404 Not Found
+        </h1>
+        <p class="mt-4 text-lg text-gray-500">
+            Sorry, the page you are looking for is not available.
+        </p>
+    </div>
+</body>
+</html>
+{% endblock %}

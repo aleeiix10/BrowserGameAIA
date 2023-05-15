@@ -1,3 +1,329 @@
-Benvingut {{user}}.
-<br>
-<a href="/accounts/logout/?next=/accounts/login">Logout</a>
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+{% include 'header.html' with msg="Hola, " %}
+{% include 'navbar.html' %}
+<body class="bg-green-300">
+{{msg|safe}}
+    <!-- MODAL FORMULARIO -->
+    <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50">
+        </div>
+        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">Tria a un jugador</p>
+                    <button id="closeModal" class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M18 1.8L16.2 0L9 7.2L1.8 0L0 1.8L7.2 9L0 16.2L1.8 18L9 10.8L16.2 18L18 16.2L10.8 9L18 1.8Z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
+                    {{form.jugador_a_atacar}}
+                    <div class="flex justify-end pt-2">
+                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
+                    </div>
+                </form>
+        
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto my-4 mainProfile">
+        <!-- STATS -->
+        <div class="divStats">
+            <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
+            <table class="border border-black" width="60%">
+                <thead class="bg-green-700 text-white text-center">
+                    <tr>
+                        <th class="p-2">
+                            Nivell
+                        </th>
+                        <th class="p-2">
+                            Vida
+                        </th>
+                        <th class="p-2">
+                            Manà
+                        </th>
+                        <th class="p-2">
+                            Experiència
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-black text-center" id="profileStats">
+                        <td class="p-2" id="profileStatsLevel"></td>
+                        <td class="p-2" id="profileStatsLife"></td>
+                        <td class="p-2" id="profileStatsMana"></td>
+                        <td class="p-2" id="profileStatsExperience"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="border-b border-l border-r border-black" width="60%">
+                <tbody>
+                    <tr class="border-b border-black">
+                        <td class="p-2  border-r border-black" style="width:10%">Vida</td>
+                        <td class="p-2">
+                            <div id="profileStatsLifeBar"></div>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-black">
+                        <td class="p-2 border-r border-black" style="width:10%">Manà</td>
+                        <td class="p-2">
+                            <div id="profileStatsManaBar"></div>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-black">
+                        <td class="p-2 border-r border-black" style="width:10%">Experiencia</td>
+                        <td class="p-2">
+                            <div id="profileStatsExperienceBar"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+        <!-- BOTONES -->
+        {% render_bundle 'main' %}
+        <div class="divBtnActions">
+            <form method="post" id="formProfile">
+                {% for action in actions %}
+                    {% csrf_token %}
+                    {% if action.category == "A" %}
+                        <button style="background-image: url('/static/img/{{action.id}}.png');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover="{{action.id}}"></button>
+                        <div id="{{action.id}}" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                                <h3 class="font-semibold text-gray-900 ">{{action.name}}</h3>
+                            </div>
+                            <div>
+                                <p style="text-align: left;">Cost: {{action.cost}}</p>
+                                <p style="text-align: left;">Percentatge: {{action.succesPercentage}}</p>
+                                <p style="text-align: left;">Punts: {{action.points}}</p>
+                              </div>
+                        </div>          
+                    {% elif action.category == "D" %}
+                    <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover="{{action.id}}"></button>
+                    <div id="{{action.id}}" class="absolute z-10 invisible w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                            <h3 class="font-semibold text-gray-900 ">{{action.name}}</h3>
+                        </div>
+                        <div>
+                            <p style="text-align: left;">Cost: {{action.cost}}</p>
+                            <p style="text-align: left;">Percentatge: {{action.succesPercentage}}</p>
+                            <p style="text-align: left;">Punts: {{action.points}}</p>
+                          </div>
+                    </div>                    
+                    {% else %}
+                    <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover="{{action.id}}"></button>
+                    <div id="{{action.id}}" class="absolute z-10 invisible w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 flex flex-col">
+                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                            <h3 class="font-semibold text-gray-900 ">{{action.name}}</h3>
+                        </div>
+                        <div>
+                            <p style="text-align: left;">Cost: {{action.cost}}</p>
+                            <p style="text-align: left;">Percentatge: {{action.succesPercentage}}</p>
+                            <p style="text-align: left;">Punts: {{action.points}}</p>
+                          </div>
+                    </div>          
+                    {% endif %}
+                {% endfor %}
+            </form>
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="divLastActions">
+            {% if userLoged|length >= 1 %}
+            <h2 class="text-lg font-semibold mt-4 mb-2">Últimes 25 accions realitzades</h2>
+            <table class="border border-black">
+                <thead class="bg-green-700 text-white text-center">
+                    <tr>
+                        <th class="p-2">
+                            Agressor
+                        </th>
+                        <th class="p-2">
+                            Victima
+                        </th>
+                        <th class="p-2">
+                            Nom Acció
+                        </th>
+                        <th class="p-2">
+                            Categoria
+                        </th>
+                        <th class="p-2">
+                            Moment Acció
+                        </th>
+                        <th class="p-2">
+                            Cost
+                        </th>
+                        <th class="p-2">
+                            Èxit
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyRelatedActions">
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+        <!-- CONTENEDOR DE ACCIONES -->
+        <div class="contenedorAcciones">
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="textoAccion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+            <span class="accion"></span>
+        </div>
+    </main>
+    <script>
+        $(document).ready(function(){ 
+            // METE A LOS BOTONES DE LAS ACCIONES EN UN DIV
+            $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow bg-green-700"></div>');
+            $("#agresiva").prepend("<p>ATACS</p>")
+            $("form .D").wrapAll('<div id="defensiva" class="rounded-sm shadow bg-green-600"></div>');
+            $("#defensiva").prepend("<p>DEFENSIVES</p>")
+            $("form .N").wrapAll('<div id="neutra" class="rounded-sm shadow bg-green-500"></div>');
+            $("#neutra").prepend("<p>NEUTRALS</p>")
+            const acciones = document.querySelectorAll(".accion");
+            // AJAX DEL SUBMIT CUANDO APARECE EL MODAL
+            $("#btn-submit").click(function(e){
+                e.preventDefault()
+                var actionId = $(this).val();
+                var user_attacked= $("#id_jugador_a_atacar").val()
+                $.ajax({
+                    type: "POST",
+                    url: "/save_action",
+                    data: {
+                        'button_choice': actionId,
+                        "jugador_a_atacar": user_attacked
+                    }
+                }).done(function(response) {
+                    getStats()
+                    getRelatedActions()
+                    $(".contenedorAcciones").css("z-index", "9999");
+                    if (actionId == 1){
+                        pesols(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3200);
+                    }
+                    else if (actionId == "4"){
+                        remolatxa(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3700);
+                    }
+                    else if (actionId == "3"){
+                        ceba(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3700);
+                    }
+                    else if (actionId == "2"){
+                        pastanaga(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3600);
+                    }
+                    if(response.lvl == true){
+                        setTimeout(function(){
+                            levelUp(acciones)
+                        },3700
+                        )       
+                    }
+                    // Manejar la respuesta de la solicitud AJAX
+                }).fail(function(error) {
+                    console.log(error)
+                    // Manejar el error de la solicitud AJAX
+                });
+            })
+            // AJAX DEL SUBMIT DE LOS BOTONES DE LAS ACCIONES
+            $(".btn-action").click(function(e){
+                e.preventDefault()
+
+                var actionId = $(this).val();
+
+                if ($(this).hasClass("A")){
+
+                    e.preventDefault()
+                    var valorBoton = $(event.target).val();
+                    $("#btn-submit").attr("value", valorBoton);
+                    $('#myModal').removeClass('hidden');
+                    $('#myModal').css('hidden');
+                    $("#myModal").css("z-index", "9999");
+                }
+                else{
+                    $(".contenedorAcciones").css("z-index", "9999");
+
+                    if ($(this).val() == "7"){
+                        fertilitzant(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3000);
+                    }
+                    if ($(this).val() == "6"){
+                        sol(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3500);
+                    }
+                    if ($(this).val() == "5"){
+                        arrels(acciones)
+                        setTimeout(function() {
+                            $(".contenedorAcciones").removeAttr("style");
+                        }, 3700);
+                    }
+                    var form= $("#formProfile")
+                    $.ajax({
+                        type: "POST",
+                        url: "/save_action",
+                        data: {
+                            'button_choice': actionId,
+                            "id_jugador_a_atacar": ""
+                        }
+                    }).done(function(response) {
+                        getStats()
+                        getRelatedActions()
+                        if(response.lvl == true){
+                            setTimeout(function(){
+                                levelUp(acciones)
+                            },3000
+                            )
+                            
+                        }
+                        // Manejar la respuesta de la solicitud AJAX
+                    }).fail(function(error) {
+                        console.log(error)
+                        // Manejar el error de la solicitud AJAX
+                    });
+                    getStats();
+                    getRelatedActions();
+                }                
+            })
+            // CERRAR EL MODAL
+            $('.modal-close').click(function(e) {
+                $('#myModal').addClass('hidden');
+            });
+            getStats();
+            getActions();
+            getRelatedActions();
+            getPopUps();
+            setInterval(getRelatedActions, 30000);
+            setInterval(getStats, 30000);
+        });
+        const acciones = document.querySelectorAll(".accion");
+        const botones = document.querySelectorAll(".botonAccion");
+    </script>     
+</body>
+{% endblock %}

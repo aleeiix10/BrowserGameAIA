@@ -1,0 +1,1280 @@
+@keyframes ampliar-negrita {
+    0% {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    50% {
+      font-size: 36px;
+      font-weight: bold;
+    }
+    100% {
+      font-size: 32px;
+      font-weight: normal;
+    }
+}
+.containerPers{
+    display: grid;
+    grid-template-columns: 30% 70%; /* Dos columnas con mitad de longitud cada una y otra que ocupa el resto */
+    grid-gap: 10px; /* Espaco entre los divs */
+}
+    .mainProfile{
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dos columnas con mitad de longitud cada una y otra que ocupa el resto */
+        grid-gap: 10px; /* Espacio entre los divs */
+    }
+    #formProfile > div{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #formProfile > div > p{
+        color: #fff;
+        width: 110px;
+    }
+
+    #formProfile > div > button{
+        margin: 5px;
+        height: 100px;
+        width: 100px;
+        background-size: cover; /* o contain */
+    }
+
+    .divBtnActions  p{
+        text-align: center;
+        padding: 10px;
+        font-weight: bolder;
+    }
+
+
+    .btn-action {
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .botonAccion {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contenedorAcciones {
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .accion {
+        position: absolute;
+        height: 50%;
+        left: -400px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        object-fit: contain;
+    }
+
+    #pea1 {
+        top: 40%;
+        left: -10%;
+        width: 10%;
+    }
+    #pea2 {
+        top: 40%;
+        left: -20%;
+        width: 10%;
+    }
+    #pea3 {
+        top: 40%;
+        left: -30%;
+        width: 10%;
+    }
+    #pea4 {
+        top: 40%;
+        left: -40%;
+        width: 10%;
+    }
+    #pea5 {
+        top: 40%;
+        left: -50%;
+        width: 10%;
+    }
+    #pea6 {
+        top: 40%;
+        left: -60%;
+        width: 10%;
+    }
+
+    #carrot1 {
+        top: -80%;
+        left: 20%;
+        width: 750px;
+    }
+
+    #onion1 {
+        top: 30%;
+        left: -400px;
+        width: 10%;
+    }
+
+    #onion2 {
+        top: 40%;
+        left: -500px;
+        width: 10%;
+    }
+
+    #onion3 {
+        top: 30%;
+        left: -800px;
+        width: 10%;
+    }
+
+    #onion4 {
+        top: 40%;
+        left: -900px;
+        width: 10%;
+    }
+
+    #onion5 {
+        top: 30%;
+        left: -1200px;
+        width: 10%;
+    }
+
+    #onion6 {
+        top: 40%;
+        left: -1300px;
+        width: 10%;
+    }
+
+    #onion7 {
+        top: 30%;
+        left: -1600px;
+        width: 10%;
+    }
+
+    #onion8 {
+        top: 40%;
+        left: -1700px;
+        width: 10%;
+    }
+
+    #onion9 {
+        display: none;
+    }
+
+    #beet1 {
+        top: -100%;
+        left: 45%;
+        width: 9%;
+    }
+    #beet2 {
+        top: -90%;
+        left: 42%;
+        width: 7%;
+    }
+    #beet3 {
+        top: -80%;
+        left: 40%;
+        width: 6%;
+    }
+    #beet4 {
+        top: -80%;
+        left: 48%;
+        width: 6%;
+    }
+    #beet5 {
+        top: -70%;
+        left: 46%;
+        width: 4%;
+    }
+    #beet6 {
+        top: -60%;
+        left: 44%;
+        width: 3%;
+    }
+
+    #verdura1 {
+        top: 45%;
+        left: 25%;
+        width: 750px;
+        opacity: 0;
+    }
+    #verdura9 {
+        top: 45%;
+        left: 25%;
+        width: 750px;
+        opacity: 0;
+    }
+
+    #mancha8 {
+        top: 45%;
+        left: 35%;
+        width: 250px;
+        opacity: 0;
+        z-index: 10;
+    }
+
+    #estate2 {
+        top: 65%;
+        left: 35.5%;
+        width: 350px;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    #cura3 {
+        top: 45%;
+        left: 35%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura4 {
+        top: 55%;
+        left: 36%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura5 {
+        top: 35%;
+        left: 35%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura6 {
+        top: 45%;
+        left: 50%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura7 {
+        top: 55%;
+        left: 49%;
+        width: 50px;
+        opacity: 0;
+    }
+    #cura8 {
+        top: 35%;
+        left: 50%;
+        width: 50px;
+        opacity: 0;
+    }
+
+    #exp1 {
+        top: 45%;
+        left: 35%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #exp2 {
+        top: 55%;
+        left: 36%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #exp3 {
+        top: 35%;
+        left: 35%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #exp4 {
+        top: 45%;
+        left: 50%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #exp5 {
+        top: 55%;
+        left: 49%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #exp6 {
+        top: 35%;
+        left: 50%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    #exp7 {
+        top: 65%;
+        left: 36%;
+        width: 40px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #exp8 {
+        top: 65%;
+        left: 50%;
+        width: 40px;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    #calavera1 {
+        top: 45%;
+        left: 35%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #calavera2 {
+        top: 55%;
+        left: 36%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #calavera3 {
+        top: 35%;
+        left: 35%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #calavera4 {
+        top: 45%;
+        left: 50%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #calavera5 {
+        top: 55%;
+        left: 49%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #calavera6 {
+        top: 35%;
+        left: 50%;
+        width: 50px;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    #calavera7 {
+        top: 65%;
+        left: 36%;
+        width: 40px;
+        z-index: 1;
+        opacity: 0;
+    }
+    #calavera8 {
+        top: 65%;
+        left: 50%;
+        width: 40px;
+        z-index: 1;
+        opacity: 0;
+    }
+
+
+    #sun2 {
+        top: 30%;
+        left: 35.5%;
+        width: 30%;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    .animacion-pea {
+        animation: desplazar 1s ease-in;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-carrot {
+        animation: martillo 2.8s ease-out;
+    }
+
+    .animacion-onion {
+        animation: rafaga 3s ease-in;
+    }
+
+    .animacion-beet {
+        animation: caer 3s ease-in, parpadeo 1.5s ease-in infinite;
+    }
+
+    .animacion-verdura {
+        animation: flotando 1.2s ease-in infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-estate {
+        animation: parpadeo 3.6s ease-in infinite;
+        animation-iteration-count: 1;
+    }
+
+    .animacion-cura {
+        animation: curacion 1.2s ease-in infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-sun {
+        animation: sun-rise 1.2s linear infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-verdura-rafaga {
+        animation: dañado-rafaga 3s ease-in;
+    }
+
+    .animacion-verdura-zanahoria {
+        animation: dañado-zanahoria 3s ease-in;
+    }
+
+    .animacion-verdura-rayo {
+        animation: dañado-rayo 3s ease-in;
+    }
+
+    .animacion-verdura-guisantes {
+        animation: dañado-guisante 1s ease-in;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-verdura-mancha {
+        animation: manchado 1s ease-in;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-verdura-exp {
+        animation: subida-exp 3s ease-in;
+    }
+
+    .animacion-verdura-nivel {
+        animation: subida-nivel 3s ease-in;
+    }
+
+    .animacion-exp {
+        animation: curacion 1s ease-in infinite;
+        animation-iteration-count: 3;
+    }
+
+    .animacion-verdura-muerte {
+        animation: muerte 4.5s ease-in;
+    }
+
+    .animacion-calavera {
+        animation: curacion 1.5s ease-in infinite;
+        animation-iteration-count: 3;
+    }
+
+    @keyframes desplazar {
+        0% {
+            transform: translateX(0);
+        }
+        10% {
+            transform: translateX(0);
+        }
+        20% {
+            transform: translateX(0);
+        }
+        30% {
+            transform: translateX(0);
+        }
+        40% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(0);
+        }
+        60% {
+            transform: translateX(0);
+        }
+        70% {
+            transform: translateX(450%);
+        }
+        80% {
+            transform: translateX(450%);
+        }
+        90% {
+            transform: translateX(450%);
+        }
+        100% {
+            transform: translateX(450%);
+        }
+    }
+
+    @keyframes flotando {
+        
+        0% {
+            transform: translateY(-1%);
+            opacity: 0.7;
+        }
+        50% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-1%);
+            opacity: 0.7;
+        }
+    }
+
+    @keyframes caer {
+        0% {
+            transform: translateY(0);
+            animation-timing-function: ease-in;
+        }
+        60% {
+            transform: translateY(250%);
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        80% {
+            transform: translateY(240%);
+            animation-timing-function: cubic-bezier(0.26, 0.09, 0.46, 0.84);
+        }
+        90% {
+            transform: translateY(245%);
+            animation-timing-function: cubic-bezier(0.26, 0.09, 0.46, 0.84);
+        }
+        100% {
+            transform: translateY(245%);
+            animation-timing-function: ease-out;
+        }
+    }
+
+    @keyframes martillo {
+        0% {
+            transform: rotate(0) translateY(0);
+            animation-timing-function: ease-in;
+        }
+        50% {
+            transform: rotate(0) translateY(180%);
+            animation-timing-function: ease-in;
+        }
+        60% {
+            transform: rotate(45deg) translateY(175%) translateX(100%);
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        80% {
+            transform: rotate(45deg) translateY(180%) translateX(100%);
+            animation-timing-function: cubic-bezier(0.26, 0.09, 0.46, 0.84);
+        }
+        90% {
+            transform: rotate(45deg) translateY(180%) translateX(100%);
+            animation-timing-function: cubic-bezier(0.26, 0.09, 0.46, 0.84);
+        }
+        100% {
+            transform: rotate(45deg) translateY(180%) translateX(100%);
+            animation-timing-function: ease-out;
+        }
+    }
+
+    @keyframes curacion {
+        0% {
+            transform: translateY(25%);
+            opacity: 0;
+        }
+        50% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-25%);
+            opacity: 0;
+        }
+    }
+
+    @keyframes parpadeo {
+        0% {
+            opacity: 1;
+        }
+        10% {
+            opacity: 0.5;
+        }
+        20% {
+            opacity: 1;
+        }
+        30% {
+            opacity: 0.5;
+        }
+        40% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 1;
+        }
+        60% {
+            opacity: 0.5;
+        }
+        80% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes rafaga {
+        0% {
+            transform: translateX(0);
+            width: 0;
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(1500%);
+            width: 12%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes sun-rise {
+        0% {
+            transform: scale(0.9);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0.9);
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes manchado {
+        0% {
+            opacity: 0;
+        }
+        10% {
+            opacity: 0;
+        }
+        20% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 0;
+        }
+        40% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        60% {
+            opacity: 0;
+        }
+        70% {
+            opacity: 0;
+        }
+        80% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes dañado-guisante {
+        0% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        10% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        20% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        30% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        40% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        50% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        60% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        70% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        80% {
+            transform: rotate(10deg);
+            opacity: 1;
+        }
+        90% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        100% {
+            transform: rotate(0);
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes dañado-rafaga {
+        0% {
+            transform: rotate(0);
+        }
+        10% {
+            transform: rotate(0);
+        }
+        20% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        30% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        40% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        50% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        60% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        70% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        80% {
+            transform: rotate(5deg);
+            opacity: 1;
+        }
+        81% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        82% {
+            transform: rotate(5deg);
+            opacity: 1;
+        }
+        83% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        84% {
+            transform: rotate(5deg);
+            opacity: 1;
+        }
+        85% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        90% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        100% {
+            transform: rotate(0);
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes dañado-zanahoria {
+        0% {
+            transform: rotate(0);
+        }
+        10% {
+            transform: rotate(0);
+        }
+        20% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        30% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        40% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        50% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        60% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        70% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        79% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        80% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        81% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        82% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        83% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        84% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        85% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        90% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        91% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        92% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        93% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        94% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        95% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        96% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        97% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        98% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        99% {
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+        100% {
+            opacity: 0.5;
+            background-image: url("/static/img/verdura1zanahoria.png");
+        }
+    }
+
+    @keyframes dañado-rayo {
+        0% {
+            transform: rotate(0);
+        }
+        10% {
+            transform: rotate(0);
+        }
+        20% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        30% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        40% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        50% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        60% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        70% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+        79% {
+            transform: rotate(-5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        80% {
+            transform: rotate(5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1.png");
+        }
+        81% {
+            transform: rotate(-5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        82% {
+            transform: rotate(5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1.png");
+        }
+        83% {
+            transform: rotate(-5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        84% {
+            transform: rotate(5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1.png");
+        }
+        85% {
+            transform: rotate(-5deg);
+            opacity: 1;
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        90% {
+            transform: rotate(0);
+            opacity: 1;
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        91% {
+            transform: rotate(15deg) translateX(5%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        92% {
+            transform: rotate(30deg) translateX(6%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        93% {
+            transform: rotate(45deg) translateX(7%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        94% {
+            transform: rotate(60deg) translateX(8%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        95% {
+            transform: rotate(75deg) translateX(9%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        96% {
+            transform: rotate(90deg) translateX(10%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        97% {
+            transform: rotate(90deg) translateX(11%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        98% {
+            transform: rotate(90deg) translateX(12%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        99% {
+            transform: rotate(90deg) translateX(13%);
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+        100% {
+            transform: rotate(90deg) translateX(14%);
+            opacity: 0.5;
+            background-image: url("/static/img/verdura1rayo.png");
+        }
+    }
+
+    @keyframes subida-exp {
+        0% {
+            background-image: url("/static/img/verdura1nivel1.png");
+        }
+        10% {
+            background-image: url("/static/img/verdura1nivel1.png");
+            opacity: 1;
+        }
+        20% {
+            background-image: url("/static/img/verdura1nivel2.png");
+            opacity: 1;
+        }
+        30% {
+            background-image: url("/static/img/verdura1nivel1.png");
+            opacity: 1;
+        }
+        40% {
+            background-image: url("/static/img/verdura1nivel2.png");
+            opacity: 1;
+        }
+        50% {
+            background-image: url("/static/img/verdura1nivel1.png");
+            opacity: 1;
+        }
+        60% {
+            background-image: url("/static/img/verdura1nivel2.png");
+            opacity: 1;
+        }
+        70% {
+            background-image: url("/static/img/verdura1nivel3.png");
+            opacity: 1;
+        }
+        79% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        80% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        81% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        82% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        83% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        84% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        85% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        90% {
+            opacity: 1;
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        91% {
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        92% {
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        93% {
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        94% {
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        95% {
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        96% {
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        97% {
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        98% {
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+        99% {
+            background-image: url("/static/img/verdura1nivel4.png");
+        }
+        100% {
+            opacity: 0.5;
+            background-image: url("/static/img/verdura1nivel3.png");
+        }
+    }
+
+    @keyframes subida-nivel {
+        0% {
+            transform: scale(1.3);
+            opacity: 0;
+        }
+        10% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        20% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        25% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        30% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        35% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        40% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        45% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        55% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        60% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        65% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        70% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        75% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        80% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        85% {
+            transform: scale(1.3);
+            opacity: 1;
+        }
+        90% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        91% {
+            transform: scale(1.3);
+            opacity: 0.5;
+        }
+        92% {
+            transform: scale(1.3);
+            opacity: 0.5;
+        }
+        93% {
+            transform: scale(1.3);
+            opacity: 0.5;
+        }
+        94% {
+            transform: scale(1.3);
+            opacity: 0.5;
+        }
+        95% {
+            transform: scale(1.3);
+            opacity: 0.5;
+        }
+        100% {
+            transform: scale(1.3);
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes muerte {
+        0% {
+            background-image: url("/static/img/verdura1muerto.png");
+            opacity: 0.5;
+        }
+        25% {
+            background-image: url("/static/img/verdura1muerto.png");
+            opacity: 1;
+        }
+        50% {
+            background-image: url("/static/img/verdura1muerto.png");
+            opacity: 1;
+        }
+        100% {
+            background-image: url("/static/img/verdura1muerto.png");
+            opacity: 0.5;
+        }
+    }
+main{
+    margin: 10px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+#formProfile > button{
+    width: 500px;
+}
+
+.highlight {
+    animation: highlight 0.5s ease-in-out infinite;
+  }
+  
+@keyframes highlight {
+  0% {
+    font-weight: bold;
+    opacity: 1;
+  }
+  50% {
+    font-weight: bold;
+    opacity: 0.25;
+  }
+  100% {
+    font-weight: bold;
+    opacity: 1;
+  }
+}
+  
+.containerModal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+.drop-up-container {
+    margin-top: 10px;
+}
+
+#modalVue{
+    overflow-y: scroll;
+    height: 300px;
+    width: 350px;
+    padding: 10px;
+    background-color: black;
+    color: darkgreen;
+    font-weight: bold;
+    border-radius: 5px;
+    left: auto !important;
+    top: auto !important;
+}

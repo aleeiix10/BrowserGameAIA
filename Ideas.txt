@@ -1,0 +1,10 @@
+Si es usuario ver un formulario:
+  - selecion accion ejecutar
+  - slecionar usuario al que atacar (un nivel por encima, del mismo nivel y un nivel por debajo)
+  - boton que ejecute la accion
+  comprovaciones: 
+    2- Si tiene mana suficiente
+    3- Si la accion que se ha realizado se ha realizado con exito o no
+    4- Tener en cuenta la subida de nivel i la possible muerte de jugadores
+Si no es usuario:
+  -Lanzamos un error 403(forbidden)

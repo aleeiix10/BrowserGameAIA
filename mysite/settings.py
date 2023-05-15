@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
-
     'browserGame.apps.BrowsergameConfig',
 ]
 
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'browserGame.middleware.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -107,9 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ca-ES'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
@@ -126,8 +128,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public/media/')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'public/static_dev/'),
+    os.path.join(BASE_DIR, "static"),
+    # os.path.join(BASE_DIR, 'public/static_dev/'),
     os.path.join(BASE_DIR, "vue-bg/dist"), # Bundle de VUE
+
 )
 
 # Default primary key field type
@@ -156,3 +160,20 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'asastremoreno.cf@iesesteveterradas.cat'
 EMAIL_HOST_PASSWORD = 'canasta2000'
+
+
+
+
+AUTH_USER_MODEL = 'browserGame.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 #cambia el valor según lo necesites

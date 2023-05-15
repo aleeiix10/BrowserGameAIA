@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% block title %} Ranking {% endblock %}
+{% block content %}
+<body class="bg-green-300">
+    {{header|safe}}
+    {% include 'navbar.html' %}
+    <div id="app">
+      {% render_bundle 'main' %}
+    </div>
+</body>
+{% endblock %}
