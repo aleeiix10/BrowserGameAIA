@@ -4,81 +4,6 @@
 {% block title %} Perfil {% endblock %}
 {% block content %}
 <style>
-    /* BOTON CONSOLE ACCIONES */
-    .drop-up-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: max-content;
-    z-index: 9999;
-  }
-
-  .drop-up-content {
-    display: none;
-    position: absolute;
-    bottom: 100%;
-    transform: translateX(-50%);
-    width: 300px;
-    padding: 10px;
-    background-color: #1a202c;
-    color: #f7fafc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  .drop-up-arrow {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid #1a202c;
-  }
-
-  /* Reglas de estilo para pantallas más pequeñas */
-  @media only screen and (max-width: 640px) {
-    .drop-up-container {
-      right: 10px;
-      width: calc(100% - 20px);
-      max-width: 400px;
-    }
-  }
-
-  /* Estilos para la ventana emergente en modo expandido */
-  .drop-up-content.expanded {
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    transform: none;
-    border-radius: 0;
-  }
-
-  .drop-up-arrow.expanded {
-    display: none;
-  }
-
-  .drop-up-content.expanded p {
-    margin-bottom: 20px;
-  }
-
-  /* Estilos para el asa de redimensionamiento */
-  .resize-handle {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    width: 16px;
-    height: 16px;
-    cursor: nwse-resize;
-    background-color: #fff;
-    border: 2px solid #1a202c;
-    border-radius: 50%;
-  }
-    
     main{
         margin:200px;
         display: grid;
@@ -1864,28 +1789,6 @@
                     }
                 });
             }
-            
-            function ajaxGetLastEvents(){
-                $.ajax({
-                    type: "GET",
-                    url: "/save_action",
-                    data: {
-                        'button_choice': "",
-                        "id_jugador_a_atacar": ""
-                    }
-
-                }).done(function(response) {
-                    console.log(response.arraySuccess)
-                    $(".modalContent").append("<p>" + response.arraySuccess + "</p>")
-
-                    // Manejar la respuesta de la solicitud AJAX
-                }).fail(function(error) {
-                    console.log(error)
-                    // Manejar el error de la solicitud AJAX
-                });
-            }
-
-            ajaxGetLastEvents()
 
             // METE A LOS BOTONES DE LAS ACCIONES EN UN DIV
             $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow dark:bg-green-700"></div>');
@@ -1896,14 +1799,6 @@
             $("#neutra").prepend("<p>NEUTRALS</p>")
             
             const acciones = document.querySelectorAll(".accion");
-            const openButton = $('#openButton');
-            const modal = $('#modal');
-    
-            let isOpen = false;
-            // Abrir y cerrar la ventana modal
-            openButton.click(function() {
-                $("#modal").toggle();
-            });
 
             // AJAX DEL SUBMIT CUANDO APARECE EL MODAL
             $("#btn-submit").click(function(e){

@@ -1,16 +1,69 @@
 {% load static %}
 {% load render_bundle from webpack_loader %}
-<div class="flex justify-end items-end fixed bottom-4 right-4" id="consoleActions">
-  <div class="drop-up-container">
-    <button id="openButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-      Abrir ventana
-    </button>
-    <div id="modal" class="drop-up-content modalContent">
-      <div class="resize-handle"></div>
-      <div class="drop-up-arrow"></div>
+<style>
+    .containerModal {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        padding: 10px;
+    }
 
-      
+    .drop-up-container {
+        margin-top: 10px;
+    }
 
+    #modalVue{
+        overflow-y: scroll;
+        height: 300px;
+        width: 350px;
+        padding: 10px;
+        background-color: black;
+        color: darkgreen;
+        font-weight: bold;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 85%;
+        left: auto !important;
+        top: auto !important;
+    }
+
+</style>
+<div class="containerModal">
+    <div id="modalVue"  class="resizable ui-widget-content">
+        {% render_bundle 'main' %}
     </div>
-  </div>
+    <div class="drop-up-container">
+        <button id="openButton" class="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Abrir Consola
+        </button>
+    </div>
 </div>
+<script>
+    const openButton = $('#openButton');    
+    let isOpen = false;
+    const modal = $("#modalVue");
+    $(modal).toggle();
+
+    // Activar el redimensionamiento del modal
+    modal.resizable({
+        handles: "nw", // Mostrar el asa de redimensionamiento en la esquina inferior derecha
+        maxHeight: 300,
+        maxWidth: 450,
+        minWidth: 400, // Establecer el ancho mínimo del modal
+        minHeight: 200, // Establecer la altura mínima del modal
+    });
+
+    // Abrir y cerrar la ventana modal
+    openButton.click(function() {
+        $(modal).toggle();
+        isOpen = !isOpen;
+        if (isOpen) {
+            openButton.text("Cerrar Consola")
+        } else {
+            openButton.text("Abrir Consola")
+        }
+    });
+</script>
