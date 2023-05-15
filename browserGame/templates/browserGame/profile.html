@@ -95,11 +95,41 @@
                 {% for action in actions %}
                     {% csrf_token %}
                     {% if action.category == "A" %}
-                        <button style="background-image: url('/static/img/{{action.id}}.png');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover-trigger="#miPopover"></button>
+                        <button style="background-image: url('/static/img/{{action.id}}.png');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover="{{action.id}}"></button>
+                        <div id="{{action.id}}" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                                <h3 class="font-semibold text-gray-900 ">{{action.name}}</h3>
+                            </div>
+                            <div>
+                                <p style="text-align: left;">Cost: {{action.cost}}</p>
+                                <p style="text-align: left;">Percentatge: {{action.succesPercentage}}</p>
+                                <p style="text-align: left;">Punts: {{action.points}}</p>
+                              </div>
+                        </div>          
                     {% elif action.category == "D" %}
-                        <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" data-popover-trigger="#miPopover"></button>
+                    <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover="{{action.id}}"></button>
+                    <div id="{{action.id}}" class="absolute z-10 invisible w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                            <h3 class="font-semibold text-gray-900 ">{{action.name}}</h3>
+                        </div>
+                        <div>
+                            <p style="text-align: left;">Cost: {{action.cost}}</p>
+                            <p style="text-align: left;">Percentatge: {{action.succesPercentage}}</p>
+                            <p style="text-align: left;">Punts: {{action.points}}</p>
+                          </div>
+                    </div>                    
                     {% else %}
-                        <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" data-popover-trigger="#miPopover"></button>
+                    <button style="background-image: url('/static/img/{{action.id}}.jpg');" type="submit" name="button_choice action" value="{{ action.id }}" class="{{action.category}} btn-action botonAccion" id="openModal" data-popover="{{action.id}}"></button>
+                    <div id="{{action.id}}" class="absolute z-10 invisible w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 flex flex-col">
+                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                            <h3 class="font-semibold text-gray-900 ">{{action.name}}</h3>
+                        </div>
+                        <div>
+                            <p style="text-align: left;">Cost: {{action.cost}}</p>
+                            <p style="text-align: left;">Percentatge: {{action.succesPercentage}}</p>
+                            <p style="text-align: left;">Punts: {{action.points}}</p>
+                          </div>
+                    </div>          
                     {% endif %}
                 {% endfor %}
             </form>
@@ -288,6 +318,7 @@
             getStats();
             getActions();
             getRelatedActions();
+            getPopUps();
             setInterval(getRelatedActions, 30000);
             setInterval(getStats, 30000);
         });

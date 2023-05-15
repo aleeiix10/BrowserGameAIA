@@ -12,6 +12,11 @@
       font-weight: normal;
     }
 }
+.containerPers{
+    display: grid;
+    grid-template-columns: 30% 70%; /* Dos columnas con mitad de longitud cada una y otra que ocupa el resto */
+    grid-gap: 10px; /* Espaco entre los divs */
+}
     .mainProfile{
         display: grid;
         grid-template-columns: 1fr 1fr; /* Dos columnas con mitad de longitud cada una y otra que ocupa el resto */

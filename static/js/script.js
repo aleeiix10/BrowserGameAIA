@@ -130,6 +130,18 @@ function getActions() {
         })
     });
 }
+function getPopUps() {
+   $(".botonAccion").hover(function(){
+        var popoverId = $(this).data('popover');
+        $("#" + popoverId).toggleClass('invisible');
+        $("#" + popoverId).toggleClass('opacity-100');
+    });  
+}
+  
+
+  
+
+
 function getUserRanking(username) {
     $.getJSON("/api/get_userByUsername/"+username,function(usuari){
         $('#profileNom').text(usuari.userObj[0].username);
