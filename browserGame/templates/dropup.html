@@ -1,36 +1,5 @@
 {% load static %}
 {% load render_bundle from webpack_loader %}
-<style>
-    .containerModal {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        padding: 10px;
-    }
-
-    .drop-up-container {
-        margin-top: 10px;
-    }
-
-    #modalVue{
-        overflow-y: scroll;
-        height: 300px;
-        width: 350px;
-        padding: 10px;
-        background-color: black;
-        color: darkgreen;
-        font-weight: bold;
-        border-radius: 5px;
-        position: absolute;
-        bottom: 85%;
-        left: auto !important;
-        top: auto !important;
-    }
-
-</style>
 <div class="containerModal">
     <div id="modalVue"  class="resizable ui-widget-content">
         {% render_bundle 'main' %}
@@ -41,7 +10,7 @@
         </button>
     </div>
 </div>
-<script>
+<script>    
     const openButton = $('#openButton');    
     let isOpen = false;
     const modal = $("#modalVue");
@@ -50,8 +19,8 @@
     // Activar el redimensionamiento del modal
     modal.resizable({
         handles: "nw", // Mostrar el asa de redimensionamiento en la esquina inferior derecha
-        maxHeight: 300,
-        maxWidth: 450,
+        maxHeight: 400,
+        maxWidth: 500,
         minWidth: 400, // Establecer el ancho mínimo del modal
         minHeight: 200, // Establecer la altura mínima del modal
     });

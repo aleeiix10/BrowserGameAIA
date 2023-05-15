@@ -15,22 +15,27 @@ export default {
         };
     },
     mounted() {
-        fetch('/save_action')
-            .then(response => {
-            return response.json();
-            })
-            .then(data => {
-                let arrayTime= this.changeFormatTime(data.arrayTime)
-                let arrayArrayActions= this.turntoArray(data.arrayAction)
-                let arrayNameActions= this.turnToArray(arrayArrayActions, 0)
-                let arrayPorcentageActions= this.turnToArray(arrayArrayActions, 1)
-                this.arrayInfo= this.addInfoIntoArray(arrayNameActions, arrayPorcentageActions, data.arrayRandom, data.arraySuccess, arrayTime)
-            })
-            .catch(error => {
-            console.log(error);
-            })
+        this.fetchData();
     },
     methods:{
+        fetchData() {
+            console.log(1)
+            fetch('/save_action')
+                .then(response => {
+                return response.json();
+                })
+                .then(data => {
+                    let arrayTime= this.changeFormatTime(data.arrayTime)
+                    let arrayArrayActions= this.turntoArray(data.arrayAction)
+                    let arrayNameActions= this.turnToArray(arrayArrayActions, 0)
+                    let arrayPorcentageActions= this.turnToArray(arrayArrayActions, 1)
+                    this.arrayInfo= this.addInfoIntoArray(arrayNameActions, arrayPorcentageActions, data.arrayRandom, data.arraySuccess, arrayTime)
+                })
+                .catch(error => {
+                console.log(error);
+                })
+        },
+
         turntoArray(arrayArray){
             let arrayInfoConsole= []
             arrayArray.forEach(array => {

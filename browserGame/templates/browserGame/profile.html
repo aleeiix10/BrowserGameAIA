@@ -1285,6 +1285,7 @@
         </div>
        
         <!-- BOTONES -->
+        {% render_bundle 'main' %}
         <div class="divBtnActions">
             <form method="post" id="formProfile">
                 {% for action in actions %}
@@ -1813,7 +1814,6 @@
                         "jugador_a_atacar": user_attacked
                     }
                 }).done(function(response) {
-                    console.log(response.arrayRandom)
                     getStats()
                     getRelatedActions()
                     $(".contenedorAcciones").css("z-index", "9999");
@@ -1908,11 +1908,9 @@
                             "id_jugador_a_atacar": ""
                         }
                     }).done(function(response) {
-                        console.log(response)
                         getStats()
                         getRelatedActions()
                         if(response.lvl == true){
-                            console.log(1)
                             setTimeout(function(){
                                 levelUp(acciones)
                             },3000
