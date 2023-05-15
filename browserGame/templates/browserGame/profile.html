@@ -90,6 +90,7 @@
         </div>
        
         <!-- BOTONES -->
+        {% render_bundle 'main' %}
         <div class="divBtnActions">
             <form method="post" id="formProfile">
                 {% for action in actions %}
@@ -205,7 +206,7 @@
                     url: "/save_action",
                     data: {
                         'button_choice': actionId,
-                        "id_jugador_a_atacar": user_attacked
+                        "jugador_a_atacar": user_attacked
                     }
                 }).done(function(response) {
                     getStats()
@@ -295,7 +296,6 @@
                         getStats()
                         getRelatedActions()
                         if(response.lvl == true){
-                            console.log(1)
                             setTimeout(function(){
                                 levelUp(acciones)
                             },3000

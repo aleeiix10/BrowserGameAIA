@@ -17,7 +17,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('actions/',views.actions, name="actions"),
     path('save_action',views.profileAjaxActions, name="save_action"),
-
     #API
     path('api/get_users',api.getUsers, name="getUsers"),
     path('get_user', api.get_user, name='get_user'),

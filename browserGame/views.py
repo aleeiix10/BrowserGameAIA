@@ -1,26 +1,23 @@
 from django import forms
+from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.core.mail import send_mail
 from .utils import *
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from .forms import CustomUserCreationForm
 from django.utils import timezone
 import datetime
-from django.core.mail import EmailMessage
 from django.conf import settings
-from django.template.loader import render_to_string
 from .decorators import *
 import random
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
-  
 @login_required
 def profile(request):
     return render(request,"browserGame/profile.html")
-
 
 @cronDecorator
 def pagina_inicio(request):
@@ -62,64 +59,21 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-class UserAttackedForm(forms.Form):
-    jugador_a_atacar = forms.ModelChoiceField(queryset=User.objects.all())
-
-class ActionForm(forms.Form):
-    action = forms.ModelChoiceField(queryset=Action.objects.all())
-    jugador_a_atacar = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
-
-    def __init__(self, user,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        action_queryset = Action.objects.all()
-        options = [(None, '--------')]
-        for category, label in Action.categories:
-            group = (label, [])
-            for action in action_queryset.filter(category=category, cost__lte=user.current_mana):
-                #Incluir el name y succesPercentage en la etiqueta de la opción
-                label = f"{action.name} ({action.succesPercentage}%) - {action.cost}"
-                group[1].append((action.id, label))
-            if group[1]:
-                options.append(group)
-        self.fields['action'].choices = options
-
-        allowed_levels = [user.level - 1, user.level, user.level + 1]
-        user_queryset = User.objects.filter(level__in=allowed_levels).exclude(pk=user.pk)
-        options = [ (None, '--------') ]
-        for user in user_queryset:
-            if user.level == 0:
-                continue
-            label = f"{user.username} (Nivel {user.level})"
-            options.append((user.id, label))
-        self.fields['jugador_a_atacar'].choices = options
-
-    def clean(self):
-        cleaned_data = super().clean()
-        action = cleaned_data.get('action')
-        jugador_a_atacar = cleaned_data.get('jugador_a_atacar')
-        
-        if action and action.category == 'A' and not jugador_a_atacar:
-            self.add_error('jugador_a_atacar', 'Este campo es obligatorio para acciones agresivas.')
-
 @cronDecorator
 def play_action(request):
-    msg= ""
-    lvl= ""
     if request.user.is_authenticated:
         user = request.user
         form = ActionForm(user, request.POST)
-        if request.method == "POST":
-            if form.is_valid():
-                action_used = form.cleaned_data.get('action') #ATAQUE USADO DEL JUGADOR
-                user_attacked = form.cleaned_data.get('jugador_a_atacar') #JUGADOR ATACADO
-                msg= play(user,action_used,user_attacked)
-        return render(request, 'browserGame/play_action.html', {'form': form, 'msg':msg, 'lvl':lvl})
+        profileAjaxActions(request)
+        return render(request, 'browserGame/play_action.html', {'form': form})
 
     else:
         return render(request, 'browserGame/403.html', {}, status=403)
 
-def play(user, action_used, user_attacked=""):
+def play(user, action_used,random_numbers ,user_attacked=""):
     user_experience_after_action= 0
+    random_atack= 0
+    random_numbers= []
     #Si el coste de mana es mayor al mana actual del usuario, dará un error
     if action_used.cost > user.current_mana:
         msg= """
@@ -160,6 +114,7 @@ def play(user, action_used, user_attacked=""):
 
         #Vemos si ha acertado el la accion
         random_atack = random.randint(0, 100)
+        random_numbers.append(random_atack)
         #Si el random es mayor que el porcentaje ha fallado la acción
         if random_atack > action_used.succesPercentage:
             event.success= False
@@ -297,18 +252,26 @@ def play(user, action_used, user_attacked=""):
                     </div>
                 """
         event.save()
-    return msg
+    return JsonResponse(random_numbers, msg, safe=False)
 
 @csrf_exempt
 def profileAjaxActions(request):
     lvl= False
     user_experience_after_action= 0
+    session= SessionStore(session_key=request.session.session_key)
+
+    # Obtener la lista de números generados de la sesión
+    random_numbers = session.get('random_numbers', [])
+    current_time = session.get('current_time', [])
+    arrayActionsConsole= session.get('arrayActionsConsole',[])
+    arraySuccesConsole= session.get('arraySuccesConsole',[])
     if request.method == "POST":
         user= request.user
         action_id= request.POST.get("button_choice")
         action_used = Action.objects.get(id=action_id)
-        user_attacked_id= request.POST.get("id_jugador_a_atacar")
-        if user_attacked_id == "":
+        user_attacked_id= request.POST.get("jugador_a_atacar")
+
+        if user_attacked_id == None or user_attacked_id == "":
             user_attacked = ""
         else:
             user_attacked= User.objects.get(id=user_attacked_id)
@@ -352,9 +315,16 @@ def profileAjaxActions(request):
             event.user= user
 
             #Vemos si ha acertado el la accion
-            random_atack = random.randint(0, 100)
-            #Si el random es mayor que el porcentaje ha fallado la acción
-            
+            random_atack= random.randint(0, 100)
+            random_numbers.append(random_atack)
+            # Guardar la lista actualizada en la sesión
+            session['random_numbers'] = random_numbers
+
+            actionTime= timezone.now()
+            actionTime= actionTime.strftime('%Y-%m-%dT%H:%M:%SZ')
+            current_time.append(actionTime)
+            session['current_time'] = current_time
+
             if random_atack > action_used.succesPercentage:
                 event.success= False
                 msg= f"""
@@ -491,12 +461,30 @@ def profileAjaxActions(request):
                             </button>
                         </div>
                     """
+            
+            actionUsedConsole= Action.objects.filter(id=action_id).values("name", "succesPercentage")
+            actionUsedConsole= list(actionUsedConsole)
+            arrayActionsConsole.append(actionUsedConsole)
+            session['arrayActionsConsole']= arrayActionsConsole
+
+            arraySuccesConsole.append(event.success)
+            session["arraySuccesConsole"]= arraySuccesConsole
+            session.save()
             event.save()
         return JsonResponse({"mensaje": "Los datos se han guardado correctamente Play 2",
-                             "lvl":lvl})
+                             "lvl":lvl,
+                             "arrayAction": arrayActionsConsole, 
+                             "arrayRandom": random_numbers, 
+                             "arrayTime":current_time, 
+                             "arraySuccess":arraySuccesConsole})
 
     else:
-        return JsonResponse({"error": "La solicitud debe ser POST"})
+        return JsonResponse({
+                            "arrayAction": arrayActionsConsole, 
+                            "arrayRandom": random_numbers, 
+                            "arrayTime":current_time, 
+                            "arraySuccess":arraySuccesConsole
+        })
 
 def ranking(request, username=None):
     if username:
@@ -520,4 +508,43 @@ def actions(request):
         return render(request,'browserGame/generalActions.html')
 
 
-    
+#CLASES
+class UserAttackedForm(forms.Form):
+    jugador_a_atacar = forms.ModelChoiceField(queryset=User.objects.all())
+
+class ActionForm(forms.Form):
+    button_choice = forms.ModelChoiceField(queryset=Action.objects.all())
+    jugador_a_atacar = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
+
+    def __init__(self, user,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        action_queryset = Action.objects.all()
+        options = [(None, '--------')]
+        for category, label in Action.categories:
+            group = (label, [])
+            for action in action_queryset.filter(category=category, cost__lte=user.current_mana):
+                #Incluir el name y succesPercentage en la etiqueta de la opción
+                label = f"{action.name} ({action.succesPercentage}%) - {action.cost}"
+                group[1].append((action.id, label))
+            if group[1]:
+                options.append(group)
+        self.fields['button_choice'].choices = options
+
+        allowed_levels = [user.level - 1, user.level, user.level + 1]
+        user_queryset = User.objects.filter(level__in=allowed_levels).exclude(pk=user.pk)
+        options = [ (None, '--------') ]
+        for user in user_queryset:
+            if user.level == 0:
+                continue
+            label = f"{user.username} (Nivel {user.level})"
+            options.append((user.id, label))
+        self.fields['jugador_a_atacar'].choices = options
+
+    def clean(self):
+        cleaned_data = super().clean()
+        action = cleaned_data.get('action')
+        jugador_a_atacar = cleaned_data.get('jugador_a_atacar')
+        
+
+        if action and action.category == 'A' and not jugador_a_atacar:
+            self.add_error('jugador_a_atacar', 'Este campo es obligatorio para acciones agresivas.')

@@ -68,21 +68,21 @@
     <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" autocomplete="off">
         {% csrf_token %}
         <div class="mb-4">
-            <label for="{{ form.accio.id_for_label }}" class="block text-gray-700 font-bold mb-2">Acció:</label>
-            {{form.action}}
+            <label for="{{ form.accio.id_for_label }}" class="block text-white font-bold mb-2">Acció:</label>
+            {{form.button_choice}}
         </div>
         <div class="mb-4" id="jugadorAtacar">
             <label for="{{ form.jugador_a_atacar.id_for_label }}" class="block text-gray-700 font-bold mb-2">Jugador a atacar</label>
             {{ form.jugador_a_atacar }}
         </div>
-        <input type="submit" name="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" id="btnSubmit">
+        <input type="submit" name="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" id="btnSubmit" @click="fetchData">
     </form>
     </div>
 </div>
-</main>
-</body>
+{% include 'dropup.html' %}
 <script>
     $(document).ready(function(){
+
         $("#id_action").first().val("selected")
         $(".btn-alert").click(function (){
             $(".btn-alert").parent().remove()
