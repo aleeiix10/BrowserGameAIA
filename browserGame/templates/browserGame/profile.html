@@ -1220,71 +1220,65 @@
 
     <!-- MODAL FORMULARIO -->
     <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
-        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50">
-        </div>
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
         <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <div class="modal-content py-4 text-left px-6">
-                <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold">Tria a un jugador</p>
-                    <button id="closeModal" class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path d="M18 1.8L16.2 0L9 7.2L1.8 0L0 1.8L7.2 9L0 16.2L1.8 18L9 10.8L16.2 18L18 16.2L10.8 9L18 1.8Z"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <form method="post">
-                    {% csrf_token %}
-                    <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
-                    {{form.jugador_a_atacar}}
-                    <div class="flex justify-end pt-2">
-                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
-                    </div>
-                </form>
-        
+          <div class="modal-content py-4 text-left px-6">
+            <div class="flex justify-between items-center pb-3">
+              <p class="text-2xl font-bold">Tria a un jugador</p>
+              <button id="closeModal" class="modal-close cursor-pointer z-50">
+                <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                  <path d="M18 1.8L16.2 0L9 7.2L1.8 0L0 1.8L7.2 9L0 16.2L1.8 18L9 10.8L16.2 18L18 16.2L10.8 9L18 1.8Z" />
+                </svg>
+              </button>
             </div>
+      
+            <form method="post">
+              {% csrf_token %}
+              <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
+              {{form.jugador_a_atacar}}
+              <div class="flex justify-end pt-2">
+                <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
     </div>
+      
 
     <main class="container mx-auto my-4">
         <!-- STATS -->
         <div class="divStats">
             <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
-            <table class="border border-black">
+            <div class="overflow-x-auto">
+              <table class="table-auto border border-black">
                 <thead class="bg-green-700 text-white text-center">
-                    <tr>
-                        <th class="p-2">
-                            Nivell
-                        </th>
-                        <th class="p-2">
-                            Vida
-                        </th>
-                        <th class="p-2">
-                            Manà
-                        </th>
-                        <th class="p-2">
-                            Experiència
-                        </th>
-                    </tr>
+                  <tr>
+                    <th class="p-2">
+                      Nivell
+                    </th>
+                    <th class="p-2">
+                      Vida
+                    </th>
+                    <th class="p-2">
+                      Manà
+                    </th>
+                    <th class="p-2">
+                      Experiència
+                    </th>
+                  </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b border-black text-center" id="profileStats">
-                        <td class="p-2" id="profileStatsLevel">
-
-                        </td>
-                        <td class="p-2" id="profileStatsLife">
-
-                        </td>
-                        <td class="p-2" id="profileStatsMana">
-
-                        </td>
-                        <td class="p-2" id="profileStatsExperience">
-
-                        </td>
-                    </tr>
+                  <tr class="border-b border-black text-center" id="profileStats">
+                    <td class="p-2" id="profileStatsLevel"></td>
+                    <td class="p-2" id="profileStatsLife"></td>
+                    <td class="p-2" id="profileStatsMana"></td>
+                    <td class="p-2" id="profileStatsExperience"></td>
+                  </tr>
                 </tbody>
-            </table>
-        </div>
+              </table>
+            </div>
+          </div>
+          
        
         <!-- BOTONES -->
         <div class="divBtnActions">
