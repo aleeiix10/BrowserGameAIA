@@ -24,10 +24,10 @@
                 
                 <form method="post">
                     {% csrf_token %}
-                    <label for="select" id="select-jugador" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
+                    <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
                     {{form.jugador_a_atacar}}
                     <div class="flex justify-end pt-2">
-                        <button type="submit" id="button-jugador" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
+                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Enviar</button>
                     </div>
                 </form>
         
