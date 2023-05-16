@@ -3,10 +3,9 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Dashboard {% endblock %}
 {% block content %}
-{% include 'header.html' with msg="Hola, " %}
-{% include 'navbar.html' %}
 <body class="bg-green-300">
-{{msg|safe}}
+    {% include 'header.html' with msg="Hola, " %}
+    {% include 'navbar.html' %}
     <!-- MODAL FORMULARIO -->
     <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
         <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50">
@@ -27,13 +26,15 @@
                     <label for="select" class="block text-gray-700 font-bold mb-2">Jugador per atacar</label>
                     {{form.jugador_a_atacar}}
                     <div class="flex justify-end pt-2">
-                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Submit</button>
+                        <button type="submit" class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" name="button_choice" id="btn-submit">Enviar</button>
                     </div>
                 </form>
         
             </div>
         </div>
     </div>
+
+    <div class="alertActions"></div>
 
     <main class="container mx-auto my-4 mainProfile">
         <!-- STATS -->
@@ -90,7 +91,6 @@
         </div>
        
         <!-- BOTONES -->
-        {% render_bundle 'main' %}
         <div class="divBtnActions">
             <form method="post" id="formProfile">
                 {% for action in actions %}
@@ -186,8 +186,9 @@
             <span class="accion"></span>
         </div>
     </main>
+    {% include 'dropup.html' %}
     <script>
-        $(document).ready(function(){ 
+        $(document).ready(function(){
             // METE A LOS BOTONES DE LAS ACCIONES EN UN DIV
             $("form .A").wrapAll('<div id="agresiva" class="rounded-sm shadow bg-green-700"></div>');
             $("#agresiva").prepend("<p>ATACS</p>")
@@ -196,58 +197,81 @@
             $("form .N").wrapAll('<div id="neutra" class="rounded-sm shadow bg-green-500"></div>');
             $("#neutra").prepend("<p>NEUTRALS</p>")
             const acciones = document.querySelectorAll(".accion");
+
             // AJAX DEL SUBMIT CUANDO APARECE EL MODAL
             $("#btn-submit").click(function(e){
                 e.preventDefault()
                 var actionId = $(this).val();
                 var user_attacked= $("#id_jugador_a_atacar").val()
-                $.ajax({
-                    type: "POST",
-                    url: "/save_action",
-                    data: {
-                        'button_choice': actionId,
-                        "jugador_a_atacar": user_attacked
-                    }
-                }).done(function(response) {
-                    getStats()
-                    getRelatedActions()
-                    $(".contenedorAcciones").css("z-index", "9999");
-                    if (actionId == 1){
-                        pesols(acciones)
-                        setTimeout(function() {
-                            $(".contenedorAcciones").removeAttr("style");
-                        }, 3200);
-                    }
-                    else if (actionId == "4"){
-                        remolatxa(acciones)
-                        setTimeout(function() {
-                            $(".contenedorAcciones").removeAttr("style");
-                        }, 3700);
-                    }
-                    else if (actionId == "3"){
-                        ceba(acciones)
-                        setTimeout(function() {
-                            $(".contenedorAcciones").removeAttr("style");
-                        }, 3700);
-                    }
-                    else if (actionId == "2"){
-                        pastanaga(acciones)
-                        setTimeout(function() {
-                            $(".contenedorAcciones").removeAttr("style");
-                        }, 3600);
-                    }
-                    if(response.lvl == true){
-                        setTimeout(function(){
-                            levelUp(acciones)
-                        },3700
-                        )       
-                    }
-                    // Manejar la respuesta de la solicitud AJAX
-                }).fail(function(error) {
-                    console.log(error)
-                    // Manejar el error de la solicitud AJAX
-                });
+                if (user_attacked != ""){
+                    $.ajax({
+                        type: "POST",
+                        url: "/save_action",
+                        data: {
+                            'button_choice': actionId,
+                            "jugador_a_atacar": user_attacked
+                        }
+                    }).done(function(response) {
+                        let divAlert= response.msg
+                        $(".alertActions").empty()
+                        $(".alertActions").append(divAlert)
+                        $(".btn-alert").click(function (e){
+                        $(this).parent().remove()
+                        
+                        })
+
+                        getStats()
+                        getRelatedActions()
+                        $(".contenedorAcciones").css("z-index", "9999");
+                        if (actionId == 1){
+                            pesols(acciones)
+                            setTimeout(function() {
+                                $(".contenedorAcciones").removeAttr("style");
+                            }, 3200);
+                        }
+                        else if (actionId == "4"){
+                            remolatxa(acciones)
+                            setTimeout(function() {
+                                $(".contenedorAcciones").removeAttr("style");
+                            }, 3700);
+                        }
+                        else if (actionId == "3"){
+                            ceba(acciones)
+                            setTimeout(function() {
+                                $(".contenedorAcciones").removeAttr("style");
+                            }, 3700);
+                        }
+                        else if (actionId == "2"){
+                            pastanaga(acciones)
+                            setTimeout(function() {
+                                $(".contenedorAcciones").removeAttr("style");
+                            }, 3600);
+                        }
+                        if(response.lvl == true && response.enemyDie == true){
+                            setTimeout(function(){
+                                levelUp(acciones)
+                            },3700
+                            )
+                            setTimeout(function(){
+                                killEnemy(acciones)
+                            },5500
+                            )
+                        }
+
+                        // if(response.enemyDie==true){
+                        //     setTimeout(function(){
+                        //         killEnemy(acciones)
+                        //     },5500
+                        //     )   
+                        // }
+                        // Manejar la respuesta de la solicitud AJAX
+                    }).fail(function(error) {
+                        console.log(error)
+                        // Manejar el error de la solicitud AJAX
+                    });
+                }
             })
+            
             // AJAX DEL SUBMIT DE LOS BOTONES DE LAS ACCIONES
             $(".btn-action").click(function(e){
                 e.preventDefault()
@@ -285,6 +309,7 @@
                         }, 3700);
                     }
                     var form= $("#formProfile")
+
                     $.ajax({
                         type: "POST",
                         url: "/save_action",
@@ -293,6 +318,13 @@
                             "id_jugador_a_atacar": ""
                         }
                     }).done(function(response) {
+                        let divAlert= response.msg
+                        $(".alertActions").empty()
+                        $(".alertActions").append(divAlert)
+                        $(".btn-alert").click(function (){
+                            $(this).parent().remove()
+                    
+                        })
                         getStats()
                         getRelatedActions()
                         if(response.lvl == true){
@@ -311,10 +343,12 @@
                     getRelatedActions();
                 }                
             })
+            
             // CERRAR EL MODAL
             $('.modal-close').click(function(e) {
                 $('#myModal').addClass('hidden');
             });
+            
             getStats();
             getActions();
             getRelatedActions();

@@ -110,6 +110,7 @@ function getRelatedActions() {
         })
     });
 }
+
 function getActions() {
     $.getJSON("/api/get_actions",function(actions){
         actions.ActionsObj.forEach(action =>{
@@ -130,6 +131,7 @@ function getActions() {
         })
     });
 }
+
 function getPopUps() {
    $(".botonAccion").hover(function(){
         var popoverId = $(this).data('popover');
@@ -137,12 +139,9 @@ function getPopUps() {
         $("#" + popoverId).toggleClass('opacity-100');
     });  
 }
-  
-
-  
-
 
 function getUserRanking(username) {
+
     $.getJSON("/api/get_userByUsername/"+username,function(usuari){
         $('#profileNom').text(usuari.userObj[0].username);
         $('#profileNivell').text(usuari.userObj[0].level);
@@ -162,8 +161,9 @@ function getUserRanking(username) {
         });
         var percentatgeExitoses = (accionsExitoses/totalAccions)*100;
         var percentatgeFallides = (accionsFallides/totalAccions)*100;
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+
+        var ctx = document.getElementById('myChart').getContext("2d");
+        new Chart(ctx, {
             type: 'pie',
             data: {
 
@@ -569,3 +569,49 @@ function levelUp(acciones){
     });
 }
 
+function killEnemy(acciones){
+    $(".contenedorAcciones").css("z-index", "9999");
+    setTimeout(function() {
+        $(".contenedorAcciones").removeAttr("style");
+    }, 5000);
+    const rutaImagen = "/static/img/calavera.png";
+    const rutaImagenVerdura = "/static/img/verdura1.png";
+    for (let i = 0; i < acciones.length; i++) {
+        if(i==8) {
+            acciones[i].style.backgroundImage = `url(${rutaImagenVerdura})`;
+            acciones[i].id = "verdura"+(i+1);
+            acciones[i].classList.add("animacion-verdura-muerte");
+        }
+        else {
+            acciones[i].style.backgroundImage = `url(${rutaImagen})`;
+            acciones[i].id = "calavera"+(i+1);
+        }
+    }
+    acciones.forEach(pea => {
+        pea.classList.remove("animacion-pea");
+        pea.classList.remove("animacion-carrot");
+        pea.classList.remove("animacion-onion");
+        pea.classList.remove("animacion-estate");
+        pea.classList.remove("animacion-verdura");
+        pea.classList.remove("animacion-cura");
+        pea.classList.remove("animacion-sun");
+        pea.classList.remove("animacion-verdura-rafaga");
+        pea.classList.remove("animacion-verdura-rayo");
+        pea.classList.remove("animacion-verdura-guisantes");
+        pea.classList.remove("animacion-verdura-mancha");
+        pea.classList.remove("animacion-verdura-zanahoria");
+        pea.classList.remove("animacion-verdura-exp");
+        pea.classList.remove("animacion-verdura-nivel");
+        pea.classList.remove("animacion-exp");
+        pea.classList.remove("animacion-verdura-muerte");
+        pea.classList.remove("animacion-calavera");
+        pea.classList.remove("animacion-beet");
+        void pea.offsetWidth; // Reiniciar la animación
+        if(pea.id == "verdura9") {
+            pea.classList.add("animacion-verdura-muerte");
+        }
+        else {
+            pea.classList.add("animacion-calavera");
+        }
+    });
+}

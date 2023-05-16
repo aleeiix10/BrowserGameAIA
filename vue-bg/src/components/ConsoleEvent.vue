@@ -19,7 +19,6 @@ export default {
     },
     methods:{
         fetchData() {
-            console.log(1)
             fetch('/save_action')
                 .then(response => {
                 return response.json();
