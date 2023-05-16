@@ -109,7 +109,7 @@
         </div>
 
         <!-- ACCIONES -->
-        <div class="divLastActions mt-4 mx-5 sm:mx-0">
+        <div class="divLastActions mt-4 mx-5 sm:mx-0 sm:overflow-x-auto">
             {% if userLoged|length >= 1 %}
                 <h2 class="text-lg font-semibold mb-2">Últimes 25 accions realitzades</h2>
                 <div class="overflow-x-auto">
@@ -147,7 +147,6 @@
         </div>
         
 
-        <!-- CONTENEDOR DE ACCIONES -->
         <div class="contenedorAcciones">
             <span class="accion"></span>
             <span class="accion"></span>
@@ -334,6 +333,6 @@
         });
         const acciones = document.querySelectorAll(".accion");
         const botones = document.querySelectorAll(".botonAccion");
-    </script>     
+    </script>       
 </body>
 {% endblock %}

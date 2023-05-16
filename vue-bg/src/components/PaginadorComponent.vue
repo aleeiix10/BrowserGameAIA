@@ -27,7 +27,7 @@
         <tbody>
           <tr v-for="(user, index) in dataPage" :key="index" class="border-b border-black">
                 <td class="p-2 text-center">
-                  <a :href="`/ranking/${user.username}`">{{user.username}}</a>
+                  <a :href="`/users/${user.username}`">{{user.username}}</a>
                 </td>
                 <td class="p-2 text-center">
                     {{user.level}}

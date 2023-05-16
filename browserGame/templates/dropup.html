@@ -10,20 +10,11 @@
         </button>
     </div>
 </div>
-<script>    
+<script>
     const openButton = $('#openButton');    
     let isOpen = false;
     const modal = $("#modalVue");
     $(modal).toggle();
-
-    // Activar el redimensionamiento del modal
-    modal.resizable({
-        handles: "nw", // Mostrar el asa de redimensionamiento en la esquina inferior derecha
-        maxHeight: 400,
-        maxWidth: 500,
-        minWidth: 400, // Establecer el ancho mínimo del modal
-        minHeight: 200, // Establecer la altura mínima del modal
-    });
 
     // Abrir y cerrar la ventana modal
     openButton.click(function() {
@@ -34,5 +25,14 @@
         } else {
             openButton.text("Abrir Consola")
         }
+    });
+
+     // Activar el redimensionamiento del modal
+    modal.resizable({
+        handles: "nw", // Mostrar el asa de redimensionamiento en la esquina inferior derecha
+        maxHeight: 400,
+        maxWidth: 500,
+        minWidth: 400, // Establecer el ancho mínimo del modal
+        minHeight: 200, // Establecer la altura mínima del modal
     });
 </script>

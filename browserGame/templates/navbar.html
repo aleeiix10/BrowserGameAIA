@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="hidden sm:hidden sm:absolute sm:inset-0 sm:z-10 sm:top-10 sm:right-0" id="mobile-menu">
+  <div class="hidden sm:hidden absolute sm:inset-0 sm:z-10 sm:top-10 sm:right-0" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-green-800">
       {% if user.is_authenticated %}
       <a href="/" id="link-inici" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Inici</a>
@@ -43,8 +43,6 @@
     </div>
   </div>
 </nav>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
     $('button[aria-label="Toggle menu"]').click(function() {
