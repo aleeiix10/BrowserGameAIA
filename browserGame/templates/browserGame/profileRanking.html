@@ -6,42 +6,40 @@
 {% include 'header.html' with title="Ranking" user=""%}
 {% include 'navbar.html' %}
 <body class="bg-green-300">
-    <main class="container mx-auto my-4">
-        <div class="divStats">
-            <h2 class="text-lg font-semibold mb-2">Estadistiques</h2>
-            <table class="border border-black" width="20%">
-                <thead class="bg-green-700 text-white text-center">
-                    <tr>
-                        <th class="p-2">
-                            Nom
-                        </th>
-                        <th class="p-2">
-                            Nivell
-                        </th>
-                        <th class="p-2">
-                            Posició Ranking
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-black text-center" id="profileStats">
-                        <td class="p-2" id="profileNom"></td>
-                        <td class="p-2" id="profileNivell"></td>
-                        <td class="p-2" id="profilprofileNomPosicio"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button onclick="getUserRanking('admin')"></button>
-            <p id="noActions"></p>
-            <canvas id="myChart"></canvas>
-
-
-    </main>
+  <main class="container mx-auto my-4">
+      <div class="divStats">
+        <h2 class="text-lg font-semibold mb-2">Estadistiques</h2>
+        <table class="border border-black w-full">
+          <thead class="bg-green-700 text-white text-center">
+            <tr>
+              <th class="p-2">
+                Nom
+              </th>
+              <th class="p-2">
+                Nivell
+              </th>
+              <th class="p-2">
+                Posició Ranking
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-black text-center" id="profileStats">
+              <td class="p-2" id="profileNom"></td>
+              <td class="p-2" id="profileNivell"></td>
+              <td class="p-2" id="profilprofileNomPosicio"></td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="noActions"></p>
+        <canvas id="myChart" class="w-full"></canvas>
+      </div>
+  </main>
+          
+    {% render_bundle 'main' %}
     <script>
-        $(document).ready(function (){
-            getUserRanking("{{username}}");
-
-        })
+        getUserRanking("{{username}}");
+        atajosTeclas();
     </script>
 </body>
 {% endblock %}

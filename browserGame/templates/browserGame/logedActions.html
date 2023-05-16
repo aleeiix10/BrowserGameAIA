@@ -7,9 +7,9 @@
     {% include 'header.html' with title="Actions" user=""%}
     {% include 'navbar.html' %}
     <main class="container mx-auto my-4">
-        <div class="divStats">
+        <div class="divStats sm:table w-full sm:w-1/2 mx-5 sm:mx-0">
             <h2 class="text-lg font-semibold mb-2">Informació personal usuari</h2>
-            <table class="border border-black" width="30%">
+            <table class="border border-black" width="62.5%">
                 <thead class="bg-green-700 text-white text-center">
                     <tr>
                         <th class="p-2">
@@ -35,7 +35,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="border-b border-l border-r border-black" width="30%">
+            <table class="border-b border-l border-r border-black" width="62.5%">
                 <tbody>
                     <tr class="border-b border-black">
                         <td class="p-2  border-r border-black" style="width:10%">Vida</td>
@@ -58,8 +58,8 @@
                 </tbody>
             </table>
         </div>
-        <h2 class="mt-10 text-lg font-semibold mb-2">Accions</h2>
-        <table class="border border-black">
+        <h2 class="mt-10 text-lg font-semibold mb-2 mx-5 sm:mx-0">Accions</h2>
+        <table class="border border-black mx-5 sm:mx-0">
             <thead class="bg-green-700 text-white text-center">
                 <tr>
                     <th class="p-2">
@@ -88,6 +88,7 @@
         getActions();
         setInterval(getRelatedActions, 30000);
         setInterval(getStats, 30000);
+        atajosTeclas();
     </script>
 </body>
 {% endblock %}

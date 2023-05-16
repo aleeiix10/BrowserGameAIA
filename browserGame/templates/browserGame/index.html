@@ -3,32 +3,191 @@
 {% load render_bundle from webpack_loader %}
 {% block title %} Index {% endblock %}
 {% block content %}
-{% include 'navbar.html' %}
+<style>
+
+    .animacion-infinita {
+        animation: aparecer 3s ease-in infinite;
+    }
+
+    .header {
+        overflow: hidden;
+    }
+
+    .imagenHeader {
+        position: relative;
+    }
+
+    .huerto-izquierda {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        transform: scaleX(-1);
+    }
+
+    .huerto-derecha {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+
+    @keyframes aparecer {
+        0% {
+            transform: translateY(70%);
+        }
+        10% {
+            transform: translateY(50%);
+        }
+        15% {
+            transform: translateY(20%);
+        }
+        16% {
+            transform: translateY(20%);
+        }
+        17% {
+            transform: translateY(20%);
+        }
+        18% {
+            transform: translateY(20%);
+        }
+        19% {
+            transform: translateY(20%);
+        }
+        20% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        21% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        22% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        23% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        24% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        25% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        26% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        27% {
+            transform: translateY(20%) scaleX(-1);
+        }
+        28% {
+            transform: translateY(20%) scaleX(1);
+        }
+        29% {
+            transform: translateY(20%) scaleX(1);
+        }
+        30% {
+            transform: translateY(20%) scaleX(1);
+        }
+        40% {
+            transform: translateY(20%) scaleX(1);
+        }
+        50% {
+            transform: translateY(20%) scaleX(1);
+        }
+        80% {
+            transform: translateY(70%) scaleX(1);
+        }
+        90% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes lanzar-izquierda {
+        0% {
+            transform: translateX(0);
+        }
+        10% {
+            transform: translateX(0);
+        }
+        20% {
+            transform: translateX(0);
+        }
+        30% {
+            transform: translateX(0);
+        }
+        40% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(-3%);
+        }
+        55% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes lanzar-derecha {
+        0% {
+            transform: translateX(0);
+        }
+        10% {
+            transform: translateX(0);
+        }
+        20% {
+            transform: translateX(0);
+        }
+        30% {
+            transform: translateX(0);
+        }
+        40% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(3%);
+        }
+        55% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+</style>
 <body id="bodyInfo" class="bg-green-300">
-    <header class="header bg-green-700 text-white flex justify-between items-center px-4 w-full">
-        <div class="imagenHeader w-1/5">
-            <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+    <header class="header bg-green-700 text-white flex flex-wrap justify-between items-center w-full">
+        <div class="imagenHeader w-full lg:w-1/5 hidden lg:block">
+            <div class="animacion-infinita">
+                <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+            </div>
+            <img src="{% static 'img/huerto.gif' %}" alt="Mi imagen" class="huerto-izquierda w-full">
         </div>
-        <div class="titulo w-3/5 text-center pt-5">
+        <div class="titulo w-full lg:w-3/5 text-center pt-5 lg:pt-0">
             <h1 class="text-3xl">Pren arrels</h1>
             <p>Fes créixer la teva verdura i evita ser desplantat!</p>
             <nav class="navbar flex justify-around items-center py-2">
-            <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" href="./accounts/login">Iniciar sessió</a>
+                <a class="nav-link button bg-white text-green-700 font-bold uppercase py-2 px-4 rounded-full" id="link-login" href="./accounts/login">Iniciar sessió</a>
             </nav>
         </div>
         
-        <div class="imagenHeader w-1/5">
-            <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+        <div class="imagenHeader w-full lg:w-1/5 hidden lg:block">
+            <div class="animacion-infinita">
+                <img src="{% static 'img/verdura1.png' %}" alt="Mi imagen" class="w-full">
+            </div>
+            <img src="{% static 'img/huerto.gif' %}" alt="Mi imagen" class="huerto-derecha w-full">
         </div>
     </header>      
-    <main>
-        <section class="hero bg-green-700 text-white text-center py-20 my-4 rounded-md">
-            <h1 class="text-3xl mb-4">Benvinguts al món de les verdures!</h1>
-            <p class="text-xl mb-4">Prepara't per cuidar la teva verdura i fer-la créixer el més possible.</p>
-            <a href="./register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Registra't ara</a>
+    <main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
+        <section class="hero bg-green-700 text-white text-center py-8 lg:py-20 my-4 rounded-md">
+            <h1 class="text-3xl lg:text-5xl mb-4">Benvinguts al món de les verdures!</h1>
+            <p class="text-xl lg:text-2xl mb-4">Prepara't per cuidar la teva verdura i fer-la créixer el més possible.</p>
+            <a href="./register" id="link-register" class="button bg-green-300 text-green-700 px-6 py-3 rounded-md font-bold uppercase tracking-wide">Registra't ara</a>
         </section>
-        <div class="descripcion flex justify-between mx-0">
-            <section class="cta bg-green-700 text-white text-center py-8 px-6 my-0 w-1/2 rounded-md">
+        <div class="descripcion flex flex-col sm:flex-row justify-between mx-0">
+            <section class="cta bg-green-700 text-white text-center py-8 px-6 my-0 sm:w-1/2 md:w-3/5 lg:w-1/2 rounded-md">
                 <h2 class="text-2xl mb-4">Vols tindre la verdura més gran?</h2>
                 <p class="text-lg mb-10">Uneix-te a la nostra comunitat i comparteix els teus consells per fer créixer verdures.</p>
                 <div class="horarioTemporada bg-green-300 py-20 text-green-700 rounded-full">
@@ -38,8 +197,7 @@
                     <p class="text-lg mb-4">Per a la propera temporada falta: {{ time_left }}</p>
                 </div>
             </section>
-        
-            <section class="cta2 bg-green-700 text-white text-center py-8 px-6 my-0 w-1/2 rounded-md">
+            <section class="cta2 bg-green-700 text-white text-center py-8 px-6 my-0 sm:ml-5 sm:w-1/2 md:w-2/5 lg:w-1/2 rounded-md">
                 <h2 class="text-2xl mb-4">Com funciona?</h2>
                 <p class="text-lg mb-4">En aquest joc, ets una verdura plantada a un jardí i el teu objectiu és créixer el més possible i evitar ser desplantat. Tot i això, el clima i altres perills et poden fer perdre vida.</p>
                 <p class="text-lg mb-4">Cada dia, el clima canviarà i afectarà el teu creixement de maneres diferents. Si el clima és assolellat i càlid, la teva verdura creixerà més ràpid i guanyarà més vida. Si el clima és plujós o fred, la teva verdura creixerà més lentament i perdrà vida.</p>
@@ -50,4 +208,7 @@
         </div>
     </main>        
 </body>
+<script>
+    atajosTeclas();
+</script>
 {% endblock %}
