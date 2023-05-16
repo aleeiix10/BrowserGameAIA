@@ -111,7 +111,7 @@ def profileAjaxActions(request):
         #Si el coste de mana es mayor al mana actual del usuario, dará un error
         if action_used.cost > user.current_mana:
             msg= """
-                <div id="alert-border-4" class="flex p-4  text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800" role="alert">
+                <div id="alert-border-4" class="flex p-4 w-full z-10 absolute text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800" role="alert">
                     <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                     <div class="ml-3 text-sm font-medium">
                     No tens suficient manà!
@@ -126,7 +126,7 @@ def profileAjaxActions(request):
 
         elif action_used.category=='D' and user.current_life >= user.level * 10:
             msg= """
-                <div id="alert-border-4" class="flex p-4  text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800" role="alert">
+                <div id="alert-border-4" class="flex p-4 w-full z-10 absolute text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800" role="alert">
                     <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                     <div class="ml-3 text-sm font-medium">
                     Tens la salut al màxim!
@@ -162,7 +162,7 @@ def profileAjaxActions(request):
             if random_atack > action_used.succesPercentage:
                 event.success= False
                 msg= f"""
-                        <div id="alert-border-2" class="flex p-4  text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                        <div id="alert-border-2" class="flex p-4 w-full z-10 absolute text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             La teva acció {action_used.name} ha sigut fallida
@@ -219,7 +219,7 @@ def profileAjaxActions(request):
                     user.experience= user_experience_after_action
                     user.save()
                     msg= f"""
-                        <div id="alert-border-3" class="flex p-4  text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+                        <div id="alert-border-3" class="flex p-4 w-full z-10 absolute text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             <strong class="font-bold">Atac exitòs!</strong> Has obtingut {action_used.points} punts d'experiència.
@@ -235,7 +235,7 @@ def profileAjaxActions(request):
                     if user.current_life + action_used.cost > user.level * 10:
                         user.current_life = user.level * 10
                         msg= f"""
-                        <div id="alert-border-3" class="flex p-4  text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+                        <div id="alert-border-3" class="flex p-4 w-full z-10 absolute text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             <strong class="font-bold">Curació exitosa!</strong> Has obtingut {action_used.points} punts de salut. <strong class="font-bold">Has arribat a la salut màxima</strong>
@@ -249,7 +249,7 @@ def profileAjaxActions(request):
                     else:
                         user.current_life += action_used.points
                         msg= f"""
-                        <div id="alert-border-3" class="flex p-4  text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+                        <div id="alert-border-3" class="flex p-4 w-full z-10 absolute text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             <strong class="font-bold">Curació exitosa!</strong> Has obtingut {action_used.points} punts de salut
@@ -266,7 +266,7 @@ def profileAjaxActions(request):
                     user.experience += action_used.points
                     user.save()
                     msg= f"""
-                        <div id="alert-border-3" class="flex p-4  text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+                        <div id="alert-border-3" class="flex p-4 w-full z-10 absolute text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             <strong class="font-bold">Exit!</strong> Has obtingut {action_used.points} punts de experiencia
@@ -279,7 +279,7 @@ def profileAjaxActions(request):
                     """
                 if enemyDie == True:
                     msg+= f"""
-                            <div id="alert-border-1" class="flex p-4  text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
+                            <div id="alert-border-1" class="flex p-4 w-full z-10 absolute text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             Has baixat de nivel a <strong class="font-bold">{nameUserAttacked}!</strong>
@@ -299,7 +299,7 @@ def profileAjaxActions(request):
                     user.save()
                     lvl= True
                     msg+= f"""
-                        <div id="alert-border-1" class="flex p-4  text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
+                        <div id="alert-border-1" class="flex p-4 w-full z-10 absolute text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
                             <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <div class="ml-3 text-sm font-medium">
                             Has arribat al <strong class="font-bold">nivel {user.level}!</strong>
