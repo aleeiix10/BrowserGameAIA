@@ -1,1 +1,1 @@
-web: gunicorn 'browserGame.wsgi'
+web: gunicorn 'mysite.wsgi'

@@ -16,6 +16,56 @@
       "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/js/main.js",
       "publicPath": "http://127.0.0.1:8080/js/main.js"
     },
+    "main.1af74bea881560e1.hot-update.js": {
+      "name": "main.1af74bea881560e1.hot-update.js",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.1af74bea881560e1.hot-update.js",
+      "publicPath": "http://127.0.0.1:8080/main.1af74bea881560e1.hot-update.js"
+    },
+    "main.1af74bea881560e1.hot-update.json": {
+      "name": "main.1af74bea881560e1.hot-update.json",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.1af74bea881560e1.hot-update.json",
+      "publicPath": "http://127.0.0.1:8080/main.1af74bea881560e1.hot-update.json"
+    },
+    "main.38511c8aeef23162.hot-update.js": {
+      "name": "main.38511c8aeef23162.hot-update.js",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.38511c8aeef23162.hot-update.js",
+      "publicPath": "http://127.0.0.1:8080/main.38511c8aeef23162.hot-update.js"
+    },
+    "main.38511c8aeef23162.hot-update.json": {
+      "name": "main.38511c8aeef23162.hot-update.json",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.38511c8aeef23162.hot-update.json",
+      "publicPath": "http://127.0.0.1:8080/main.38511c8aeef23162.hot-update.json"
+    },
+    "main.3fe1a9dc9f2404f8.hot-update.js": {
+      "name": "main.3fe1a9dc9f2404f8.hot-update.js",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.3fe1a9dc9f2404f8.hot-update.js",
+      "publicPath": "http://127.0.0.1:8080/main.3fe1a9dc9f2404f8.hot-update.js"
+    },
+    "main.3fe1a9dc9f2404f8.hot-update.json": {
+      "name": "main.3fe1a9dc9f2404f8.hot-update.json",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.3fe1a9dc9f2404f8.hot-update.json",
+      "publicPath": "http://127.0.0.1:8080/main.3fe1a9dc9f2404f8.hot-update.json"
+    },
+    "main.ce0624ecad07dd69.hot-update.js": {
+      "name": "main.ce0624ecad07dd69.hot-update.js",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.ce0624ecad07dd69.hot-update.js",
+      "publicPath": "http://127.0.0.1:8080/main.ce0624ecad07dd69.hot-update.js"
+    },
+    "main.ce0624ecad07dd69.hot-update.json": {
+      "name": "main.ce0624ecad07dd69.hot-update.json",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.ce0624ecad07dd69.hot-update.json",
+      "publicPath": "http://127.0.0.1:8080/main.ce0624ecad07dd69.hot-update.json"
+    },
+    "main.e85b92f2a3ab8e5a.hot-update.js": {
+      "name": "main.e85b92f2a3ab8e5a.hot-update.js",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.e85b92f2a3ab8e5a.hot-update.js",
+      "publicPath": "http://127.0.0.1:8080/main.e85b92f2a3ab8e5a.hot-update.js"
+    },
+    "main.e85b92f2a3ab8e5a.hot-update.json": {
+      "name": "main.e85b92f2a3ab8e5a.hot-update.json",
+      "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.e85b92f2a3ab8e5a.hot-update.json",
+      "publicPath": "http://127.0.0.1:8080/main.e85b92f2a3ab8e5a.hot-update.json"
+    },
     "main.html": {
       "name": "main.html",
       "path": "/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/dist/main.html",
@@ -24,8 +74,11 @@
   },
   "chunks": {
     "main": [
-      "js/main.js"
+      "js/main.js",
+      "main.38511c8aeef23162.hot-update.js"
     ]
   },
-  "publicPath": "http://127.0.0.1:8080/"
+  "publicPath": "http://127.0.0.1:8080/",
+  "error": "ModuleNotFoundError",
+  "message": "Module not found: Error: Can't resolve './components/HelloDjango' in '/home/aleix/Documents/GitHub/BrowserGameAIA/vue-bg/src'"
 }
